@@ -33,17 +33,17 @@ export const Navbar = () => {
             <div className="hidden lg:flex space-x-4 lg:items-center lg:justify-end lg:flex-1">
               <button
                 onClick={() => {scroll('home')}}
-                className="px-3 py-2 rounded-md text-sm font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
+                className="px-3 py-2 rounded-md text-sm font-medium hover:underline text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
                 Home
               </button>
               <button
                 onClick={() => {scroll('info')}}
-                className="px-3 py-2 rounded-md text-sm font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
+                className="px-3 py-2 rounded-md text-sm font-medium hover:underline text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
                 About
               </button>
               <button
                 onClick={() => {scroll('projects')}}
-                className="px-3 py-2 rounded-md text-sm font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
+                className="px-3 py-2 rounded-md text-sm font-medium hover:underline text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
                 Projects
               </button>
               { session.status === "authenticated" ? (
