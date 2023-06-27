@@ -10,8 +10,9 @@ export default function Home() {
    <div className="bg-background">
     <Navbar />
     <Title />
-    <Background />
-    <Info />
+    <div id="info">
+      <Info />
+    </div>
    </div>
    
   )

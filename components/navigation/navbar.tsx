@@ -13,13 +13,16 @@ export const Navbar = () => {
   }
 
   return (
-    <div className="md:navbar">
+    <div className="navbar">
       <nav className="bg-background shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
               <Link href="/" className="flex items-center">
-              <Logo />
+                <div className='h-6 w-6 text-wave-100 mr-2'>
+                  <Logo />
+                </div>
+              
                 
                 <span className="font-medium text-wave-100 text-lg">tf.2x1.dev</span>
               </Link>
@@ -31,7 +34,7 @@ export const Navbar = () => {
                 Home
               </button>
               <button
-                onClick={() => {scroll('about')}}
+                onClick={() => {scroll('info')}}
                 className="px-3 py-2 rounded-md text-sm font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
                 About
               </button>
@@ -41,7 +44,7 @@ export const Navbar = () => {
                 Projects
               </button>
               <button  onClick={() => {scroll('contact')}} className=" px-3 py-2 bg-wave-300 hover:bg-wave-400 rounded-md text-white">
-                Contact
+                Signup
               </button>
             </div>
             <div className="flex lg:hidden">
@@ -94,7 +97,7 @@ export const Navbar = () => {
               Home
             </button>
             <button
-              onClick={() => {scroll('about')}}
+              onClick={() => {scroll('info')}}
               className="block px-3 py-2 rounded-md text-base font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
               About
             </button>
@@ -104,7 +107,7 @@ export const Navbar = () => {
               Projects
             </button>
             <button onClick={() => {scroll('contact')}} className=" px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white">
-              Contact
+              Signup
             </button>
           </div>
         </div>
