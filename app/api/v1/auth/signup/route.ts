@@ -2,9 +2,11 @@ import { NextResponse, NextRequest } from "next/server";
 import { hash } from "bcryptjs";
 
 import { connect } from "@lib/mongodb";
+import fs from 'fs';
 
 import { type IUser, User } from "@models/User";
 import { randomUUID } from "crypto";
+import { getRandomIndex } from "@services/util.service";
 
 export async function POST ( req: Request ) {
     
@@ -84,13 +86,29 @@ export async function POST ( req: Request ) {
     // hash password and create user
     
     const hashedPassword: string = await hash(password, 12)
+
+     // set random image as pfp
+
+     const images: string[] = [
+        'https://i.imgur.com/JL92Jwq.png',
+        'https://i.imgur.com/3ZdzSOF.png',
+        'https://i.imgur.com/HNZ8nwn.png',
+        'https://i.imgur.com/OrBukhd.png',
+        'https://i.imgur.com/kcyIMoM.png'
+    ]
+
+    const image = images [ getRandomIndex( images ) ]
+
     
     const userData = {
         username,
         password: hashedPassword,
         email,
+        profilePicture: image,
         id: randomUUID()
     }
+
+   
     
     const user = new User (
         userData
