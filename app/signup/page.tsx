@@ -11,6 +11,5 @@ export default function Signup () {
         <RedirectIfAuth target={"/profile"} session={session}>
             <SignupForm />
         </RedirectIfAuth>
-        
     )
 }
