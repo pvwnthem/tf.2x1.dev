@@ -43,8 +43,8 @@ export const Navbar = () => {
                 className="px-3 py-2 rounded-md text-sm font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
                 Projects
               </button>
-              <button  onClick={() => { window.location.replace( "/signup" ) } } className=" px-3 py-2 bg-wave-300 hover:bg-wave-400 rounded-md text-white">
-                Signup
+              <button  onClick={() => { window.location.replace( "/login" ) } } className=" px-3 py-2 bg-wave-300 hover:bg-wave-400 rounded-md text-white">
+                Log In
               </button>
             </div>
             <div className="flex lg:hidden">
@@ -106,8 +106,8 @@ export const Navbar = () => {
               className="block px-3 py-2 rounded-md text-base font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
               Projects
             </button>
-            <button onClick={() => {window.location.replace( "/signup" ) }} className=" px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white">
-              Signup
+            <button onClick={() => {window.location.replace( "/login" ) }} className=" px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white">
+              Sign In
             </button>
           </div>
         </div>

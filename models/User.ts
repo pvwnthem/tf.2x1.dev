@@ -6,6 +6,9 @@ export interface IUser extends Document {
     username: string,
     password: string,
     id: string,
+    description: string | null,
+    profilePicture: string | null,
+    role: string
     verified: boolean
 }
 
@@ -45,6 +48,24 @@ const userSchema = new Schema(
             unique: true,
         },
         
+        description: {
+            type: String,
+            required: false,
+            default: ""
+        },
+
+        profilePicture: {
+            type: String,
+            required: false,
+            default: ""
+        },
+
+        role: {
+            type: String,
+            required: false,
+            default: "user"
+        },
+
         verified: {
             type: Boolean,
             required: false,
