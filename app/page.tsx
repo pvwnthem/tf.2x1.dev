@@ -1,5 +1,6 @@
 'use client'
 import Wrapper from "@components/auth/Wrapper";
+import RedirectIfAuth from "@components/auth/redirectIfAuth";
 import { Navbar } from "@components/navigation/navbar";
 import Info from "@components/pages/info";
 import Title from "@components/pages/title";
@@ -11,13 +12,16 @@ export default function Home() {
   return (
    <div className="bg-background">
     <Wrapper session={session}>
-      <Navbar />
-      <Title />
-      <div id="info">
-        <Info />
-      </div>
+      <RedirectIfAuth target={"/profile"} session={session}>
+        <Navbar />
+        <Title />
+        <div id="info">
+          <Info />
+        </div>
+      </RedirectIfAuth>
     </Wrapper>
    </div>
    
   )
 }
+ 
