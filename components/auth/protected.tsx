@@ -11,11 +11,14 @@ export default function Protected ( props : props ) {
     
     return (
         <>
-            { props.session.status === "authenticated" ? (
+            { props.session.status === "authenticated" && (
                 <div>
                     { props.children }
                 </div>
-            ): <AuthError /> }
+            )}
+            { props.session.status != "loading" && props.session.status != "authenticated" && (
+                <AuthError />
+            )}
         </>
     )
 }

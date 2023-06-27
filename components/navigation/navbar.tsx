@@ -2,9 +2,12 @@
 import Logo from '@components/svg/logo';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useSession } from 'next-auth/react'
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const session = useSession()
 
   function scroll (to: string) {
     setIsMobileMenuOpen(false)
@@ -43,9 +46,15 @@ export const Navbar = () => {
                 className="px-3 py-2 rounded-md text-sm font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
                 Projects
               </button>
+              { session.status === "authenticated" ? (
+                <button  onClick={() => { window.location.replace( "/profile" ) } } className=" px-3 py-2 bg-wave-300 hover:bg-wave-400 rounded-md text-white">
+                  Profile
+               </button>
+              ): <>
               <button  onClick={() => { window.location.replace( "/login" ) } } className=" px-3 py-2 bg-wave-300 hover:bg-wave-400 rounded-md text-white">
                 Log In
               </button>
+              </> }
             </div>
             <div className="flex lg:hidden">
               <button
@@ -106,9 +115,17 @@ export const Navbar = () => {
               className="block px-3 py-2 rounded-md text-base font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400">
               Projects
             </button>
-            <button onClick={() => {window.location.replace( "/login" ) }} className=" px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white">
-              Sign In
+            { session.status === "authenticated" ? (
+                <button onClick={() => {window.location.replace( "/profile" ) }} className=" px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white">
+                Profile
+              </button>
+              ): <>
+              <button onClick={() => {window.location.replace( "/login" ) }} className=" px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white">
+              Log In
             </button>
+              </> }
+
+            
           </div>
         </div>
       </nav>

@@ -45,7 +45,7 @@ const LoginForm = () => {
                 setSubmitError(loginRes.error || "")
             }
             else {
-                router.push("/")
+                router.push("/profile")
             }
         } catch (error) {
             if (error) {

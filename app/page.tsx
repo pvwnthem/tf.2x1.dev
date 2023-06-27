@@ -1,18 +1,22 @@
 'use client'
+import Wrapper from "@components/auth/Wrapper";
 import { Navbar } from "@components/navigation/navbar";
 import Info from "@components/pages/info";
 import Title from "@components/pages/title";
-import Background from "@components/svg/background";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 export default function Home() {
+  const session = useSession()
   return (
    <div className="bg-background">
-    <Navbar />
-    <Title />
-    <div id="info">
-      <Info />
-    </div>
+    <Wrapper session={session}>
+      <Navbar />
+      <Title />
+      <div id="info">
+        <Info />
+      </div>
+    </Wrapper>
    </div>
    
   )
