@@ -21,13 +21,13 @@ const SignupForm = () => {
     const errors = [];
 
     if (data.username.length < 4) {
-      errors.push({ fullName: 'Full name must be at least 4 characters long' });
+      errors.push({ error: 'Full name must be at least 4 characters long' });
     } else if (data.username.length > 30) {
-      errors.push({ fullName: 'Full name should be less than 30 characters' });
+      errors.push({ error: 'Full name should be less than 30 characters' });
     } else if (data.password.length < 6) {
-      errors.push({ password: 'Password should be at least 6 characters long' });
+      errors.push({ error: 'Password should be at least 6 characters long' });
     } else if (data.password !== data.confirmPassword) {
-      errors.push({ confirmPassword: "Passwords don't match" });
+      errors.push({ error: "Passwords don't match" });
     }
 
     setValidationErrors(errors);
@@ -40,10 +40,12 @@ const SignupForm = () => {
 
     const isValid = validateData();
 
+    console.log(isValid)
+
     if (isValid) {
       try {
         setLoading(true);
-        const apiRes = await axios.post('/api/auth/signup', data);
+        const apiRes = await axios.post('/api/v1/auth/signup', data);
 
         if (apiRes.data.success) {
           const loginRes = await loginUser({
@@ -59,7 +61,7 @@ const SignupForm = () => {
         }
       } catch (error) {
         if (error instanceof AxiosError) {
-          const errorMsg = error.response?.data?.error;
+          const errorMsg = error.response?.data;
           setSubmitError(errorMsg);
         }
       }
@@ -78,20 +80,21 @@ const SignupForm = () => {
   };
 
   return (
-    <div className='w-screen h-screen bg-background'>
-        <div className='w-full flex items-center justify-center'>
-        <h1></h1>
+    <div className='w-full h-screen bg-background flex items-center justify-center'>
+        <div className='md:w-1/4 w-full rounded-lg py-8 flex items-center justify-center'>
 
         <form onSubmit={handleSignup}>
-            <h1>Sign Up</h1>
+            <h1 className='text-3xl font-semibold text-center text-wave-300 '>Sign Up</h1>
+            <h2 className='text-lg mt-2 font-semibold text-center text-wave-300'>Sign Up For The tf.2x1.dev Community</h2>
 
             <input
-            type="text"
-            placeholder="Username"
-            value={data.username}
-            name="username"
-            onChange={handleInputChange}
-            required
+                type="text"
+                placeholder="Username"
+                value={data.username}
+                name="username"
+                onChange={handleInputChange}
+                className='p-2 w-full rounded mt-4'
+                required
             />
             <div>
             <input
@@ -100,6 +103,7 @@ const SignupForm = () => {
                 value={data.email}
                 name="email"
                 onChange={handleInputChange}
+                className='p-2 w-full rounded mt-4'
                 required
             />
             </div>
@@ -110,6 +114,7 @@ const SignupForm = () => {
                 value={data.password}
                 name="password"
                 onChange={handleInputChange}
+                className='p-2 w-full rounded mt-4'
                 required
             />
             </div>
@@ -120,19 +125,31 @@ const SignupForm = () => {
                 value={data.confirmPassword}
                 name="confirmPassword"
                 onChange={handleInputChange}
+                className='p-2 w-full rounded mt-4'
                 required
             />
             </div>
 
-            <button type="submit" disabled={loading}>
-            Sign Up
+            <button type="submit" className='mx-auto mt-4 p-2 bg-wave-300 rounded-md w-full' disabled={loading}>
+                Sign Up
             </button>
 
-            {submitError && <p>{submitError}</p>}
+            {submitError && <p className='text-center mt-4 text-wave-500'>Error: {submitError}</p>}
+            {validationErrors && (
+                <>
+                    {validationErrors.map(
+                        (error: any, j: number) => {
+                            return (
+                                <p key={j} className='text-center mt-4 text-wave-500'>Error: {error.error}</p>
+                            )
+                        }
+                    )}
+                </>
+            )}
 
-            <div>
-            <p>Already have an account?</p>
-            <Link href="/login">Login</Link>
+            <div className='flex flex-col'>
+                <p className='text-center text-white mt-2'>Already have an account? </p>
+                <Link href="/login" className='text-center text-wave-300'>Login</Link>
             </div>
         </form>
         </div>

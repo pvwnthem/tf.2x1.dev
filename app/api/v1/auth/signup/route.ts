@@ -60,7 +60,7 @@ export async function POST ( req: Request ) {
         await User.findOne( { username } )
     ) {
         return new NextResponse (
-            "Username is already in user",
+            "Username is already in use",
             {
                 status: 409
             }
