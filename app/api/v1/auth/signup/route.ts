@@ -4,6 +4,7 @@ import { hash } from "bcryptjs";
 import { connect } from "@lib/mongodb";
 
 import { type IUser, User } from "@models/User";
+import { randomUUID } from "crypto";
 
 export async function POST ( req: Request ) {
     
@@ -87,7 +88,8 @@ export async function POST ( req: Request ) {
     const userData = {
         username,
         password: hashedPassword,
-        email
+        email,
+        id: randomUUID()
     }
     
     const user = new User (

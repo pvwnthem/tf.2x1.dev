@@ -41,9 +41,8 @@ const userSchema = new Schema(
         
         id: {
             type: String,
-            required: false,
+            required: true,
             unique: true,
-            default: crypto.randomUUID()
         },
         
         verified: {
