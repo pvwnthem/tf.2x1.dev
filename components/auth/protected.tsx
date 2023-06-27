@@ -2,12 +2,19 @@
 import React from 'react'
 import AuthError from './errors/AuthError'
 
-export default function Protected ( { children, session } : { children: React.ReactNode, session: any } ) {
+export interface props {
+    children: any
+    session: any
+}
+
+export default function Protected ( props : props ) {
     
     return (
         <>
-            { session.status === "authenticated" ? (
-                { children }
+            { props.session.status === "authenticated" ? (
+                <div>
+                    { props.children }
+                </div>
             ): <AuthError /> }
         </>
     )

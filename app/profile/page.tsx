@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { useSession } from 'next-auth/react'
+import Protected from '@components/auth/protected'
 
 
 export default function Profile () {
@@ -8,7 +9,9 @@ export default function Profile () {
 
     return (
         <>
-            {JSON.stringify(session)}
+            <Protected session={session}>
+                {JSON.stringify(session)}
+            </Protected>
         </>
     )
 }
