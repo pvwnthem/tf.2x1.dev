@@ -81,7 +81,7 @@ const SignupForm = () => {
 
   return (
     <div className='w-full h-screen bg-background flex items-center justify-center'>
-        <div className='md:w-1/4 w-full rounded-lg py-8 flex items-center justify-center'>
+        <div className='md:w-1/4 w-full rounded-lg py-8 md:px-2 px-2 flex items-center justify-center'>
 
         <form onSubmit={handleSignup}>
             <h1 className='text-3xl font-semibold text-center text-wave-300 '>Sign Up</h1>
