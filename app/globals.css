@@ -10,3 +10,12 @@
   right: 0;
   z-index: 100;
 }
+
+@font-face {
+  font-family: 'tf2build';
+  src: url('../fonts/tf2build.ttf');
+ }
+
+.tf2font {
+  font-family: 'tf2build';
+}

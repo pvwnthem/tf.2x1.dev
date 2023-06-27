@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <Provider>
       <html lang="en">
-        <body>{children}</body>
+        <body className='tf2font'>{children}</body>
       </html>
     </Provider>
   )
