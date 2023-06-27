@@ -10,7 +10,7 @@ export default function Title() {
           <Logo />  
         </div>
         
-      <h1 className="text-7xl text-wave-100 absolute font-semibold">tf.2x1.dev</h1>
+      <h1 className="md:text-7xl text-6xl text-wave-100 absolute font-semibold">tf.2x1.dev</h1>
       <Background />
       <div className="absolute bottom-0">
         
