@@ -12,13 +12,11 @@ export default function Home() {
   return (
    <div className="bg-background">
     <Wrapper session={session}>
-      <RedirectIfAuth target={"/profile"} session={session}>
         <Navbar />
         <Title />
         <div id="info">
           <Info />
         </div>
-      </RedirectIfAuth>
     </Wrapper>
    </div>
    
