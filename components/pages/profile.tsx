@@ -2,6 +2,8 @@
 import LevelBar from "@components/levels/LevelBar"
 import React from "react"
 
+
+// TODO : make styling good, styling is just for testing right now
 export default function Profile ( props: { session: any } ) {
 
     
