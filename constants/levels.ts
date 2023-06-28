@@ -7,6 +7,110 @@ export interface Levels {
     [key: number]: Level
 }
 
+
+export interface Title {
+    title: string
+}
+
+export interface Titles {
+    [key: number]: Title
+}
+
+export const titles: Titles = {
+    5: {
+        title: "Novice"
+    },
+    10: {
+        title: "Apprentice"
+    },
+    15: {
+        title: "Journeyman"
+    },
+    20: {
+        title: "Adept"
+    },
+    25: {
+        title: "Skilled"
+    },
+    30: {
+        title: "Seasoned"
+    },
+    35: {
+        title: "Expert"
+    },
+    40: {
+        title: "Artisan"
+    },
+    45: {
+        title: "Master"
+    },
+    50: {
+        title: "Elite"
+    },
+    55: {
+        title: "Grandmaster"
+    },
+    60: {
+        title: "Champion"
+    },
+    65: {
+        title: "Legend"
+    },
+    70: {
+        title: "Hero"
+    },
+    75: {
+        title: "Mythic"
+    },
+    80: {
+        title: "Divine"
+    },
+    85: {
+        title: "Demigod"
+    },
+    90: {
+        title: "Titan"
+    },
+    95: {
+        title: "Immortal"
+    },
+    100: {
+        title: "Ascendant"
+    },
+    105: {
+        title: "Eternal"
+    },
+    110: {
+        title: "Sovereign"
+    },
+    115: {
+        title: "Celestial"
+    },
+    120: {
+        title: "Transcendent"
+    },
+    125: {
+        title: "Omniscient"
+    },
+    130: {
+        title: "Ineffable"
+    },
+    135: {
+        title: "Sublime"
+    },
+    140: {
+        title: "Incomprehensible"
+    },
+    145: {
+        title: "Cosmic"
+    },
+    150: {
+        title: "Infinite"
+    }
+};
+
+
+
 /* 
     levels are scraped using the python script scrapeLevels.py
     and then formatted using es6.py
