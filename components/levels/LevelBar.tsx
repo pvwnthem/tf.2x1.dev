@@ -12,7 +12,7 @@ export default function LevelBar ( props : { session : any } ) {
 
 
     function addTest () {
-        addXP(id, 1000).then((user) => {
+        addXP(id, 100).then((user) => {
             update({
                 ...props.session,
                 data: {
