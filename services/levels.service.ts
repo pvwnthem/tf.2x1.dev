@@ -10,7 +10,6 @@ export async function addXP( id : string , amount : number ) {
     const user = await User.findOne({ id });
 
     user.xp = user.xp + amount
-    console.log(user.xp, Number(levels[user.level + 1].xpRequired))
 
     while (user.xp >= Number(levels[user.level + 1].xpRequired)) {
       user.xp -= Number(levels[user.level + 1].xpRequired);
@@ -25,6 +24,27 @@ export async function addXP( id : string , amount : number ) {
   } catch (error) {
     console.error("Error adding XP:", error);
   }
+}
+
+export async function getAllXP( id : string ) {
+    try {
+        await connect();
+        const user = await User.findOne({ id });
+    
+        let totalXp = 0;
+
+        for (let level = 1; level <= user.level; level++) {
+            const currentLevel = levels[level];
+            if (currentLevel) {
+                const xpRequired = parseInt(currentLevel.xpRequired);
+                totalXp += xpRequired;
+            }
+        }
+
+        return totalXp += user.xp;
+    } catch (error) {
+        console.error("Error getting XP:", error);
+      }
 }
 /*
 const { update } = props.session
