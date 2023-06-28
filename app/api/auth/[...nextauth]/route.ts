@@ -47,8 +47,15 @@ const options: NextAuthOptions = {
         },
         session: async ({ session, token }) => {
             const user = token.user as IUser
-            session.user = user
 
+            const updatedUser = await User.findOne({ id : (token.user as any).id});
+
+
+            if (token.user = updatedUser) {
+                session.user = user
+            } else {
+                session.user = updatedUser
+            }
             return session
         }
     }
