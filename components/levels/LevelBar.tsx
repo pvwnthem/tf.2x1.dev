@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { levels } from "@constants/levels";
 import { addXP } from "@services/levels.service";
-import { connect } from "@lib/mongodb";
+import Image from "next/image";
 
 export default function LevelBar(props: { session: any }) {
     const { level, xp, id, title } = props.session.data.user;
@@ -29,7 +29,7 @@ export default function LevelBar(props: { session: any }) {
         <>
             <div className="flex flex-col items-center justify-center w-1/2">
                 {/* BEGIN: keeping this part when redoing styling also move it to its own component soon */}
-                <img className="" src={levels[level].badge}></img>
+                <Image alt="badge" className="" src={levels[level].badge} />
                 <h1 className="mt-1  text-wave-300">{title}</h1>
                 {/* END: keep */}
                 <h2 className="text-center mt-1 text-wave-200">

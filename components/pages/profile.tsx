@@ -1,6 +1,7 @@
 "use client";
 import LevelBar from "@components/levels/LevelBar";
 import React from "react";
+import Image from "next/image"
 
 // TODO : make styling good, styling is just for testing right now
 export default function Profile(props: { session: any }) {
@@ -12,7 +13,7 @@ export default function Profile(props: { session: any }) {
                 <div className="md:w-1/2 w-full h-full flex flex-col items-center justify-start">
                     <div className=" md:mt-16 mt-12 w-full items-center flex flex-col justify-center">
                         <div className="border w-1/4 flex items-center justify-center rounded-full p-2">
-                            <img src={profilePicture} className="w-full"></img>
+                            <Image alt="pfp" src={profilePicture} className="w-full" />
                         </div>
                         <h1 className="md:text-5xl text-4xl text-wave-300 py-4">
                             {username}
