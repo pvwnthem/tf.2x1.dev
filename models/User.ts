@@ -51,7 +51,7 @@ const userSchema = new Schema(
         description: {
             type: String,
             required: false,
-            default: ""
+            default: "Hi, I am a tf.2x1.dev user that has not yet changed their description!"
         },
 
         profilePicture: {
