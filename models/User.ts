@@ -9,6 +9,7 @@ export interface IUser extends Document {
     description: string | null
     profilePicture: string | null
     role: string
+    title: string
     verified: boolean
     xp: number | string
     level: number
@@ -69,24 +70,27 @@ const userSchema = new Schema(
             default: "user"
         },
 
+        title: {
+            type: String,
+            required: false,
+            default: "Beginner"
+        },
+
         verified: {
             type: Boolean,
             required: false,
-            unique: false,
             default: false
         },
 
         xp: {
             type: Number,
             required: false,
-            unique: false,
             default: 0
         },
 
         level: {
             type: Number,
             required: false,
-            unique: false,
             default: 1
         }
     }
