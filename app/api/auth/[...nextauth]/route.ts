@@ -46,6 +46,7 @@ const options: NextAuthOptions = {
             return token
         },
         session: async ({ session, token }) => {
+            // TODO : investigate fatal flaw when signing up that causes user to be immedietly logged in
             const user = token.user as IUser
 
             const updatedUser = await User.findOne({ id : (token.user as any).id});
