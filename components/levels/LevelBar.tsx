@@ -9,7 +9,10 @@ export default function LevelBar ( props : { session : any } ) {
 
     return (
         <>
-        <img src={levels[level].badge}></img>
+            <div className="flex flex-col items-center justify-center w-1/2">
+                <img className="" src={levels[level].badge}></img>
+                <h2 className="text-center mt-2 text-wave-200">{xp} xp</h2>
+            </div>
         </>
     )
 
