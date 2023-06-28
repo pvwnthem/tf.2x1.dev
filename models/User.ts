@@ -2,14 +2,16 @@ import mongoose, { Schema, model, models, Document } from "mongoose";
 import * as crypto from "crypto";
 
 export interface IUser extends Document {
-    email : string,
-    username: string,
-    password: string,
-    id: string,
-    description: string | null,
-    profilePicture: string | null,
+    email : string
+    username: string
+    password: string
+    id: string
+    description: string | null
+    profilePicture: string | null
     role: string
     verified: boolean
+    xp: number | string
+
 }
 
 const userSchema = new Schema(
@@ -71,6 +73,13 @@ const userSchema = new Schema(
             required: false,
             unique: false,
             default: false
+        },
+
+        xp: {
+            type: Number,
+            required: false,
+            unique: false,
+            default: 0
         }
     }
 );
