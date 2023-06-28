@@ -1,5 +1,5 @@
 'use server'
-import { levels } from "@constants/levels";
+import { levels, titles } from "@constants/levels";
 import { connect } from "@lib/mongodb";
 import { User } from "@models/User";
 
@@ -15,7 +15,9 @@ export async function addXP( id : string , amount : number ) {
     while (user.xp >= Number(levels[user.level + 1].xpRequired)) {
       user.xp -= Number(levels[user.level + 1].xpRequired);
       user.level += 1;
-      console.log("lvl up!")
+      if (titles[user.level]) {
+        user.title = titles[user.level].title
+      }
     }
 
     await user.save();
