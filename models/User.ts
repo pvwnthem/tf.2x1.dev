@@ -11,6 +11,7 @@ export interface IUser extends Document {
     role: string
     verified: boolean
     xp: number | string
+    level: number
 
 }
 
@@ -76,6 +77,13 @@ const userSchema = new Schema(
         },
 
         xp: {
+            type: Number,
+            required: false,
+            unique: false,
+            default: 0
+        },
+
+        level: {
             type: Number,
             required: false,
             unique: false,
