@@ -1,8 +1,10 @@
 'use client'
+import LevelBar from "@components/levels/LevelBar"
 import React from "react"
 
 export default function Profile ( props: { session: any } ) {
 
+    
     const { profilePicture, username, description  } = props.session.data.user
 
     return (
@@ -19,7 +21,7 @@ export default function Profile ( props: { session: any } ) {
                         </img>
                         </div>
                         <h1 className="md:text-5xl text-4xl text-wave-300 py-4">{username}</h1>
-                        <p>level bar</p>
+                        <LevelBar session={props.session} />
                     </div>
                     
                     <div className="border mt-4 w-3/4 h-1/6 items-start flex px-2 py-2 break-words justify-center">

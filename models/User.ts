@@ -87,7 +87,7 @@ const userSchema = new Schema(
             type: Number,
             required: false,
             unique: false,
-            default: 0
+            default: 1
         }
     }
 );
