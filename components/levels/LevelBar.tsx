@@ -31,7 +31,7 @@ export default function LevelBar ( props : { session : any } ) {
     return (
         <>
             <div className="flex flex-col items-center justify-center w-1/2">
-                {/* BEGIN: keeping this part when redoing styling */}
+                {/* BEGIN: keeping this part when redoing styling also move it to its own component soon */}
                 <img className="" src={levels[level].badge}></img>
                 <h1 className="mt-1  text-wave-300">{title}</h1>
                 {/* END: keep */}
