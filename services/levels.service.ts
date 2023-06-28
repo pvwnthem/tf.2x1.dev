@@ -24,3 +24,20 @@ export async function addXP( id : string , amount : number ) {
     console.error("Error adding XP:", error);
   }
 }
+/*
+const { update } = props.session
+
+
+    function addTest () {
+        addXP(id, 100).then((user) => {
+            update({
+                ...props.session,
+                data: {
+                    ...props.session.data,
+                    user
+                }
+            })
+            console.log(user, level, xp, id)
+        })
+    }
+*/
