@@ -1,31 +1,28 @@
-'use client'
-import React, { useEffect } from "react"
-import { levels } from "@constants/levels"
-import { addXP } from "@services/levels.service"
+"use client";
+import React, { useEffect } from "react";
+import { levels } from "@constants/levels";
+import { addXP } from "@services/levels.service";
 import { connect } from "@lib/mongodb";
 
+export default function LevelBar(props: { session: any }) {
+    const { level, xp, id, title } = props.session.data.user;
+    const { update } = props.session;
 
-export default function LevelBar ( props : { session : any } ) {
-    
-    const { level, xp, id, title } = props.session.data.user
-    const { update } = props.session
-
-
-    function addTest () {
+    function addTest() {
         addXP(id, 100).then((user) => {
             update({
                 ...props.session,
                 data: {
                     ...props.session.data,
-                    user
-                }
-            })
-            console.log(user, level, xp, id)
-        })
+                    user,
+                },
+            });
+            console.log(user, level, xp, id);
+        });
     }
 
-    function l () {
-        console.log(props.session)
+    function l() {
+        console.log(props.session);
     }
 
     return (
@@ -35,13 +32,13 @@ export default function LevelBar ( props : { session : any } ) {
                 <img className="" src={levels[level].badge}></img>
                 <h1 className="mt-1  text-wave-300">{title}</h1>
                 {/* END: keep */}
-                <h2 className="text-center mt-1 text-wave-200">{xp} xp / {levels[level + 1].xpRequired} xp</h2>
+                <h2 className="text-center mt-1 text-wave-200">
+                    {xp} xp / {levels[level + 1].xpRequired} xp
+                </h2>
 
                 <button onClick={addTest}>add 100 xp</button>
                 <button onClick={l}>log</button>
             </div>
         </>
-    )
-
+    );
 }
-

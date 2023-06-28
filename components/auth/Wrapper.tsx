@@ -1,24 +1,20 @@
-'use client'
-import Loading from '@components/pages/loading'
-import React from 'react'
+"use client";
+import Loading from "@components/pages/loading";
+import React from "react";
 
 export interface props {
-    children: any
-    session: any
+    children: any;
+    session: any;
 }
 
-export default function Wrapper ( props : props ) {
-    
+export default function Wrapper(props: props) {
     return (
         <>
-            { props.session.status === "loading" ? (
+            {props.session.status === "loading" ? (
                 <Loading />
-            ): (
-
-                <div>
-                    { props.children }
-                </div>
+            ) : (
+                <div>{props.children}</div>
             )}
         </>
-    )
+    );
 }

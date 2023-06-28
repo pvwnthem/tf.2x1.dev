@@ -2,20 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
 }
 
 @font-face {
-  font-family: 'tf2build';
-  src: url('../fonts/tf2build.ttf');
- }
+    font-family: "tf2build";
+    src: url("../fonts/tf2build.ttf");
+}
 
 .tf2font {
-  font-family: 'tf2build';
+    font-family: "tf2build";
 }
