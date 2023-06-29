@@ -11,10 +11,19 @@ export async function addXP(id: string, amount: number) {
         user.xp = user.xp + amount;
 
         while (user.xp >= Number(levels[user.level + 1].xpRequired)) {
-            user.xp -= Number(levels[user.level + 1].xpRequired);
             user.level += 1;
             if (titles[user.level]) {
                 user.title = titles[user.level].title;
+            }
+            
+            if (user.level >= 150) {
+                // Handle overflow XP here
+                const overflowXP = user.xp - Number(levels[user.level].xpRequired);
+                // Reset user XP to the minimum XP required for the current level
+                user.xp = Number(levels[user.level].xpRequired);
+                // Do something with the overflow XP, e.g., distribute it as bonus rewards
+                //distributeOverflowXP(overflowXP);
+                break; // Exit the loop since the user has reached the max level
             }
         }
 
