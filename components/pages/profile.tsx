@@ -10,7 +10,7 @@ export default function Profile(props: { session: any }) {
   const { profilePicture, username, description, level, id } = props.session.data.user;
   const { update } = props.session
 
-
+  /*
     function addTest () {
         addXP(id, 10000).then((user) => {
             update({
@@ -22,7 +22,7 @@ export default function Profile(props: { session: any }) {
             })
         })
     }
-
+  */
   return (
     <div className="bg-background h-screen flex items-center justify-center py-8">
       <div className="w-full md:w-1/2 h-full flex flex-col items-center justify-start">
@@ -43,7 +43,7 @@ export default function Profile(props: { session: any }) {
 
           
           <LevelBar user={props.session.data.user} />
-          <button onClick={addTest}>add xp</button>
+          { /* <button onClick={addTest}>add xp</button> } */}
           
         </div>
 
