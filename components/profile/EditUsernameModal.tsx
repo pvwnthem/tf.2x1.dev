@@ -39,7 +39,7 @@ const EditUsernameModal = ({
                     </button>
                     <button
                         onClick={handleSave}
-                        className="bg-wave-400 hover:bg-wave-500 text-white font-semibold px-4 py-2 mr-2 rounded"
+                        className="bg-wave-400 hover:bg-wave-500 text-white font-semibold px-4 py-2 ml-2 rounded"
                     >
                         Save
                     </button>
