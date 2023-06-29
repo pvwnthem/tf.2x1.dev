@@ -25,9 +25,9 @@ const SignupForm = () => {
             errors.push({
                 error: "Full name must be at least 4 characters long",
             });
-        } else if (data.username.length > 30) {
+        } else if (data.username.length > 16) {
             errors.push({
-                error: "Full name should be less than 30 characters",
+                error: "Full name should be less than 16 characters long",
             });
         } else if (data.password.length < 6) {
             errors.push({

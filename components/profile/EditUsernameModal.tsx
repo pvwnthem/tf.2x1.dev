@@ -8,14 +8,22 @@ const EditUsernameModal = ({
     onClose: any;
 }) => {
     const [newUsername, setNewUsername] = useState("");
+    const [error, setError] = useState<any>(null)
 
     const handleChange = (e: any) => {
         setNewUsername(e.target.value);
     };
 
     const handleSave = () => {
-        onSave(newUsername);
-        onClose();
+        if (newUsername === "") {
+            setError("Please enter a new username")
+        } else if (newUsername.length < 4 || newUsername.length > 16) {
+            setError("Please enter a new username between 4 characters and 16 characters long")
+        }
+         else {
+            onSave(newUsername);
+            onClose();
+        }
     };
 
     return (
@@ -30,6 +38,11 @@ const EditUsernameModal = ({
                     onChange={handleChange}
                     className="border rounded-md px-3 py-2 mb-4"
                 />
+                { error && (
+                    <>
+                        <h1 className="text-wave-200">{error}</h1>
+                    </>
+                ) }
                 <div className="flex justify-end">
                     <button
                         onClick={onClose}
