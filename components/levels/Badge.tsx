@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
-import { levels } from '@constants/levels';
-import React from 'react';
+"use client";
+import { levels } from "@constants/levels";
+import React from "react";
 
-export default function Badge ( props: { session: any } ) {
+export default function Badge(props: { user: any }) {
+    const user = props.user;
+    const { level, xp, title } = user;
 
-    const { level, xp, title } = props.session.data.user;
-    
     return (
         <>
             <img alt="badge" className="" src={levels[level].badge} />
@@ -15,6 +15,5 @@ export default function Badge ( props: { session: any } ) {
                 {xp} xp / {levels[level + 1].xpRequired} xp
             </h2>
         </>
-    )
-
+    );
 }
