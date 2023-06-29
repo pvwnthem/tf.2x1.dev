@@ -128,7 +128,7 @@ const LoginForm = () => {
 
                     <div className="flex flex-col">
                         <p className="text-center text-white mt-2">
-                            Don't have an account?{" "}
+                            Don&apos;t have an account?{" "}
                         </p>
                         <Link
                             href="/signup"
