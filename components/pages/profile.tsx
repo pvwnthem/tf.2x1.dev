@@ -14,17 +14,14 @@ export default function Profile(props: { session: any; user?: any }) {
 
     React.useEffect(() => {
         if (props.user && props.user.id === props.session.data.user.id) {
-            console.log("1");
             setCanEdit(true);
         }
 
         if ((props.user && role === "admin") || role === "owner") {
-            console.log("2");
             setCanEdit(true);
         }
 
         if (!props.user && id) {
-            console.log("3");
             setCanEdit(true);
         }
     }, [id, props.session.data.user.id, props.user, role]);
