@@ -32,16 +32,16 @@ const EditUsernameModal = ({
                 />
                 <div className="flex justify-end">
                     <button
-                        onClick={handleSave}
-                        className="bg-wave-400 hover:bg-wave-500 text-white font-semibold px-4 py-2 mr-2 rounded"
-                    >
-                        Save
-                    </button>
-                    <button
                         onClick={onClose}
                         className="bg-wave-100 hover:bg-wave-300 text-white font-semibold px-4 py-2 rounded"
                     >
                         Cancel
+                    </button>
+                    <button
+                        onClick={handleSave}
+                        className="bg-wave-400 hover:bg-wave-500 text-white font-semibold px-4 py-2 mr-2 rounded"
+                    >
+                        Save
                     </button>
                 </div>
             </div>
