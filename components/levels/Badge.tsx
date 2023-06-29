@@ -3,9 +3,9 @@
 import { levels } from '@constants/levels';
 import React from 'react';
 
-export default function Badge ( props: { session: any } ) {
+export default function Badge ( props: { user: any } ) {
 
-    const { level, xp, title } = props.session.data.user;
+    const { level, xp, title } = props.user;
     
     return (
         <>

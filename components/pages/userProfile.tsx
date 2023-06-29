@@ -5,8 +5,9 @@ import Image from "next/image";
 import LevelBar from "@components/levels/LevelBar";
 import { levels } from "@constants/levels";
 
-export default function Profile(props: { session: any }) {
-  const { profilePicture, username, description, level } = props.session.data.user;
+export default function UserProfile(props: { user: any }) {
+
+  const { profilePicture, username, description, level } = props.user
 
   return (
     <div className="bg-background h-screen flex items-center justify-center py-8">
@@ -27,7 +28,7 @@ export default function Profile(props: { session: any }) {
             </div>
 
           
-          <LevelBar user={props.session.data.user} />
+          <LevelBar user={props.user} />
         </div>
 
         <div className="mt-4 w-3/4 h-1/6 flex items-start justify-center py-2 break-words">
