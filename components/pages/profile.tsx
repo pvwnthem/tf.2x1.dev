@@ -24,7 +24,6 @@ export default function Profile(props: { session: any }) {
                 <h1 className="text-4xl py-4 md:text-5xl text-wave-300">
                     {username}
                 </h1> 
-                {/* <img alt="badge" className="h-12 ml-2" src={levels[level].badge} /> */}
             </div>
 
           
