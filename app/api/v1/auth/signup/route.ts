@@ -11,6 +11,9 @@ import { Verify } from "@models/Verify";
 import { sendVerificationRequest } from "@services/email.service";
 
 export async function POST(req: Request) {
+
+    const url = new URL(req.url)
+
     // make initial connection to mongodb
     connect().catch((err) => {
         console.log(err);
@@ -95,8 +98,9 @@ export async function POST(req: Request) {
     })
 
     await verify.save();
+    const baseUrl = `${url.protocol}//${url.hostname}:${url.port}`;
 
-    await sendVerificationRequest({identifier: email, token, baseUrl: req.url})
+    await sendVerificationRequest({identifier: email, token, baseUrl})
 
     return NextResponse.json({
         success: true,

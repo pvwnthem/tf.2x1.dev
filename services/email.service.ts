@@ -1,3 +1,6 @@
+import { connect } from "@lib/mongodb";
+import { User } from "@models/User";
+import { Verify } from "@models/Verify";
 import mailer from "nodemailer";
 
 // Initialize the nodemailer transporter
@@ -49,9 +52,7 @@ export class Mail {
 export async function sendVerificationRequest({ identifier: email, token, baseUrl} :  { identifier: string, token: string, baseUrl: string }) {
   const mailer = new Mail(transporter)
 
-  console.log(process.env.EMAIL_USERNAME, process.env.EMAIL_PASSWORD)
-
-  const verificationUrl = `${baseUrl}/auth/verify?token=${token}`;
+  const verificationUrl = `${baseUrl}/api/v1/auth/verify?token=${token}`;
 
   mailer.setOption('html', `<p>Please click the following link to verify your email: <a href="${verificationUrl}">${verificationUrl}</a></p>`)
 
@@ -61,3 +62,19 @@ export async function sendVerificationRequest({ identifier: email, token, baseUr
   
 }
 
+
+export async function verifyToken ( token: string ) {
+  try {
+      await connect()
+
+      const verificationObject = await Verify.findOne({ token })
+
+      if ( verificationObject ) {
+          await User.findOneAndUpdate( { id : verificationObject.id }, { verified: true } )
+      }
+  } catch ( error : any) {
+      throw new Error(error)
+  }
+  
+  
+}

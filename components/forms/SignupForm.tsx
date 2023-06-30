@@ -1,9 +1,9 @@
-"use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { loginUser } from "@services/auth.service";
 import Link from "next/link";
+import Loading from "@components/pages/loading";
 
 const SignupForm = () => {
     const [data, setData] = useState({
@@ -14,7 +14,7 @@ const SignupForm = () => {
     });
 
     const [validationErrors, setValidationErrors] = useState<any>([]);
-    const [submitError, setSubmitError] = useState("");
+    const [submitError, setSubmitError] = useState<any>("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
@@ -71,9 +71,9 @@ const SignupForm = () => {
                     const errorMsg = error.response?.data;
                     setSubmitError(errorMsg);
                 }
+            } finally {
+                setLoading(false);
             }
-
-            setLoading(false);
         }
     };
 
@@ -145,7 +145,7 @@ const SignupForm = () => {
                         className="mx-auto mt-4 p-2 bg-wave-300 rounded-md w-full"
                         disabled={loading}
                     >
-                        Sign Up
+                        {loading ? "Loading" : "Sign Up"}
                     </button>
 
                     {submitError && (
