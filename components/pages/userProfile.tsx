@@ -5,6 +5,7 @@ import Image from "next/image";
 import LevelBar from "@components/levels/LevelBar";
 import { levels } from "@constants/levels";
 import Description from "@components/profile/Description";
+import Username from "@components/profile/Username";
 
 export default function UserProfile(props: { user: any }) {
 
@@ -23,9 +24,7 @@ export default function UserProfile(props: { user: any }) {
           </div>
           
             <div className="flex items-center justify-center">
-                <h1 className="text-4xl py-4 md:text-5xl text-wave-300">
-                    {username}
-                </h1> 
+               <Username username={username} />
             </div>
 
           
