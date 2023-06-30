@@ -1,8 +1,11 @@
 "use client";
+import BackButton from "@components/navigation/back";
 import React from "react";
 
 export default function Page() {
     return (
+        <>
+        <BackButton />
         <div className="w-full h-screen flex items-start justify-center bg-background">
             <div className="w-1/2 flex flex-col">
                 <h1 className="text-wave-300 text-center text-7xl mt-48">
@@ -13,5 +16,7 @@ export default function Page() {
                 </h2>
             </div>
         </div>
+        </>
+        
     );
 }

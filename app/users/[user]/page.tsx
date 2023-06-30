@@ -7,6 +7,7 @@ import Loading from "@components/pages/loading";
 import { useSession } from "next-auth/react";
 import UserNotFound from "@components/auth/errors/UserNotFound";
 import UserProfile from "@components/pages/userProfile";
+import BackButton from "@components/navigation/back";
 
 export default function UserPage({ params }: any) {
     const [user, setUser] = useState<IUser | null>(null);
@@ -37,6 +38,7 @@ export default function UserPage({ params }: any) {
         <>
             {user ? (
                 <>
+                    <BackButton />
                     <UserProfile user={user} />
                 </>
             ) : (
