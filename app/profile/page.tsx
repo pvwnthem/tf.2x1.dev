@@ -5,6 +5,7 @@ import Protected from "@components/auth/protected";
 import Wrapper from "@components/auth/Wrapper";
 import ProfilePage from "@components/pages/profile";
 import BackButton from "@components/navigation/back";
+import EmailProtected from "@components/auth/emailProtected";
 
 export default function Profile() {
     const session = useSession();
@@ -12,10 +13,12 @@ export default function Profile() {
     return (
         <>
             <Wrapper session={session}>
-                <Protected session={session}>
-                    <BackButton />
-                    <ProfilePage session={session} />
-                </Protected>
+                <EmailProtected session={session} >
+                    <Protected session={session}>
+                        <BackButton />
+                        <ProfilePage session={session} />
+                    </Protected>
+                </EmailProtected>
             </Wrapper>
         </>
     );
