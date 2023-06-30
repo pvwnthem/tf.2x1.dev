@@ -10,6 +10,7 @@ import EditDescription from "@components/profile/editing/EditDescription";
 import Username from "@components/profile/Username";
 import EditUsername from "@components/profile/editing/EditUsername";
 import ProfilePicture from "@components/profile/ProfilePicture";
+import EditProfilePicture from "@components/profile/editing/EditProfilePicture";
 
 const validateData = (data: any) => {
   const errors = [];
@@ -44,6 +45,7 @@ export default function Profile(props: { session: any }) {
 
   const [editing, setEditing] = useState(false);
   const [updatedUsername, setUpdatedUsername] = useState(username);
+  const [updatedProfilePicture, setUpdatedProfilePicture] = useState(profilePicture);
   const [updatedDescription, setUpdatedDescription] = useState(description);
   const [validationErrors, setValidationErrors] = useState<any>([]);
 
@@ -54,6 +56,7 @@ export default function Profile(props: { session: any }) {
       const parsedUser = JSON.parse(storedUser);
       setUpdatedUsername(parsedUser.username.toLowerCase());
       setUpdatedDescription(parsedUser.description);
+      setUpdatedProfilePicture(parsedUser.profilePicture)
     }
   }, []);
 
@@ -65,6 +68,11 @@ export default function Profile(props: { session: any }) {
     setUpdatedDescription(event.target.value);
   };
 
+  const handleProfilePictureChange = (event: React.ChangeEvent<HTMLTextAreaElement> | any) => {
+    console.log(event)
+    setUpdatedProfilePicture(event.target.value);
+  };
+
   const handleEdit = () => {
     setEditing(true);
   };
@@ -74,6 +82,7 @@ export default function Profile(props: { session: any }) {
       ...props.session.data.user,
       username: updatedUsername,
       description: updatedDescription,
+      profilePicture: updatedProfilePicture
     };
 
     const validationErrors = validateData(updatedUser);
@@ -107,7 +116,12 @@ export default function Profile(props: { session: any }) {
     <div className="bg-background h-screen flex items-center justify-center py-8">
       <div className="w-full md:w-1/2 h-full flex flex-col items-center justify-start">
         <div className="md:mt-16 mt-12 w-full flex flex-col items-center justify-center">
-          <ProfilePicture src={profilePicture} />
+          {editing ? (
+            <EditProfilePicture src={profilePicture} handleProfilePictureChange={handleProfilePictureChange} />
+          ) : (
+            <ProfilePicture src={updatedProfilePicture} />
+          )}
+          
 
           {editing ? (
             <EditUsername username={updatedUsername} handleUsernameChange={handleUsernameChange} />

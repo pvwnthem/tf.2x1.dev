@@ -13,12 +13,12 @@ export default function Profile() {
     return (
         <>
             <Wrapper session={session}>
-                <EmailProtected session={session} >
                     <Protected session={session}>
-                        <BackButton />
-                        <ProfilePage session={session} />
+                        <EmailProtected session={session} >
+                            <BackButton />
+                            <ProfilePage session={session} />
+                        </EmailProtected>
                     </Protected>
-                </EmailProtected>
             </Wrapper>
         </>
     );
