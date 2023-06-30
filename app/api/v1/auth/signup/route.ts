@@ -13,7 +13,8 @@ export async function POST(req: Request) {
     const data = (await req.json()) as unknown as IUser;
 
     // destructure request data into required params of User model
-    const { username, password, email } = data;
+    const { password, email } = data;
+    const username = data.username.toLowerCase()
 
     // check if all the data is provided
 

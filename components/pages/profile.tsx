@@ -3,9 +3,37 @@ import Image from "next/image";
 import LevelBar from "@components/levels/LevelBar";
 import { levels } from "@constants/levels";
 import { addXP } from "@services/levels.service";
-import { updateUser } from "@services/users.service"; // Import the updateUser function
+import { updateUser } from "@services/users.service";
 import Description from "@components/profile/Description";
-import EditingButton from "@components/profile/EditingButton";
+import EditingButton from "@components/profile/editing/EditingButton";
+import EditDescription from "@components/profile/editing/EditDescription";
+
+const validateData = (data: any) => {
+  const errors = [];
+
+  if (data.username.length < 4) {
+    errors.push({
+      error: "username must be at least 4 characters long",
+    });
+  } else if (data.username.length > 16) {
+    errors.push({
+      error: "username should be less than 16 characters long",
+    });
+  }
+
+  if (data.description.length === 0) {
+    errors.push({
+      error: "Description must be atleast 1 character long"
+    })
+  }
+  if (data.description.length > 128) {
+    errors.push({
+      error: "Description can't be longer than 128 characters"
+    })
+  }
+
+  return errors;
+};
 
 export default function Profile(props: { session: any }) {
   const { profilePicture, username, description, level, id } = props.session.data.user;
@@ -14,19 +42,20 @@ export default function Profile(props: { session: any }) {
   const [editing, setEditing] = useState(false);
   const [updatedUsername, setUpdatedUsername] = useState(username);
   const [updatedDescription, setUpdatedDescription] = useState(description);
+  const [validationErrors, setValidationErrors] = useState<any>([]);
 
   useEffect(() => {
     // Load the user data from localStorage on component mount
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      setUpdatedUsername(parsedUser.username);
+      setUpdatedUsername(parsedUser.username.toLowerCase());
       setUpdatedDescription(parsedUser.description);
     }
   }, []);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUpdatedUsername(event.target.value);
+    setUpdatedUsername(event.target.value.toLowerCase());
   };
 
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -41,23 +70,27 @@ export default function Profile(props: { session: any }) {
     const updatedUser = {
       ...props.session.data.user,
       username: updatedUsername,
-      description: updatedDescription
+      description: updatedDescription,
     };
 
+    const validationErrors = validateData(updatedUser);
+
+    if (validationErrors.length > 0) {
+      setValidationErrors(validationErrors);
+      return;
+    }
+
     try {
-      // Call the updateUser function to update the user in the backend
       const response = await updateUser(id, updatedUser);
 
-      // Update the user object in localStorage
       localStorage.setItem("user", JSON.stringify(response));
 
-      // Update the session with the updated user data
       update({
         ...props.session,
         data: {
           ...props.session.data,
-          user: response
-        }
+          user: response,
+        },
       });
 
       setEditing(false);
@@ -66,20 +99,6 @@ export default function Profile(props: { session: any }) {
       // Handle error, e.g., show an error message to the user
     }
   };
-
-  /*
-  function addTest() {
-    addXP(id, 10000).then((user) => {
-      update({
-        ...props.session,
-        data: {
-          ...props.session.data,
-          user
-        }
-      });
-    });
-  }
-  */
 
   return (
     <div className="bg-background h-screen flex items-center justify-center py-8">
@@ -105,21 +124,23 @@ export default function Profile(props: { session: any }) {
           )}
 
           <LevelBar user={props.session.data.user} />
-          {/* <button onClick={addTest}>add xp</button> */}
         </div>
 
         <div className="mt-4 w-3/4 h-1/6 flex items-start justify-center py-2 break-words">
           {editing ? (
-            <textarea
-              value={updatedDescription}
-              onChange={handleDescriptionChange}
-              maxLength={128}
-              className="mt-4 w-3/4 flex h-auto items-start justify-center py-2 break-keep text-lg text-wave-300 bg-background"
-            />
+            <EditDescription description={updatedDescription} handleDescriptionChange={handleDescriptionChange} />
           ) : (
             <Description description={updatedDescription} />
           )}
         </div>
+
+        {validationErrors.length > 0 && (
+          <div className="text-red-500">
+            {validationErrors.map((error: any, index: number) => (
+              <p key={index}>{error.error}</p>
+            ))}
+          </div>
+        )}
 
         <EditingButton isEditing={editing} handleSave={handleSave} handleEdit={handleEdit} />
       </div>
