@@ -7,6 +7,8 @@ import fs from "fs";
 import { type IUser, User } from "@models/User";
 import { randomUUID } from "crypto";
 import { getRandomIndex } from "@services/util.service";
+import { Verify } from "@models/Verify";
+import { sendVerificationRequest } from "@services/email.service";
 
 export async function POST(req: Request) {
     // make initial connection to mongodb
@@ -72,17 +74,29 @@ export async function POST(req: Request) {
 
     const image = images[getRandomIndex(images)];
 
+    const id = randomUUID()
+    const token = randomUUID()
+
     const userData = {
         username,
         password: hashedPassword,
         email,
         profilePicture: image,
-        id: randomUUID(),
+        id
     };
 
     const user = new User(userData);
 
     await user.save();
+
+    const verify = new Verify({
+        id,
+        token
+    })
+
+    await verify.save();
+
+    await sendVerificationRequest({identifier: email, token, baseUrl: req.url})
 
     return NextResponse.json({
         success: true,

@@ -2,12 +2,9 @@ import mailer from "nodemailer";
 
 // Initialize the nodemailer transporter
 export const transporter = mailer.createTransport({
-  // Set the SMTP host to Zoho
   host: process.env.EMAIL_SERVER_HOST,
-  // Use SSL on the port 465
   port: process.env.EMAIL_SERVER_PORT,
   secure: true,
-  // Set the authentication credentials for the Zoho newsletter account
   auth: {
     user: process.env.EMAIL_USERNAME,
     pass: process.env.EMAIL_PASSWORD,
@@ -47,4 +44,20 @@ export class Mail {
       console.error(error as string);
     }
   }
-}4
+}
+
+export async function sendVerificationRequest({ identifier: email, token, baseUrl} :  { identifier: string, token: string, baseUrl: string }) {
+  const mailer = new Mail(transporter)
+
+  console.log(process.env.EMAIL_USERNAME, process.env.EMAIL_PASSWORD)
+
+  const verificationUrl = `${baseUrl}/auth/verify?token=${token}`;
+
+  mailer.setOption('html', `<p>Please click the following link to verify your email: <a href="${verificationUrl}">${verificationUrl}</a></p>`)
+
+  mailer.setOption('to', email)
+
+  await mailer.send()
+  
+}
+
