@@ -7,6 +7,8 @@ import { updateUser } from "@services/users.service";
 import Description from "@components/profile/Description";
 import EditingButton from "@components/profile/editing/EditingButton";
 import EditDescription from "@components/profile/editing/EditDescription";
+import Username from "@components/profile/Username";
+import EditUsername from "@components/profile/editing/EditUsername";
 
 const validateData = (data: any) => {
   const errors = [];
@@ -109,18 +111,9 @@ export default function Profile(props: { session: any }) {
           </div>
 
           {editing ? (
-            <div className="flex items-center justify-center">
-              <input
-                type="text"
-                value={updatedUsername}
-                onChange={handleUsernameChange}
-                className="text-4xl py-4 md:text-5xl text-center text-wave-300 bg-background"
-              />
-            </div>
+            <EditUsername username={updatedUsername} handleUsernameChange={handleUsernameChange} />
           ) : (
-            <div className="flex items-center justify-center">
-              <h1 className="text-4xl py-4 md:text-5xl text-wave-300">{updatedUsername}</h1>
-            </div>
+            <Username username={updatedUsername} />
           )}
 
           <LevelBar user={props.session.data.user} />

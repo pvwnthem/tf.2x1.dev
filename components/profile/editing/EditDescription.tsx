@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 
-const Description = ({ description, handleDescriptionChange }: { description: string, handleDescriptionChange: any }) => {
+const EditDescription = ({ description, handleDescriptionChange }: { description: string, handleDescriptionChange: any }) => {
   return (
     <div className="w-full flex ">
         <textarea
@@ -14,4 +14,4 @@ const Description = ({ description, handleDescriptionChange }: { description: st
   );
 };
 
-export default Description;
+export default EditDescription;
