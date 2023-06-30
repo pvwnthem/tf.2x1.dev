@@ -6,6 +6,7 @@ import { type IUser, User } from "@models/User";
 import { Verify } from "@models/Verify";
 import { sendVerificationRequest } from "@services/email.service";
 import { randomUUID } from "crypto";
+import { images } from "@constants/images";
 
 export async function POST(req: Request) {
     const url = new URL(req.url)
@@ -53,13 +54,7 @@ export async function POST(req: Request) {
         const hashedPassword: string = await hash(password, 12);
 
         // set random image as pfp
-        const images: string[] = [
-            "https://i.imgur.com/JL92Jwq.png",
-            "https://i.imgur.com/3ZdzSOF.png",
-            "https://i.imgur.com/HNZ8nwn.png",
-            "https://i.imgur.com/OrBukhd.png",
-            "https://i.imgur.com/kcyIMoM.png",
-        ];
+
 
         const randomIndex = Math.floor(Math.random() * images.length);
         const image = images[randomIndex];
