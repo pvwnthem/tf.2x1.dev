@@ -20,7 +20,7 @@ export class Mail {
   constructor(transporter: mailer.Transporter) {
     this.transporter = transporter;
     this.options = {
-      from: `${process.env.EMAIL_USERNAME} <${process.env.EMAIL_USERNAME}>`,
+      from: `"${process.env.EMAIL_USERNAME}" <${process.env.EMAIL_USERNAME}>`,
       subject: "Alert From tf.2x1.dev",
       to: "",
       html: "",
