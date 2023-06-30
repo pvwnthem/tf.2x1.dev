@@ -1,9 +1,0 @@
-custom titles for high profile members
-dropdown for the different pfps
-achievments for xp (
-    first post,
-    first like on post,
-    first comment,
-    awards like reddit,
-    follow another user
-)
