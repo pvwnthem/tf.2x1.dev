@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 
-const ProfilePicture = ({ src }: { src: string }) => {
+const ProfilePicture = ({ src, onClick }: { src: string, onClick?: any }) => {
   return (
     <div className="rounded-full w-1/4 flex items-center justify-center p-2">
         <img

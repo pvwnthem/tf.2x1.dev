@@ -11,6 +11,7 @@ import Username from "@components/profile/Username";
 import EditUsername from "@components/profile/editing/EditUsername";
 import ProfilePicture from "@components/profile/ProfilePicture";
 import EditProfilePicture from "@components/profile/editing/EditProfilePicture";
+import { encrypt, decrypt } from "@services/encryption.service";
 
 const validateData = (data: any) => {
   const errors = [];
@@ -27,7 +28,7 @@ const validateData = (data: any) => {
 
   if (data.description.length === 0) {
     errors.push({
-      error: "Description must be atleast 1 character long"
+      error: "Description must be at least 1 character long"
     })
   }
   if (data.description.length > 128) {
@@ -52,11 +53,29 @@ export default function Profile(props: { session: any }) {
   useEffect(() => {
     // Load the user data from localStorage on component mount
     const storedUser = localStorage.getItem("user");
+
+    async function decUser() {
+      try {
+        const decryptedUser = await decrypt(storedUser);
+
+        let parsedUser;
+        try {
+          parsedUser = JSON.parse(decryptedUser);
+        } catch (error) {
+          console.error("Error parsing decrypted user:", error);
+          parsedUser = {};
+        }
+
+        setUpdatedUsername(parsedUser.username?.toLowerCase() || "");
+        setUpdatedDescription(parsedUser.description || "");
+        setUpdatedProfilePicture(parsedUser.profilePicture || "");
+      } catch (error) {
+        console.error("Error decrypting user:", error);
+      }
+    }
+
     if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      setUpdatedUsername(parsedUser.username.toLowerCase());
-      setUpdatedDescription(parsedUser.description);
-      setUpdatedProfilePicture(parsedUser.profilePicture)
+      decUser();
     }
   }, []);
 
@@ -95,7 +114,15 @@ export default function Profile(props: { session: any }) {
     try {
       const response = await updateUser(id, updatedUser);
 
-      localStorage.setItem("user", JSON.stringify(response));
+      const data = {
+        profilePicture: response.profilePicture,
+        description: response.description,
+        username: response.username
+      }
+
+      const encryptedData = await encrypt(JSON.stringify(data));
+
+      localStorage.setItem("user", encryptedData);
 
       update({
         ...props.session,

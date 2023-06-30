@@ -1,6 +1,7 @@
 import { images } from '@constants/images';
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
+import ProfilePicture from '../ProfilePicture';
 
 const EditProfilePicture = ({ src, handleProfilePictureChange }: { src: string, handleProfilePictureChange: any }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -17,10 +18,11 @@ const EditProfilePicture = ({ src, handleProfilePictureChange }: { src: string, 
   };
 
   return (
-      <div className="rounded-full w-1/4 flex items-center justify-center p-2">
-        <div onClick={togglePopup} >
-          <img alt="Profile Picture" src={selectedImage} className="w-full cursor-pointer" />
+      <div className="w-full">
+        <div onClick={togglePopup} className='w-full flex items-center cursor-pointer justify-center'>
+            <ProfilePicture src={selectedImage} />
         </div>
+       
         <Draggable>
             <div className='cursor-move'>
             {showPopup && (
