@@ -9,7 +9,19 @@ export async function getUserByName(username: string) {
         const user = await User.findOne({ username });
 
         return JSON.parse(JSON.stringify(user));
-    } catch (error) {
-        console.error("Couldn't get user: ", error);
+    } catch (error : any) {
+        throw new Error ( error )
     }
 }
+
+export async function updateUser(id: string, updatedUser: any): Promise<any> {
+    try {
+      await connect();
+      
+      const user = await User.findOneAndUpdate({ id }, updatedUser, { new: true });
+  
+      return JSON.parse(JSON.stringify(user));
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }

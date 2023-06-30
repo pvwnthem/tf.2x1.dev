@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import LevelBar from "@components/levels/LevelBar";
 import { levels } from "@constants/levels";
+import Description from "@components/profile/Description";
 
 export default function UserProfile(props: { user: any }) {
 
@@ -31,9 +32,7 @@ export default function UserProfile(props: { user: any }) {
           <LevelBar user={props.user} />
         </div>
 
-        <div className="mt-4 w-3/4 h-1/6 flex items-start justify-center py-2 break-words">
-          <p className="text-lg text-wave-300">{description}</p>
-        </div>
+        <Description description={description} />
       </div>
     </div>
   );
