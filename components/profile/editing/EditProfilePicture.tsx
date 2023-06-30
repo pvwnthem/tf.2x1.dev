@@ -24,11 +24,11 @@ const EditProfilePicture = ({ src, handleProfilePictureChange }: { src: string, 
         <Draggable>
             <div className='cursor-move'>
             {showPopup && (
-                <div className="absolute top-0 right-0 bg-white border border-gray-300 rounded p-2 mt-2">
+                <div className="absolute top-0 right-0 bg-background border  rounded p-2 mt-2">
                     <select
                         value={selectedImage}
                         onChange={handleChange}
-                        className="border border-gray-300 rounded px-3 py-1 mb-2"
+                        className="border  rounded px-3 py-1 mb-2"
                     >
                         {images.map((image, index) => (
                             <option key={index} value={image}>
@@ -43,7 +43,7 @@ const EditProfilePicture = ({ src, handleProfilePictureChange }: { src: string, 
                                     alt="Image Preview"
                                     src={image}
                                     className={`w-12 h-12 cursor-pointer ${
-                                        image === selectedImage ? 'border-2 border-blue-500' : ''
+                                        image === selectedImage ? 'border' : ''
                                     }`}
                                     onClick={() => {setSelectedImage(image); handleProfilePictureChange({ target: { value: image }})}}
                                 />
