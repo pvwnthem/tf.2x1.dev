@@ -9,6 +9,7 @@ import EditingButton from "@components/profile/editing/EditingButton";
 import EditDescription from "@components/profile/editing/EditDescription";
 import Username from "@components/profile/Username";
 import EditUsername from "@components/profile/editing/EditUsername";
+import ProfilePicture from "@components/profile/ProfilePicture";
 
 const validateData = (data: any) => {
   const errors = [];
@@ -106,9 +107,7 @@ export default function Profile(props: { session: any }) {
     <div className="bg-background h-screen flex items-center justify-center py-8">
       <div className="w-full md:w-1/2 h-full flex flex-col items-center justify-start">
         <div className="md:mt-16 mt-12 w-full flex flex-col items-center justify-center">
-          <div className="rounded-full w-1/4 flex items-center justify-center p-2">
-            <img alt="Profile Picture" src={profilePicture} className="w-full" />
-          </div>
+          <ProfilePicture src={profilePicture} />
 
           {editing ? (
             <EditUsername username={updatedUsername} handleUsernameChange={handleUsernameChange} />
