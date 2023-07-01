@@ -13,3 +13,15 @@ export async function getNumberOfPostsInCategory ( category : string ) {
         throw new Error(e)
     }
 }
+
+export async function getAllPostsInCategory(category: string) {
+    try {
+      await connect();
+  
+      const posts = await ForumPost.find({ category });
+  
+      return posts;
+    } catch (e: any) {
+      throw new Error(e);
+    }
+}

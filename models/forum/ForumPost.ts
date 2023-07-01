@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-interface IForumPost extends Document {
+export interface IForumPost extends Document {
   category: string;
   postId: string;
   title: string;
