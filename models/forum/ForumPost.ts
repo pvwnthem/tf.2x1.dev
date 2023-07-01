@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 interface IForumPost extends Document {
+  category: string;
   postId: string;
   title: string;
   content: string;
@@ -12,6 +13,10 @@ interface IForumPost extends Document {
 }
 
 const ForumPostSchema: Schema = new Schema({
+  category: {
+    type: String,
+    required: true
+  },
   postId: {
     type: String,
     required: true,
