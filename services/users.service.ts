@@ -1,6 +1,7 @@
 'use server'
 import { connect } from "@lib/mongodb";
 import { User } from "@models/User";
+import { Verify } from "@models/Verify";
 
 export async function getUserByName(username: string) {
     try {
@@ -24,4 +25,20 @@ export async function updateUser(id: string, updatedUser: any): Promise<any> {
     } catch (error: any) {
       throw new Error(error);
     }
+  }
+
+  export async function verifyToken ( token: string ) {
+    try {
+        await connect()
+  
+        const verificationObject = await Verify.findOne({ token })
+  
+        if ( verificationObject ) {
+            await User.findOneAndUpdate( { id : verificationObject.id }, { verified: true } )
+        }
+    } catch ( error : any) {
+        throw new Error(error)
+    }
+    
+    
   }

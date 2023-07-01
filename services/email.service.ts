@@ -61,20 +61,3 @@ export async function sendVerificationRequest({ identifier: email, token, baseUr
   await mailer.send()
   
 }
-
-
-export async function verifyToken ( token: string ) {
-  try {
-      await connect()
-
-      const verificationObject = await Verify.findOne({ token })
-
-      if ( verificationObject ) {
-          await User.findOneAndUpdate( { id : verificationObject.id }, { verified: true } )
-      }
-  } catch ( error : any) {
-      throw new Error(error)
-  }
-  
-  
-}
