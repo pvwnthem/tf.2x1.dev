@@ -57,7 +57,7 @@ export default function CategoryPage({ params }: any) {
                     </div>
 
                     <div className="max-w-7xl w-full mt-6 flex md:justify-end justify-center">
-                    <button className="bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap">
+                    <button onClick={() => { window.location.replace(`/forum/new?category=${params.category}`) }} className="bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap">
                         <span className="text-xl">new post</span>
                         <span className="flex items-center justify-center w-6">
                             <Plus />

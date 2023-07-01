@@ -20,7 +20,7 @@ export async function getAllPostsInCategory(category: string) {
   
       const posts = await ForumPost.find({ category });
   
-      return posts;
+      return JSON.parse(JSON.stringify(posts));
     } catch (e: any) {
       throw new Error(e);
     }
