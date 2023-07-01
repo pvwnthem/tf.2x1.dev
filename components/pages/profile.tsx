@@ -56,7 +56,7 @@ export default function Profile(props: { session: any }) {
 
     async function decUser() {
       try {
-        const decryptedUser = await decrypt(storedUser);
+        const decryptedUser = await decrypt(storedUser)
 
         let parsedUser;
         try {
@@ -64,6 +64,12 @@ export default function Profile(props: { session: any }) {
         } catch (error) {
           console.error("Error parsing decrypted user:", error);
           parsedUser = {};
+        }
+        if (parsedUser && parsedUser.username && parsedUser.profilePicture && parsedUser.description) {
+          
+        } else {
+          localStorage.removeItem('user')
+          parsedUser = props.session.data.user
         }
 
         setUpdatedUsername(parsedUser.username?.toLowerCase() || "");
