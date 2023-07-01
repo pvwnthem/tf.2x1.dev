@@ -65,13 +65,10 @@ export default function Profile(props: { session: any }) {
           console.error("Error parsing decrypted user:", error);
           parsedUser = {};
         }
-        if (parsedUser && parsedUser.username && parsedUser.profilePicture && parsedUser.description) {
-          
-        } else {
+        if (!parsedUser || !parsedUser.username || !parsedUser.profilePicture || !parsedUser.description) {
           localStorage.removeItem('user')
           parsedUser = props.session.data.user
         }
-
         setUpdatedUsername(parsedUser.username?.toLowerCase() || "");
         setUpdatedDescription(parsedUser.description || "");
         setUpdatedProfilePicture(parsedUser.profilePicture || "");
