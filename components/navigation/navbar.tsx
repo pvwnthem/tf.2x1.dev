@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 
-export const Navbar = () => {
+export const Navbar = ({ overlapsNot } : { overlapsNot?: boolean }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const session = useSession();
@@ -20,7 +20,7 @@ export const Navbar = () => {
     }
 
     return (
-        <div className="navbar">
+        <div className={overlapsNot ? `` : `navbar`}>
             <nav className="bg-background shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
@@ -54,11 +54,11 @@ export const Navbar = () => {
                             </button>
                             <button
                                 onClick={() => {
-                                    scroll("projects");
+                                    window.location.replace("/forum");
                                 }}
                                 className="px-3 py-2 rounded-md text-sm font-medium hover:underline text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400"
                             >
-                                Projects
+                                Forums
                             </button>
                             {session.status === "authenticated" ? (
                                 <button
@@ -155,11 +155,11 @@ export const Navbar = () => {
                         </button>
                         <button
                             onClick={() => {
-                                scroll("projects");
+                                window.location.replace("/forum");
                             }}
                             className="block px-3 py-2 rounded-md text-base font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400"
                         >
-                            Projects
+                            Forum
                         </button>
                         {session.status === "authenticated" ? (
                             <button
