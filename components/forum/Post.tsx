@@ -2,7 +2,7 @@ import Trading from '@components/svg/trading';
 import { getNumberOfPostsInCategory } from '@services/forum.service';
 import React, { useState, useEffect } from 'react';
 
-const CategoryBox = ({ post }: { post : any }) => {
+const Post = ({ post }: { post : any }) => {
 
 
   return (
@@ -13,4 +13,4 @@ const CategoryBox = ({ post }: { post : any }) => {
   );
 };
 
-export default CategoryBox;
+export default Post;
