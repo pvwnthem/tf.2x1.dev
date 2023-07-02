@@ -7,3 +7,5 @@ export const images: string[] = [
     "https://i.imgur.com/OrBukhd.png",
     "https://i.imgur.com/kcyIMoM.png",
 ];
+
+export const deletedUserPfp = "https://i.imgur.com/NUKhd4G.png"

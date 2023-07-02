@@ -1,6 +1,7 @@
 import Badge from '@components/levels/Badge';
 import Loading from '@components/pages/loading';
 import Trading from '@components/svg/trading';
+import { deletedUserPfp } from '@constants/images';
 import { levels } from '@constants/levels';
 import { getNumberOfPostsInCategory } from '@services/forum.service';
 import { getUser } from '@services/users.service';
@@ -18,20 +19,21 @@ const Post = ({ post }: { post: any }) => {
     getUserData();
   }, [post.author]);
 
+  
+
   return (
     <>
-      {user ? (
         <>
           <a
             href={`/forum/topic/${post.postId}`}
             className="w-full border flex flex-col md:flex-row md:items-center md:px-4 md:py-8 px-2 py-6"
           >
             <div className="flex items-center md:w-1/5 mb-4 md:mb-0">
-              <img src={user.profilePicture} className="w-12 h-12 mr-4" alt="Profile" />
+              <img src={user ? user.profilePicture :  deletedUserPfp} className="w-12 h-12 mr-4" alt="Profile" />
               <div className="flex flex-col">
-                <h1 className="text-wave-300 text-sm md:text-base">{user.username}</h1>
+                <h1 className="text-wave-300 text-sm md:text-base">{user ? user.username : "deleted user"}</h1>
                 <h2 className="text-wave-500 text-xs md:text-sm">
-                  level {user.level} {user.title}
+                  level {user ? user.level : "0"} {user ? user.title : "deleted"}
                 </h2>
               </div>
             </div>
@@ -44,7 +46,7 @@ const Post = ({ post }: { post: any }) => {
               </div>
              
               <h2 className="text-wave-100 text-xs md:text-sm font-light">
-                by {user.username} on{' '}
+                by {user ? user.username : "deleted user"} on{' '}
                 {new Date(post.createdAt).toLocaleDateString('en-US', {
                   month: '2-digit',
                   day: '2-digit',
@@ -55,17 +57,18 @@ const Post = ({ post }: { post: any }) => {
             </div>
 
             <div className="ml-auto">
-              <img
+              {user && (
+                <img
                 src={levels[user.level].badge}
                 className="h-12 md:h-16"
                 alt="Level Badge"
               />
+              )}
+              
             </div>
           </a>
         </>
-      ) : (
-        <Loading />
-      )}
+      
     </>
   );
 };
