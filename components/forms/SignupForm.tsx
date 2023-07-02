@@ -25,9 +25,9 @@ const SignupForm = () => {
             errors.push({
                 error: "Full name must be at least 4 characters long",
             });
-        } else if (data.username.length > 16) {
+        } else if (data.username.length > 10) {
             errors.push({
-                error: "Full name should be less than 16 characters long",
+                error: "Full name should be less than 10 characters long",
             });
         } else if (data.password.length < 6) {
             errors.push({
@@ -102,6 +102,7 @@ const SignupForm = () => {
                         placeholder="Username"
                         value={data.username}
                         name="username"
+                        maxLength={10}
                         onChange={handleInputChange}
                         className="p-2 w-full rounded mt-4"
                         required
