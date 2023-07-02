@@ -13,8 +13,18 @@ import ProfilePicture from "@components/profile/ProfilePicture";
 import EditProfilePicture from "@components/profile/editing/EditProfilePicture";
 import { encrypt, decrypt } from "@services/encryption.service";
 
-const validateData = (data: any) => {
+const validateData = (data: any, lastChangedName: number | Date) => {
   const errors = [];
+
+  lastChangedName = new Date(lastChangedName)
+
+  if (lastChangedName.getDate() + 30 < Date.now() ) {
+
+    lastChangedName.setDate(lastChangedName.getDate() + 30)
+    errors.push({
+      error:`you can change your name on ${lastChangedName.toLocaleDateString()}`
+  })
+  }
 
   if (data.username.length < 4) {
     errors.push({
@@ -41,7 +51,7 @@ const validateData = (data: any) => {
 };
 
 export default function Profile(props: { session: any }) {
-  const { profilePicture, username, description, level, id } = props.session.data.user;
+  const { profilePicture, username, description, level, id, lastChangedName  } = props.session.data.user;
   const { update } = props.session;
 
   const [editing, setEditing] = useState(false);
@@ -107,7 +117,7 @@ export default function Profile(props: { session: any }) {
       profilePicture: updatedProfilePicture
     };
 
-    const validationErrors = validateData(updatedUser);
+    const validationErrors = validateData(updatedUser, lastChangedName);
 
     if (validationErrors.length > 0) {
       setValidationErrors(validationErrors);
@@ -122,6 +132,8 @@ export default function Profile(props: { session: any }) {
         description: response.description,
         username: response.username
       }
+
+      await updateUser(id , { lastChangedName: Date.now() })
 
       const encryptedData = await encrypt(JSON.stringify(data));
 

@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { verifyToken } from "@services/email.service";
+import { verifyToken } from "@services/users.service";
 
 
 
