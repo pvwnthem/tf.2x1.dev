@@ -95,6 +95,18 @@ const userSchema = new Schema({
         required: false,
         default: 1,
     },
+
+    lastChangedName: {
+        type: Date,
+        required: false,
+        default: Date.now()
+    },
+
+    createdAt: {
+        type: Date,
+        required: false,
+        default: Date.now()
+    }
 });
 
 export const User = models.User || model<IUser>("User", userSchema);
