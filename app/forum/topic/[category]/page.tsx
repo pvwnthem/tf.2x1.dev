@@ -66,7 +66,7 @@ export default function CategoryPage({ params }: any) {
 
                     </div>
 
-                    <div>
+                    <div className="max-w-7xl w-full mt-6">
                     {posts ? (
                 <>
                     { posts.map((post: IForumPost, index: number) => {
