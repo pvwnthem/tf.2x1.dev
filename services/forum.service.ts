@@ -30,7 +30,7 @@ export async function getPost(id : string) {
   try {
     await connect();
 
-    const post = await ForumPost.findOne({ id });
+    const post = await ForumPost.findOne({ postId: id });
 
     return JSON.parse(JSON.stringify(post));
   } catch (e: any) {
