@@ -25,3 +25,15 @@ export async function getAllPostsInCategory(category: string) {
       throw new Error(e);
     }
 }
+
+export async function getPost(id : string) {
+  try {
+    await connect();
+
+    const post = await ForumPost.findOne({ id });
+
+    return JSON.parse(JSON.stringify(post));
+  } catch (e: any) {
+    throw new Error(e);
+  }
+}
