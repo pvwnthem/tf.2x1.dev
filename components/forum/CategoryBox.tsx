@@ -11,7 +11,7 @@ const CategoryBox = ({ name, description }: { name: string, description: string 
       setCount(count);
     }
     getCount();
-  }, []);
+  }, [name]);
 
   return (
     <a href={`/forum/topic/${name}`} className="w-full border flex md:px-4 md:py-8 px-2 py-6 ">
