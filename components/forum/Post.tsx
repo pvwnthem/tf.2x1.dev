@@ -2,7 +2,7 @@ import Badge from '@components/levels/Badge';
 import Loading from '@components/pages/loading';
 import Trading from '@components/svg/trading';
 import { deletedUserPfp } from '@constants/images';
-import { levels } from '@constants/levels';
+import { deletedUserBadge, levels } from '@constants/levels';
 import { getNumberOfPostsInCategory } from '@services/forum.service';
 import { getUser } from '@services/users.service';
 import React, { useState, useEffect } from 'react';
@@ -57,13 +57,11 @@ const Post = ({ post }: { post: any }) => {
             </div>
 
             <div className="ml-auto">
-              {user && (
                 <img
-                src={levels[user.level].badge}
+                src={user ? levels[user.level].badge : deletedUserBadge}
                 className="h-12 md:h-16"
                 alt="Level Badge"
               />
-              )}
               
             </div>
           </a>

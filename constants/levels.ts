@@ -15,6 +15,8 @@ export interface Titles {
     [key: number]: Title;
 }
 
+export const deletedUserBadge = "https://i.imgur.com/uGWrpre.png"
+
 export const titles: Titles = {
     5: {
         title: "Novice",
