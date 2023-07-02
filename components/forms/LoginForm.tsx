@@ -128,7 +128,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
 
           <div className="flex flex-col">
             <p className="text-center text-white mt-2">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
             </p>
             <Link href="/signup" className="text-center text-wave-300">
               Sign Up
