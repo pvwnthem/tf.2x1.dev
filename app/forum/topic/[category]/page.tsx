@@ -67,7 +67,19 @@ export default function CategoryPage({ params }: any) {
                     </div>
 
                     <div>
-
+                    {posts ? (
+                <>
+                    { posts.map((post: IForumPost, index: number) => {
+                        return (
+                            <>
+                                <Post post={post} />
+                            </>
+                        )
+                    }) }
+                </>
+            ) : (
+                <Loading />
+            )}
                     </div>
 
                 </div>

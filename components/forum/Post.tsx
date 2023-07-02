@@ -8,7 +8,7 @@ const Post = ({ post }: { post : any }) => {
   return (
     <a href={`/forum/topic/${post.postId}`} className=" ">
       
-      
+      <h1>{JSON.stringify(post)}</h1>
     </a>
   );
 };
