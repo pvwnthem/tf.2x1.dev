@@ -25,7 +25,7 @@ const Post = ({ post }: { post: any }) => {
     <>
         <>
           <a
-            href={`/forum/topic/${post.postId}`}
+            href={`/forum/posts/${post.postId}`}
             className="w-full border flex flex-col md:flex-row md:items-center md:px-4 md:py-8 px-2 py-6"
           >
             <div className="flex items-center md:w-1/5 mb-4 md:mb-0">
