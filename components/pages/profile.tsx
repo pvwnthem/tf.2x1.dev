@@ -90,7 +90,7 @@ export default function Profile(props: { session: any }) {
     if (storedUser) {
       decUser();
     }
-  }, []);
+  }, [props.session.data.user]);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUpdatedUsername(event.target.value.toLowerCase());
