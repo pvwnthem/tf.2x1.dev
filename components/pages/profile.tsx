@@ -13,12 +13,12 @@ import ProfilePicture from "@components/profile/ProfilePicture";
 import EditProfilePicture from "@components/profile/editing/EditProfilePicture";
 import { encrypt, decrypt } from "@services/encryption.service";
 
-const validateData = (data: any, lastChangedName: number | Date) => {
+const validateData = (data: any, lastChangedName: number | Date, lastUsername: string) => {
   const errors = [];
 
   lastChangedName = new Date(lastChangedName)
 
-  if (lastChangedName.getDate() + 30 < Date.now() ) {
+  if (lastChangedName.getDate() + 30 < Date.now() && data.username != lastUsername) {
 
     lastChangedName.setDate(lastChangedName.getDate() + 30)
     errors.push({
@@ -117,7 +117,7 @@ export default function Profile(props: { session: any }) {
       profilePicture: updatedProfilePicture
     };
 
-    const validationErrors = validateData(updatedUser, lastChangedName);
+    const validationErrors = validateData(updatedUser, lastChangedName, username);
 
     if (validationErrors.length > 0) {
       setValidationErrors(validationErrors);
