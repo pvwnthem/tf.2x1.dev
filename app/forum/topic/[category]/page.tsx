@@ -38,7 +38,7 @@ export default function CategoryPage({ params }: any) {
         }
 
         getData();
-    }, [params.user]);
+    }, [params.user, params.category]);
 
     if (notFound) {
         return <UserNotFound />;
