@@ -16,7 +16,7 @@ const Post = ({ post }: { post: any }) => {
     }
 
     getUserData();
-  }, []);
+  }, [post.author]);
 
   return (
     <>
