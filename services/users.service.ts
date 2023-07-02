@@ -54,3 +54,15 @@ export async function updateUser(id: string, updatedUser: any): Promise<any> {
     
     
   }
+
+export async function getToken ( id: string ) {
+  try {
+    await connect()
+
+    const verificationObject = await Verify.findOne({ id })
+
+    return verificationObject.token
+} catch ( error : any) {
+    throw new Error(error)
+}
+}

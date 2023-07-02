@@ -1,10 +1,11 @@
+'use server'
 import { connect } from "@lib/mongodb";
 import { User } from "@models/User";
 import { Verify } from "@models/Verify";
 import mailer from "nodemailer";
 
 // Initialize the nodemailer transporter
-export const transporter = mailer.createTransport({
+const transporter = mailer.createTransport({
   host: process.env.EMAIL_SERVER_HOST,
   port: process.env.EMAIL_SERVER_PORT,
   secure: true,
@@ -14,7 +15,7 @@ export const transporter = mailer.createTransport({
   },
 });
 
-export class Mail {
+class Mail {
   // Initialize variables
   private transporter: mailer.Transporter;
   private options: mailer.SendMailOptions;

@@ -15,7 +15,7 @@ export default function EmailProtected(props: props) {
                 <div>{props.children}</div>
             )}
             {props.session.status != "loading" &&
-                !props.session.data.user.verified && <EmailError />}
+                !props.session.data.user.verified && <EmailError id={props.session.data.user.id} email={props.session.data.user.email} url={ `${window.location.protocol}//${window.location.hostname}:${window.location.port}` } />}
         </>
     );
 }
