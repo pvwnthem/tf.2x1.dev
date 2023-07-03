@@ -1,12 +1,15 @@
 'use client'
 import UserNotFound from "@components/auth/errors/UserNotFound";
+import Reply from "@components/forum/Reply";
 import Badge from "@components/levels/Badge";
 import DeletedBadge from "@components/levels/DeletedBadge";
 import { Navbar } from "@components/navigation/navbar";
 import Loading from "@components/pages/loading";
 import { deletedUserPfp } from "@constants/images";
-import { getPost } from "@services/forum.service";
+import { IForumPost } from "@models/forum/ForumPost";
+import { addReply, getPost } from "@services/forum.service";
 import { getUser } from "@services/users.service";
+import { randomUUID } from "crypto";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
@@ -16,6 +19,7 @@ export default function PostPage({ params }: any) {
   const [notFound, setNotFound] = useState<boolean>(false);
   const [postLoading, setPostLoading] = useState<boolean>(true);
   const [userLoading, setUserLoading] = useState<boolean>(true);
+  const [replyContent, setReplyContent] = useState<any>(null)
   const session = useSession();
 
   useEffect(() => {
@@ -43,7 +47,15 @@ export default function PostPage({ params }: any) {
     getData();
   }, [params.postId, params.category]);
 
-  const handleReply = () => {};
+  const handleReply = async (e: any) => {
+    const post = await addReply(params.postId, {
+        postId: randomUUID(),
+        title: null,
+        content: e.target.value,
+        author: (session.data?.user as any).id,
+        category: null
+    })
+  };
 
   const handleLike = () => {};
 
@@ -116,7 +128,31 @@ export default function PostPage({ params }: any) {
 
         <div className="w-full mt-8">
           <h1 className="text-left text-wave-300 text-4xl">Replies</h1>
+          {post.replies.length > 0 ? (
+            post.replies.map((reply: IForumPost, index: number) => {
+                return (
+                    <Reply reply={reply} />
+                )
+            })
+          ) : <h1>no replies yet!</h1>}
         </div>
+
+        <div className="w-full mt-8">
+          <h1 className="text-left text-wave-300 text-4xl">Reply</h1>
+          <textarea
+            value={replyContent}
+            onChange={(e) => setReplyContent(e.target.value)}
+            className="w-full h-40 bg-background text-wave-300 p-4"
+            placeholder="Write your reply..."
+          ></textarea>
+          <button
+            onClick={handleReply}
+            className="bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl mt-4"
+          >
+            Submit Reply
+          </button>
+        </div>
+      
       </div>
     </>
   );
