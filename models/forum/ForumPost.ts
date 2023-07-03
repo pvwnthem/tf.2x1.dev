@@ -6,7 +6,6 @@ export interface IForumPost extends Document {
   title: string;
   content: string;
   author: string;
-  parent: string | null;
   replies: string[];
   createdAt: Date;
   updatedAt: Date;
@@ -33,11 +32,6 @@ const ForumPostSchema: Schema = new Schema({
   author: {
     type: String,
     required: true,
-  },
-  parent: {
-    type: String,
-    ref: 'ForumPost',
-    default: null,
   },
   replies: [{
     type: String,

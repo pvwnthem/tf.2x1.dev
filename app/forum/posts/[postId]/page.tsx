@@ -113,6 +113,10 @@ export default function PostPage({ params }: any) {
             Like
           </button>
         </div>
+
+        <div className="w-full mt-8">
+          <h1 className="text-left text-wave-300 text-4xl">Replies</h1>
+        </div>
       </div>
     </>
   );
