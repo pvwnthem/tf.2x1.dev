@@ -2,7 +2,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
-import { randomUUID } from 'crypto';
+import { uuid } from 'uuidv4';
 import { connect } from '@lib/mongodb';
 import ForumPost, { IForumPost } from '@models/forum/ForumPost';
 
@@ -39,7 +39,7 @@ export const POST = async (req: Request, res: NextApiResponse) => {
         author,
         title,
         content,
-        postId: randomUUID()
+        postId: uuid()
     }
 
     const newPost = new ForumPost(postData)

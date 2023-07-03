@@ -9,7 +9,7 @@ import { deletedUserPfp } from "@constants/images";
 import { IForumPost } from "@models/forum/ForumPost";
 import { addReply, getPost } from "@services/forum.service";
 import { getUser } from "@services/users.service";
-import { randomUUID } from "crypto";
+import { uuid } from 'uuidv4';
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
@@ -49,7 +49,7 @@ export default function PostPage({ params }: any) {
 
   const handleReply = async (e: any) => {
     const post = await addReply(params.postId, {
-        postId: randomUUID(),
+        postId: uuid(),
         title: null,
         content: e.target.value,
         author: (session.data?.user as any).id,

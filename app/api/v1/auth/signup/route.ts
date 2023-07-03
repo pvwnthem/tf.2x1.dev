@@ -5,7 +5,7 @@ import { connect } from "@lib/mongodb";
 import { type IUser, User } from "@models/User";
 import { Verify } from "@models/Verify";
 import { sendVerificationRequest } from "@services/email.service";
-import { randomUUID } from "crypto";
+import { uuid } from 'uuidv4';
 import { images } from "@constants/images";
 
 export async function POST(req: Request) {
@@ -59,8 +59,8 @@ export async function POST(req: Request) {
         const randomIndex = Math.floor(Math.random() * images.length);
         const image = images[randomIndex];
 
-        const id = randomUUID();
-        const token = randomUUID();
+        const id = uuid();
+        const token = uuid();
 
         const userData = {
             username,
