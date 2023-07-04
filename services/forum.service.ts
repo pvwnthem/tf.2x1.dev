@@ -42,8 +42,9 @@ export async function addReply ( parentId: string, reply: any ) {
   try {
     await connect();
 
-    const post = await ForumPost.findOneAndUpdate({ postId: parentId } , { "$push": { replies: reply  } }, { new: true });
+    const post = await ForumPost.findOneAndUpdate({ postId: parentId } , { "$push": { replies: JSON.stringify(reply)  } }, { new: true });
 
+    console.log(post)
     return JSON.parse(JSON.stringify(post));
   } catch (e: any) {
     throw new Error(e);

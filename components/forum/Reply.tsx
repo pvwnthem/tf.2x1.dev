@@ -42,6 +42,9 @@ const Reply = ({ reply }: { reply: any }) => {
                 <h1 className="text-wave-100 text-sm md:text-md font-semibold mb-2">
                   posted on {new Date(reply.createdAt).toLocaleDateString()}
                 </h1>
+                <h2 className='text-wave-300'>
+                    {reply.content}
+                </h2>
               </div>
              
             </div>

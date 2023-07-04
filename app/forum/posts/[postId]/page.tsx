@@ -6,12 +6,22 @@ import DeletedBadge from "@components/levels/DeletedBadge";
 import { Navbar } from "@components/navigation/navbar";
 import Loading from "@components/pages/loading";
 import { deletedUserPfp } from "@constants/images";
-import { IForumPost } from "@models/forum/ForumPost";
+import ForumPost, { IForumPost } from "@models/forum/ForumPost";
 import { addReply, getPost } from "@services/forum.service";
 import { getUser } from "@services/users.service";
 import { uuid } from 'uuidv4';
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
+
+function Replies({ replies }: { replies: IForumPost[] }) {
+  if (replies.length > 0) {
+    return replies.map((reply: IForumPost, index: number) => {
+      return <Reply reply={JSON.parse(reply as unknown as string)} key={index} />;
+    });
+  } else {
+    return <h1>No replies yet!</h1>;
+  }
+}
 
 export default function PostPage({ params }: any) {
   const [post, setPost] = useState<any>(null);
@@ -19,7 +29,9 @@ export default function PostPage({ params }: any) {
   const [notFound, setNotFound] = useState<boolean>(false);
   const [postLoading, setPostLoading] = useState<boolean>(true);
   const [userLoading, setUserLoading] = useState<boolean>(true);
-  const [replyContent, setReplyContent] = useState<any>(null)
+  const [replyContent, setReplyContent] = useState<any>(null);
+  const [replies, setReplies] = useState<IForumPost[]>([]);
+  const [replyLoading, setReplyLoading] = useState<boolean>(true);
   const session = useSession();
 
   useEffect(() => {
@@ -36,6 +48,10 @@ export default function PostPage({ params }: any) {
           const user = await getUser(post.author);
           setUser(user);
           setUserLoading(false);
+
+          // Fetch replies
+          setReplies(post.replies);
+          setReplyLoading(false);
         } else {
           setNotFound(true);
         }
@@ -47,14 +63,24 @@ export default function PostPage({ params }: any) {
     getData();
   }, [params.postId, params.category]);
 
-  const handleReply = async (e: any) => {
-    const post = await addReply(params.postId, {
-        postId: uuid(),
-        title: null,
-        content: e.target.value,
-        author: (session.data?.user as any).id,
-        category: null
-    })
+  const handleReply = async () => {
+    const reply = {
+      postId: uuid(), // Generate a unique string value for postId
+      title: "", // Provide a title for the reply
+      content: replyContent,
+      author: (session.data?.user as any).id,
+      category: "",
+      createdAt: Date.now()
+    };
+
+    try {
+      const response = await addReply(params.postId, reply);
+      console.log(response);
+      setReplies((prevReplies: any) => [...prevReplies, JSON.stringify(reply)]); // Add the new reply to the list
+      setReplyContent(""); // Clear the reply content
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleLike = () => {};
@@ -128,13 +154,7 @@ export default function PostPage({ params }: any) {
 
         <div className="w-full mt-8">
           <h1 className="text-left text-wave-300 text-4xl">Replies</h1>
-          {post.replies.length > 0 ? (
-            post.replies.map((reply: IForumPost, index: number) => {
-                return (
-                    <Reply reply={reply} />
-                )
-            })
-          ) : <h1>no replies yet!</h1>}
+          {!replyLoading && <Replies replies={replies} />}
         </div>
 
         <div className="w-full mt-8">
@@ -152,8 +172,8 @@ export default function PostPage({ params }: any) {
             Submit Reply
           </button>
         </div>
-      
       </div>
     </>
   );
 }
+

@@ -1,12 +1,20 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
+export interface IReply {
+  postId: string;
+  title: string | null;
+  content: string;
+  author: string;
+  category: string | null;
+}
+
 export interface IForumPost extends Document {
   category: string;
   postId: string;
   title: string;
   content: string;
   author: string;
-  replies: string[];
+  replies: IReply[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -34,8 +42,9 @@ const ForumPostSchema: Schema = new Schema({
     required: true,
   },
   replies: [{
-    type: String,
-    ref: 'ForumPost',
+    type: {
+      type: String
+    },
   }],
   createdAt: {
     type: Date,
