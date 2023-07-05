@@ -1,3 +1,5 @@
+/** @format */
+
 'use client'
 import Wrapper from '@components/auth/Wrapper'
 import EmailProtected from '@components/auth/emailProtected'

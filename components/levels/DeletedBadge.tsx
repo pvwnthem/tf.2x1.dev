@@ -1,4 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
+/**
+ * eslint-disable @next/next/no-img-element
+ *
+ * @format
+ */
+
 'use client'
 import { deletedUserBadge, levels } from '@constants/levels'
 import React from 'react'

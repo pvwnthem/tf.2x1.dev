@@ -1,3 +1,5 @@
+/** @format */
+
 'use server'
 import { levels, titles } from '@constants/levels'
 import { connect } from '@lib/mongodb'

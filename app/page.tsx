@@ -1,3 +1,5 @@
+/** @format */
+
 'use client'
 import Wrapper from '@components/auth/Wrapper'
 import RedirectIfAuth from '@components/auth/redirectIfAuth'

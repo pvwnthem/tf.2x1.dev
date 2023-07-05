@@ -1,3 +1,5 @@
+/** @format */
+
 'use client'
 import Loading from '@components/pages/loading'
 import React from 'react'

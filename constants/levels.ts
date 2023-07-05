@@ -1,3 +1,5 @@
+/** @format */
+
 export interface Level {
     xpRequired: string
     badge: string

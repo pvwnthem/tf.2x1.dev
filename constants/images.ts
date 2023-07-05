@@ -1,3 +1,5 @@
+/** @format */
+
 export const images: string[] = [
     'https://i.imgur.com/JL92Jwq.png',
     'https://i.imgur.com/3ZdzSOF.png',

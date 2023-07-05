@@ -1,3 +1,5 @@
+/** @format */
+
 'use client'
 import UserNotFound from '@components/auth/errors/UserNotFound'
 import Reply from '@components/forum/Reply'

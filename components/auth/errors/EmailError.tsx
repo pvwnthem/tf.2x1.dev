@@ -1,3 +1,5 @@
+/** @format */
+
 'use client'
 import { sendVerificationRequest } from '@services/email.service'
 import { getToken } from '@services/users.service'

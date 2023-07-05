@@ -1,3 +1,5 @@
+/** @format */
+
 import mongoose, { Schema, model, models, Document } from 'mongoose'
 import * as crypto from 'crypto'
 

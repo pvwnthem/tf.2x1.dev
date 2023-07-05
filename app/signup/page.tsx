@@ -1,3 +1,5 @@
+/** @format */
+
 'use client'
 import RedirectIfAuth from '@components/auth/redirectIfAuth'
 import SignupForm from '@components/forms/SignupForm'

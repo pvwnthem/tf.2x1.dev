@@ -1,3 +1,5 @@
+/** @format */
+
 'use server'
 import { connect } from '@lib/mongodb'
 import ForumPost from '@models/forum/ForumPost'

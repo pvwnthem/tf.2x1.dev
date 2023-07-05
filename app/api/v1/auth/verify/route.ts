@@ -1,3 +1,5 @@
+/** @format */
+
 import { redirect } from 'next/navigation'
 import { verifyToken } from '@services/users.service'
 

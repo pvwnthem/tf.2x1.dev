@@ -1,4 +1,8 @@
-/** @type {import('next').NextConfig} */
+/**
+ * @format
+ * @type {import('next').NextConfig}
+ */
+
 const nextConfig = {
     experimental: {
         serverActions: true,

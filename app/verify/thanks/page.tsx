@@ -1,3 +1,5 @@
+/** @format */
+
 'use client'
 import BackButton from '@components/navigation/back'
 import React from 'react'

@@ -1,4 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
+/**
+ * eslint-disable @next/next/no-img-element
+ *
+ * @format
+ */
+
 'use client'
 import React from 'react'
 import Image from 'next/image'

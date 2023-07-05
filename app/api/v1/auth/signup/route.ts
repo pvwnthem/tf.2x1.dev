@@ -1,3 +1,5 @@
+/** @format */
+
 import { NextResponse, NextRequest } from 'next/server'
 import { hash } from 'bcryptjs'
 

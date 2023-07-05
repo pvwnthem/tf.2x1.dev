@@ -1,3 +1,5 @@
+/** @format */
+
 'use client'
 import CategoryBox from '@components/forum/CategoryBox'
 import React from 'react'

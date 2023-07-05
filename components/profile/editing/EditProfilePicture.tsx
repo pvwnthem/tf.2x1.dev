@@ -1,3 +1,5 @@
+/** @format */
+
 import { images } from '@constants/images'
 import React, { useState } from 'react'
 import Draggable from 'react-draggable'

@@ -1,3 +1,5 @@
+/** @format */
+
 import Badge from '@components/levels/Badge'
 import Loading from '@components/pages/loading'
 import Trading from '@components/svg/trading'

@@ -1,3 +1,5 @@
+/** @format */
+
 import Trading from '@components/svg/trading'
 import { getNumberOfPostsInCategory } from '@services/forum.service'
 import React, { useState, useEffect } from 'react'

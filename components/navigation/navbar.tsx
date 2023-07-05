@@ -1,3 +1,5 @@
+/** @format */
+
 'use client'
 import Logo from '@components/svg/logo'
 import Link from 'next/link'
