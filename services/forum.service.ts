@@ -55,3 +55,19 @@ export async function addReply(parentId: string, reply: any) {
         throw new Error(e)
     }
 }
+
+export async function removeReply(parentId: string, reply: string) {
+    try {
+        await connect()
+
+        const post = await ForumPost.findOneAndUpdate(
+            { postId: parentId },
+            { $pull: { replies: JSON.stringify(reply) } },
+            { new: true }
+        )
+
+        return JSON.parse(JSON.stringify(post))
+    } catch (e: any) {
+        throw new Error(e)
+    }
+}
