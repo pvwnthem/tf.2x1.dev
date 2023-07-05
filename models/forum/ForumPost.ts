@@ -45,9 +45,7 @@ const ForumPostSchema: Schema = new Schema({
     },
     replies: [
         {
-            type: {
-                type: String,
-            },
+            type: String,
         },
     ],
     createdAt: {

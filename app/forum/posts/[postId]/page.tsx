@@ -16,6 +16,7 @@ import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 
 function Replies({ replies }: { replies: IForumPost[] }) {
+    console.log(replies, 'rep')
     if (replies.length > 0) {
         return replies.map((reply: IForumPost, index: number) => {
             return (
