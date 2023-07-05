@@ -46,7 +46,7 @@ export async function addReply(parentId: string, reply: any) {
 
         const post = await ForumPost.findOneAndUpdate(
             { postId: parentId },
-            { $push: { replies: JSON.stringify(reply) } },
+            { $push: { replies: reply } },
             { new: true }
         )
 
