@@ -55,8 +55,8 @@ export default function CategoryPage({ params }: any) {
                     <EmailProtected session={session}>
                         <>
                             <Navbar overlapsNot={true} />
-                            <div className="w-full h-screen bg-background flex flex-col px-2 py-2 items-center">
-                                <div className="max-w-7xl w-full md:mt-12">
+                            <div className='w-full h-screen bg-background flex flex-col px-2 py-2 items-center'>
+                                <div className='max-w-7xl w-full md:mt-12'>
                                     <CategoryBox
                                         name={categories[params.category].title}
                                         description={
@@ -66,25 +66,25 @@ export default function CategoryPage({ params }: any) {
                                     />
                                 </div>
 
-                                <div className="max-w-7xl w-full mt-6 flex md:justify-end justify-center">
+                                <div className='max-w-7xl w-full mt-6 flex md:justify-end justify-center'>
                                     <button
                                         onClick={() => {
                                             window.location.replace(
                                                 `/forum/new?category=${params.category}`
                                             )
                                         }}
-                                        className="bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap"
+                                        className='bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap'
                                     >
-                                        <span className="text-xl">
+                                        <span className='text-xl'>
                                             new post
                                         </span>
-                                        <span className="flex items-center justify-center w-6">
+                                        <span className='flex items-center justify-center w-6'>
                                             <Plus />
                                         </span>
                                     </button>
                                 </div>
 
-                                <div className="max-w-7xl w-full mt-6">
+                                <div className='max-w-7xl w-full mt-6'>
                                     {posts ? (
                                         <>
                                             {posts.map(

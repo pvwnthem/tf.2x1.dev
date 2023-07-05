@@ -13,18 +13,18 @@ const Description = ({
     handleEdit: any
 }) => {
     return (
-        <div className="">
+        <div className=''>
             {isEditing ? (
                 <button
                     onClick={handleSave}
-                    className="px-4 rounded-md py-2 mt-4 bg-wave-300 text-white"
+                    className='px-4 rounded-md py-2 mt-4 bg-wave-300 text-white'
                 >
                     Save
                 </button>
             ) : (
                 <button
                     onClick={handleEdit}
-                    className="px-4 rounded-md py-2 mt-4 bg-wave-300 text-white"
+                    className='px-4 rounded-md py-2 mt-4 bg-wave-300 text-white'
                 >
                     Edit
                 </button>

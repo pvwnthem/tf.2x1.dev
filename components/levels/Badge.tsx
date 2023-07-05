@@ -13,19 +13,19 @@ export default function Badge(props: { user: any }) {
 
     return (
         <>
-            <img alt="badge" className="" src={levels[level].badge} />
-            <div className="flex items-center justify-center w-full">
-                <h1 className="mt-1  text-wave-300">
+            <img alt='badge' className='' src={levels[level].badge} />
+            <div className='flex items-center justify-center w-full'>
+                <h1 className='mt-1  text-wave-300'>
                     {title} lvl {level}
                 </h1>
             </div>
 
             {levels[level + 1] ? (
-                <h2 className="text-center mt-1 text-wave-200">
+                <h2 className='text-center mt-1 text-wave-200'>
                     {xp} xp / {levels[level + 1].xpRequired} xp
                 </h2>
             ) : (
-                <h2 className="text-center mt-1 text-wave-200">
+                <h2 className='text-center mt-1 text-wave-200'>
                     {xp} xp / {levels[level].xpRequired} xp
                 </h2>
             )}

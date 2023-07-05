@@ -26,33 +26,33 @@ const Post = ({ post }: { post: any }) => {
             <>
                 <a
                     href={`/forum/posts/${post.postId}`}
-                    className="w-full border flex flex-col md:flex-row md:items-center md:px-4 md:py-8 px-2 py-6"
+                    className='w-full border flex flex-col md:flex-row md:items-center md:px-4 md:py-8 px-2 py-6'
                 >
-                    <div className="flex items-center md:w-1/5 mb-4 md:mb-0">
+                    <div className='flex items-center md:w-1/5 mb-4 md:mb-0'>
                         <img
                             src={user ? user.profilePicture : deletedUserPfp}
-                            className="w-12 h-12 mr-4"
-                            alt="Profile"
+                            className='w-12 h-12 mr-4'
+                            alt='Profile'
                         />
-                        <div className="flex flex-col">
-                            <h1 className="text-wave-300 text-sm md:text-base">
+                        <div className='flex flex-col'>
+                            <h1 className='text-wave-300 text-sm md:text-base'>
                                 {user ? user.username : 'deleted user'}
                             </h1>
-                            <h2 className="text-wave-500 text-xs md:text-sm">
+                            <h2 className='text-wave-500 text-xs md:text-sm'>
                                 level {user ? user.level : '0'}{' '}
                                 {user ? user.title : 'deleted'}
                             </h2>
                         </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-grow">
-                        <div className="">
-                            <h1 className="text-wave-300 text-base md:text-xl font-semibold mb-2">
+                    <div className='flex flex-col md:flex-grow'>
+                        <div className=''>
+                            <h1 className='text-wave-300 text-base md:text-xl font-semibold mb-2'>
                                 {post.title}
                             </h1>
                         </div>
 
-                        <h2 className="text-wave-100 text-xs md:text-sm font-light">
+                        <h2 className='text-wave-100 text-xs md:text-sm font-light'>
                             by {user ? user.username : 'deleted user'} on{' '}
                             {new Date(post.createdAt).toLocaleDateString(
                                 'en-US',
@@ -69,15 +69,15 @@ const Post = ({ post }: { post: any }) => {
                         </h2>
                     </div>
 
-                    <div className="ml-auto">
+                    <div className='ml-auto'>
                         <img
                             src={
                                 user
                                     ? levels[user.level].badge
                                     : deletedUserBadge
                             }
-                            className="h-12 md:h-16"
-                            alt="Level Badge"
+                            className='h-12 md:h-16'
+                            alt='Level Badge'
                         />
                     </div>
                 </a>

@@ -185,9 +185,9 @@ export default function Profile(props: { session: any }) {
     }
 
     return (
-        <div className="bg-background h-screen flex items-center justify-center py-8">
-            <div className="w-full md:w-1/2 h-full flex flex-col items-center justify-start">
-                <div className="md:mt-16 mt-12 w-full flex flex-col items-center justify-center">
+        <div className='bg-background h-screen flex items-center justify-center py-8'>
+            <div className='w-full md:w-1/2 h-full flex flex-col items-center justify-start'>
+                <div className='md:mt-16 mt-12 w-full flex flex-col items-center justify-center'>
                     {editing ? (
                         <EditProfilePicture
                             src={profilePicture}
@@ -211,7 +211,7 @@ export default function Profile(props: { session: any }) {
                     <LevelBar user={props.session.data.user} />
                 </div>
 
-                <div className="mt-4 w-3/4 h-1/6 flex items-start justify-center py-2 break-words">
+                <div className='mt-4 w-3/4 h-1/6 flex items-start justify-center py-2 break-words'>
                     {editing ? (
                         <EditDescription
                             description={updatedDescription}
@@ -223,7 +223,7 @@ export default function Profile(props: { session: any }) {
                 </div>
 
                 {validationErrors.length > 0 && (
-                    <div className="text-red-500">
+                    <div className='text-red-500'>
                         {validationErrors.map((error: any, index: number) => (
                             <p key={index}>{error.error}</p>
                         ))}

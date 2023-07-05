@@ -11,12 +11,12 @@ const EditUsername = ({
     handleUsernameChange: any
 }) => {
     return (
-        <div className="w-full flex ">
+        <div className='w-full flex '>
             <input
-                type="text"
+                type='text'
                 value={username}
                 onChange={handleUsernameChange}
-                className="text-4xl py-4 md:text-5xl mx-auto text-center text-wave-300 bg-background"
+                className='text-4xl py-4 md:text-5xl mx-auto text-center text-wave-300 bg-background'
             />
         </div>
     )

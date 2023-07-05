@@ -68,60 +68,60 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ category, session }) => {
     }
 
     return (
-        <div className="w-full h-screen bg-background flex items-center justify-center">
-            <div className="md:w-2/3 w-full rounded-lg py-8 md:px-2 px-2 flex items-center justify-center">
+        <div className='w-full h-screen bg-background flex items-center justify-center'>
+            <div className='md:w-2/3 w-full rounded-lg py-8 md:px-2 px-2 flex items-center justify-center'>
                 <form onSubmit={handleSubmit}>
-                    <h1 className="text-3xl font-semibold text-center text-wave-300">
+                    <h1 className='text-3xl font-semibold text-center text-wave-300'>
                         Create a New Forum Post
                     </h1>
 
-                    <div className="mt-4">
+                    <div className='mt-4'>
                         <label
-                            htmlFor="title"
-                            className="text-wave-300 block font-semibold mb-2"
+                            htmlFor='title'
+                            className='text-wave-300 block font-semibold mb-2'
                         >
                             Title:
                         </label>
                         <input
-                            type="text"
-                            id="title"
-                            name="title"
+                            type='text'
+                            id='title'
+                            name='title'
                             maxLength={56}
                             value={postData.title}
                             onChange={handleInputChange}
-                            className="p-2 w-full rounded"
+                            className='p-2 w-full rounded'
                             required
                         />
                     </div>
 
-                    <div className="mt-4">
+                    <div className='mt-4'>
                         <label
-                            htmlFor="content"
-                            className="text-wave-300 block font-semibold mb-2"
+                            htmlFor='content'
+                            className='text-wave-300 block font-semibold mb-2'
                         >
                             Content:
                         </label>
                         <textarea
-                            id="content"
-                            name="content"
+                            id='content'
+                            name='content'
                             maxLength={2048}
                             value={postData.content}
                             onChange={handleInputChange}
-                            className="p-2 w-full rounded"
+                            className='p-2 w-full rounded'
                             required
                         />
                     </div>
 
                     <button
-                        type="submit"
-                        className="mx-auto mt-4 p-2 bg-wave-300 rounded-md w-full"
+                        type='submit'
+                        className='mx-auto mt-4 p-2 bg-wave-300 rounded-md w-full'
                         disabled={loading}
                     >
                         {loading ? 'Creating...' : 'Create Post'}
                     </button>
 
                     {submitError && (
-                        <p className="text-center mt-4 text-wave-500">
+                        <p className='text-center mt-4 text-wave-500'>
                             Error: {submitError}
                         </p>
                     )}

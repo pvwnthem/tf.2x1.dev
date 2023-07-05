@@ -71,50 +71,50 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
     }
 
     return (
-        <div className="w-full h-screen bg-background flex items-center justify-center">
-            <div className="md:w-1/4 w-full rounded-lg py-8 md:px-2 px-2 flex items-center justify-center">
+        <div className='w-full h-screen bg-background flex items-center justify-center'>
+            <div className='md:w-1/4 w-full rounded-lg py-8 md:px-2 px-2 flex items-center justify-center'>
                 <form onSubmit={handleLogin}>
-                    <h1 className="text-3xl font-semibold text-center text-wave-300">
+                    <h1 className='text-3xl font-semibold text-center text-wave-300'>
                         Login
                     </h1>
-                    <h2 className="text-lg mt-2 font-semibold text-center text-wave-300">
+                    <h2 className='text-lg mt-2 font-semibold text-center text-wave-300'>
                         Login to the tf.2x1.dev Community
                     </h2>
 
                     <div>
                         <input
-                            type="email"
-                            placeholder="Email"
+                            type='email'
+                            placeholder='Email'
                             value={data.email}
-                            name="email"
+                            name='email'
                             onChange={handleInputChange}
-                            className="p-2 w-full rounded mt-4"
+                            className='p-2 w-full rounded mt-4'
                             required
                         />
                     </div>
 
                     <div>
                         <input
-                            type="password"
-                            placeholder="Password"
+                            type='password'
+                            placeholder='Password'
                             value={data.password}
-                            name="password"
+                            name='password'
                             onChange={handleInputChange}
-                            className="p-2 w-full rounded mt-4"
+                            className='p-2 w-full rounded mt-4'
                             required
                         />
                     </div>
 
                     <button
-                        type="submit"
-                        className="mx-auto mt-4 p-2 text-white bg-wave-300 rounded-md w-full"
+                        type='submit'
+                        className='mx-auto mt-4 p-2 text-white bg-wave-300 rounded-md w-full'
                         disabled={loading}
                     >
                         Log In
                     </button>
 
                     {submitError && (
-                        <p className="text-center mt-4 text-wave-500">
+                        <p className='text-center mt-4 text-wave-500'>
                             Error: {submitError}
                         </p>
                     )}
@@ -123,7 +123,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
                             {validationErrors.map((error: any, j: number) => (
                                 <p
                                     key={j}
-                                    className="text-center mt-4 text-wave-500"
+                                    className='text-center mt-4 text-wave-500'
                                 >
                                     Error: {error.error}
                                 </p>
@@ -131,13 +131,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
                         </>
                     )}
 
-                    <div className="flex flex-col">
-                        <p className="text-center text-white mt-2">
+                    <div className='flex flex-col'>
+                        <p className='text-center text-white mt-2'>
                             Don&apos;t have an account?{' '}
                         </p>
                         <Link
-                            href="/signup"
-                            className="text-center text-wave-300"
+                            href='/signup'
+                            className='text-center text-wave-300'
                         >
                             Sign Up
                         </Link>

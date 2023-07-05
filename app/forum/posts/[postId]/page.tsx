@@ -26,7 +26,7 @@ function Replies({ replies }: { replies: IForumPost[] }) {
             )
         })
     } else {
-        return <h1 className="text-wave-200">No replies yet!</h1>
+        return <h1 className='text-wave-200'>No replies yet!</h1>
     }
 }
 
@@ -104,22 +104,22 @@ export default function PostPage({ params }: any) {
     return (
         <>
             <Navbar overlapsNot={true} />
-            <div className="w-full min-h-screen md:px-16 bg-background flex flex-col items-center">
-                <div className="w-full border flex-col p-8">
-                    <div className="flex w-full">
-                        <div className="w-1/5 flex flex-col border rounded p-8 items-center justify-center">
+            <div className='w-full min-h-screen md:px-16 bg-background flex flex-col items-center'>
+                <div className='w-full border flex-col p-8'>
+                    <div className='flex w-full'>
+                        <div className='w-1/5 flex flex-col border rounded p-8 items-center justify-center'>
                             <img
                                 src={
                                     user ? user.profilePicture : deletedUserPfp
                                 }
-                                alt="Profile Picture"
-                                className="w-1/2 px-2 mt-4"
+                                alt='Profile Picture'
+                                className='w-1/2 px-2 mt-4'
                             />
-                            <h1 className="text-wave-400 text-3xl mt-4">
+                            <h1 className='text-wave-400 text-3xl mt-4'>
                                 {user ? user.username : 'Deleted User'}
                             </h1>
-                            <h2 className="text-wave-500">{user.role}</h2>
-                            <h1 className="mt-1 text-sm text-wave-200">
+                            <h2 className='text-wave-500'>{user.role}</h2>
+                            <h1 className='mt-1 text-sm text-wave-200'>
                                 Created{' '}
                                 {user
                                     ? new Date(
@@ -137,7 +137,7 @@ export default function PostPage({ params }: any) {
                                       ).toLocaleTimeString('en-US')
                                     : '00:00:00'}
                             </h1>
-                            <div className="mt-2 flex flex-col items-center justify-center">
+                            <div className='mt-2 flex flex-col items-center justify-center'>
                                 {user ? (
                                     <Badge user={user} />
                                 ) : (
@@ -146,12 +146,12 @@ export default function PostPage({ params }: any) {
                             </div>
                         </div>
 
-                        <div className="px-12">
-                            <div className="post-content">
-                                <h1 className="text-wave-300 text-3xl">
+                        <div className='px-12'>
+                            <div className='post-content'>
+                                <h1 className='text-wave-300 text-3xl'>
                                     {post.title}
                                 </h1>
-                                <p className="text-wave-400 mt-8">
+                                <p className='text-wave-400 mt-8'>
                                     {post.content}
                                 </p>
                             </div>
@@ -159,39 +159,39 @@ export default function PostPage({ params }: any) {
                     </div>
                 </div>
 
-                <div className="w-full flex justify-end px-8 mt-4 space-x-4">
+                <div className='w-full flex justify-end px-8 mt-4 space-x-4'>
                     <button
                         onClick={handleReply}
-                        className="bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl"
+                        className='bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl'
                     >
                         Reply
                     </button>
                     <button
                         onClick={handleLike}
-                        className="bg-wave-300 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl"
+                        className='bg-wave-300 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl'
                     >
                         Like
                     </button>
                 </div>
 
-                <div className="w-full mt-8">
-                    <h1 className="text-left text-wave-300 text-4xl">
+                <div className='w-full mt-8'>
+                    <h1 className='text-left text-wave-300 text-4xl'>
                         Replies
                     </h1>
                     {!replyLoading && <Replies replies={replies} />}
                 </div>
 
-                <div className="w-full mt-8">
-                    <h1 className="text-left text-wave-300 text-4xl">Reply</h1>
+                <div className='w-full mt-8'>
+                    <h1 className='text-left text-wave-300 text-4xl'>Reply</h1>
                     <textarea
                         value={replyContent}
                         onChange={(e) => setReplyContent(e.target.value)}
-                        className="w-full h-40 bg-background text-wave-300 p-4"
-                        placeholder="Write your reply..."
+                        className='w-full h-40 bg-background text-wave-300 p-4'
+                        placeholder='Write your reply...'
                     ></textarea>
                     <button
                         onClick={handleReply}
-                        className="bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl mt-4"
+                        className='bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl mt-4'
                     >
                         Submit Reply
                     </button>

@@ -26,22 +26,22 @@ const EditProfilePicture = ({
     }
 
     return (
-        <div className="w-full">
+        <div className='w-full'>
             <div
                 onClick={togglePopup}
-                className="w-full flex items-center cursor-pointer justify-center"
+                className='w-full flex items-center cursor-pointer justify-center'
             >
                 <ProfilePicture src={selectedImage} />
             </div>
 
             <Draggable>
-                <div className="cursor-move">
+                <div className='cursor-move'>
                     {showPopup && (
-                        <div className="absolute top-0 right-0 bg-background border  rounded p-2 mt-2">
+                        <div className='absolute top-0 right-0 bg-background border  rounded p-2 mt-2'>
                             <select
                                 value={selectedImage}
                                 onChange={handleChange}
-                                className="border  rounded px-3 py-1 mb-2"
+                                className='border  rounded px-3 py-1 mb-2'
                             >
                                 {images.map((image, index) => (
                                     <option key={index} value={image}>
@@ -49,11 +49,11 @@ const EditProfilePicture = ({
                                     </option>
                                 ))}
                             </select>
-                            <div className="flex flex-wrap">
+                            <div className='flex flex-wrap'>
                                 {images.map((image, index) => (
-                                    <div key={index} className="p-1">
+                                    <div key={index} className='p-1'>
                                         <img
-                                            alt="Image Preview"
+                                            alt='Image Preview'
                                             src={image}
                                             className={`w-12 h-12 cursor-pointer ${
                                                 image === selectedImage

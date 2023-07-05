@@ -15,7 +15,7 @@ const BackButton = () => {
                 left: '10px',
                 zIndex: '9999',
             }}
-            className="text-wave-300 md:text-4xl text-3xl p-2 hover:underline"
+            className='text-wave-300 md:text-4xl text-3xl p-2 hover:underline'
             onClick={goBack}
         >
             Back &gt;

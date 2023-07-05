@@ -24,26 +24,26 @@ const CategoryBox = ({
     return (
         <a
             href={`/forum/topic/${name}`}
-            className="w-full border flex md:px-4 md:py-8 px-2 py-6 "
+            className='w-full border flex md:px-4 md:py-8 px-2 py-6 '
         >
-            <div className="flex md;w-12 w-10 text-wave-400 justify-center items-center">
+            <div className='flex md;w-12 w-10 text-wave-400 justify-center items-center'>
                 <Trading />
             </div>
-            <div className="flex flex-col ml-3">
-                <h1 className="text-wave-300 md:text-2xl text-xl font-semibold">
+            <div className='flex flex-col ml-3'>
+                <h1 className='text-wave-300 md:text-2xl text-xl font-semibold'>
                     {name}
                 </h1>
-                <h2 className="text-wave-100 md:text-lg text-sm mt-1 font-light">
+                <h2 className='text-wave-100 md:text-lg text-sm mt-1 font-light'>
                     {description}
                 </h2>
             </div>
             {count !== null && (
-                <div className="flex ml-auto">
-                    <div className="flex flex-col justify-center">
-                        <span className="text-wave-100 text-xl font-light">
+                <div className='flex ml-auto'>
+                    <div className='flex flex-col justify-center'>
+                        <span className='text-wave-100 text-xl font-light'>
                             {count}
                         </span>
-                        <h2 className="text-wave-300 mt-1">posts</h2>
+                        <h2 className='text-wave-300 mt-1'>posts</h2>
                     </div>
                 </div>
             )}

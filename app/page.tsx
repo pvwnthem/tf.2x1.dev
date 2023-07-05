@@ -12,11 +12,11 @@ import React from 'react'
 export default function Home() {
     const session = useSession()
     return (
-        <div className="bg-background">
+        <div className='bg-background'>
             <Wrapper session={session}>
                 <Navbar />
                 <Title />
-                <div id="info">
+                <div id='info'>
                     <Info />
                 </div>
             </Wrapper>

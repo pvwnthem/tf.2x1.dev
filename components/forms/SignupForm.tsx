@@ -87,70 +87,70 @@ const SignupForm = () => {
     }
 
     return (
-        <div className="w-full h-screen bg-background flex items-center justify-center">
-            <div className="md:w-1/4 w-full rounded-lg py-8 md:px-2 px-2 flex items-center justify-center">
+        <div className='w-full h-screen bg-background flex items-center justify-center'>
+            <div className='md:w-1/4 w-full rounded-lg py-8 md:px-2 px-2 flex items-center justify-center'>
                 <form onSubmit={handleSignup}>
-                    <h1 className="text-3xl font-semibold text-center text-wave-300 ">
+                    <h1 className='text-3xl font-semibold text-center text-wave-300 '>
                         Sign Up
                     </h1>
-                    <h2 className="text-lg mt-2 font-semibold text-center text-wave-300">
+                    <h2 className='text-lg mt-2 font-semibold text-center text-wave-300'>
                         Sign Up For The tf.2x1.dev Community
                     </h2>
 
                     <input
-                        type="text"
-                        placeholder="Username"
+                        type='text'
+                        placeholder='Username'
                         value={data.username}
-                        name="username"
+                        name='username'
                         maxLength={10}
                         onChange={handleInputChange}
-                        className="p-2 w-full rounded mt-4"
+                        className='p-2 w-full rounded mt-4'
                         required
                     />
                     <div>
                         <input
-                            type="email"
-                            placeholder="Email"
+                            type='email'
+                            placeholder='Email'
                             value={data.email}
-                            name="email"
+                            name='email'
                             onChange={handleInputChange}
-                            className="p-2 w-full rounded mt-4"
+                            className='p-2 w-full rounded mt-4'
                             required
                         />
                     </div>
                     <div>
                         <input
-                            type="password"
-                            placeholder="Password"
+                            type='password'
+                            placeholder='Password'
                             value={data.password}
-                            name="password"
+                            name='password'
                             onChange={handleInputChange}
-                            className="p-2 w-full rounded mt-4"
+                            className='p-2 w-full rounded mt-4'
                             required
                         />
                     </div>
                     <div>
                         <input
-                            type="password"
-                            placeholder="Confirm Password"
+                            type='password'
+                            placeholder='Confirm Password'
                             value={data.confirmPassword}
-                            name="confirmPassword"
+                            name='confirmPassword'
                             onChange={handleInputChange}
-                            className="p-2 w-full rounded mt-4"
+                            className='p-2 w-full rounded mt-4'
                             required
                         />
                     </div>
 
                     <button
-                        type="submit"
-                        className="mx-auto mt-4 text-white p-2 bg-wave-300 rounded-md w-full"
+                        type='submit'
+                        className='mx-auto mt-4 text-white p-2 bg-wave-300 rounded-md w-full'
                         disabled={loading}
                     >
                         {loading ? 'Loading' : 'Sign Up'}
                     </button>
 
                     {submitError && (
-                        <p className="text-center mt-4 text-wave-500">
+                        <p className='text-center mt-4 text-wave-500'>
                             Error: {submitError}
                         </p>
                     )}
@@ -160,7 +160,7 @@ const SignupForm = () => {
                                 return (
                                     <p
                                         key={j}
-                                        className="text-center mt-4 text-wave-500"
+                                        className='text-center mt-4 text-wave-500'
                                     >
                                         Error: {error.error}
                                     </p>
@@ -169,13 +169,13 @@ const SignupForm = () => {
                         </>
                     )}
 
-                    <div className="flex flex-col">
-                        <p className="text-center text-white mt-2">
+                    <div className='flex flex-col'>
+                        <p className='text-center text-white mt-2'>
                             Already have an account?{' '}
                         </p>
                         <Link
-                            href="/login"
-                            className="text-center text-wave-300"
+                            href='/login'
+                            className='text-center text-wave-300'
                         >
                             Login
                         </Link>
