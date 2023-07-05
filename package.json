@@ -6,7 +6,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "prepare": "husky install"
     },
     "dependencies": {
         "@types/node": "20.3.2",
@@ -34,7 +35,9 @@
         "@types/bcryptjs": "^2.4.2",
         "@types/crypto-js": "^4.1.1",
         "@types/nodemailer": "^6.4.8",
+        "husky": "^8.0.0",
         "mongoose": "^7.3.1",
-        "prettier": "2.8.8"
+        "prettier": "2.8.8",
+        "pretty-quick": "^3.1.3"
     }
 }
