@@ -1,60 +1,60 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import LevelBar from "@components/levels/LevelBar";
-import { levels } from "@constants/levels";
-import { addXP } from "@services/levels.service";
-import { updateUser } from "@services/users.service";
-import Description from "@components/profile/Description";
-import EditingButton from "@components/profile/editing/EditingButton";
-import EditDescription from "@components/profile/editing/EditDescription";
-import Username from "@components/profile/Username";
-import EditUsername from "@components/profile/editing/EditUsername";
-import ProfilePicture from "@components/profile/ProfilePicture";
-import EditProfilePicture from "@components/profile/editing/EditProfilePicture";
-import { encrypt, decrypt } from "@services/encryption.service";
+import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
+import LevelBar from '@components/levels/LevelBar'
+import { levels } from '@constants/levels'
+import { addXP } from '@services/levels.service'
+import { updateUser } from '@services/users.service'
+import Description from '@components/profile/Description'
+import EditingButton from '@components/profile/editing/EditingButton'
+import EditDescription from '@components/profile/editing/EditDescription'
+import Username from '@components/profile/Username'
+import EditUsername from '@components/profile/editing/EditUsername'
+import ProfilePicture from '@components/profile/ProfilePicture'
+import EditProfilePicture from '@components/profile/editing/EditProfilePicture'
+import { encrypt, decrypt } from '@services/encryption.service'
 
 const validateData = (
     data: any,
     lastChangedName: number | Date,
     lastUsername: string
 ) => {
-    const errors = [];
+    const errors = []
 
-    lastChangedName = new Date(lastChangedName);
+    lastChangedName = new Date(lastChangedName)
 
     if (
         lastChangedName.getDate() + 30 < Date.now() &&
         data.username != lastUsername
     ) {
-        lastChangedName.setDate(lastChangedName.getDate() + 30);
+        lastChangedName.setDate(lastChangedName.getDate() + 30)
         errors.push({
             error: `you can change your name on ${lastChangedName.toLocaleDateString()}`,
-        });
+        })
     }
 
     if (data.username.length < 4) {
         errors.push({
-            error: "username must be at least 4 characters long",
-        });
+            error: 'username must be at least 4 characters long',
+        })
     } else if (data.username.length > 16) {
         errors.push({
-            error: "username should be less than 16 characters long",
-        });
+            error: 'username should be less than 16 characters long',
+        })
     }
 
     if (data.description.length === 0) {
         errors.push({
-            error: "Description must be at least 1 character long",
-        });
+            error: 'Description must be at least 1 character long',
+        })
     }
     if (data.description.length > 128) {
         errors.push({
             error: "Description can't be longer than 128 characters",
-        });
+        })
     }
 
-    return errors;
-};
+    return errors
+}
 
 export default function Profile(props: { session: any }) {
     const {
@@ -64,30 +64,30 @@ export default function Profile(props: { session: any }) {
         level,
         id,
         lastChangedName,
-    } = props.session.data.user;
-    const { update } = props.session;
+    } = props.session.data.user
+    const { update } = props.session
 
-    const [editing, setEditing] = useState(false);
-    const [updatedUsername, setUpdatedUsername] = useState(username);
+    const [editing, setEditing] = useState(false)
+    const [updatedUsername, setUpdatedUsername] = useState(username)
     const [updatedProfilePicture, setUpdatedProfilePicture] =
-        useState(profilePicture);
-    const [updatedDescription, setUpdatedDescription] = useState(description);
-    const [validationErrors, setValidationErrors] = useState<any>([]);
+        useState(profilePicture)
+    const [updatedDescription, setUpdatedDescription] = useState(description)
+    const [validationErrors, setValidationErrors] = useState<any>([])
 
     useEffect(() => {
         // Load the user data from localStorage on component mount
-        const storedUser = localStorage.getItem("user");
+        const storedUser = localStorage.getItem('user')
 
         async function decUser() {
             try {
-                const decryptedUser = await decrypt(storedUser);
+                const decryptedUser = await decrypt(storedUser)
 
-                let parsedUser;
+                let parsedUser
                 try {
-                    parsedUser = JSON.parse(decryptedUser);
+                    parsedUser = JSON.parse(decryptedUser)
                 } catch (error) {
-                    console.error("Error parsing decrypted user:", error);
-                    parsedUser = {};
+                    console.error('Error parsing decrypted user:', error)
+                    parsedUser = {}
                 }
                 if (
                     !parsedUser ||
@@ -95,43 +95,43 @@ export default function Profile(props: { session: any }) {
                     !parsedUser.profilePicture ||
                     !parsedUser.description
                 ) {
-                    localStorage.removeItem("user");
-                    parsedUser = props.session.data.user;
+                    localStorage.removeItem('user')
+                    parsedUser = props.session.data.user
                 }
-                setUpdatedUsername(parsedUser.username?.toLowerCase() || "");
-                setUpdatedDescription(parsedUser.description || "");
-                setUpdatedProfilePicture(parsedUser.profilePicture || "");
+                setUpdatedUsername(parsedUser.username?.toLowerCase() || '')
+                setUpdatedDescription(parsedUser.description || '')
+                setUpdatedProfilePicture(parsedUser.profilePicture || '')
             } catch (error) {
-                console.error("Error decrypting user:", error);
+                console.error('Error decrypting user:', error)
             }
         }
 
         if (storedUser) {
-            decUser();
+            decUser()
         }
-    }, [props.session.data.user]);
+    }, [props.session.data.user])
 
     const handleUsernameChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
-        setUpdatedUsername(event.target.value.toLowerCase());
-    };
+        setUpdatedUsername(event.target.value.toLowerCase())
+    }
 
     const handleDescriptionChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
     ) => {
-        setUpdatedDescription(event.target.value);
-    };
+        setUpdatedDescription(event.target.value)
+    }
 
     const handleProfilePictureChange = (
         event: React.ChangeEvent<HTMLTextAreaElement> | any
     ) => {
-        setUpdatedProfilePicture(event.target.value);
-    };
+        setUpdatedProfilePicture(event.target.value)
+    }
 
     const handleEdit = () => {
-        setEditing(true);
-    };
+        setEditing(true)
+    }
 
     const handleSave = async () => {
         const updatedUser = {
@@ -139,33 +139,33 @@ export default function Profile(props: { session: any }) {
             username: updatedUsername,
             description: updatedDescription,
             profilePicture: updatedProfilePicture,
-        };
+        }
 
         const validationErrors = validateData(
             updatedUser,
             lastChangedName,
             username
-        );
+        )
 
         if (validationErrors.length > 0) {
-            setValidationErrors(validationErrors);
-            return;
+            setValidationErrors(validationErrors)
+            return
         }
 
         try {
-            const response = await updateUser(id, updatedUser);
+            const response = await updateUser(id, updatedUser)
 
             const data = {
                 profilePicture: response.profilePicture,
                 description: response.description,
                 username: response.username,
-            };
+            }
 
-            await updateUser(id, { lastChangedName: Date.now() });
+            await updateUser(id, { lastChangedName: Date.now() })
 
-            const encryptedData = await encrypt(JSON.stringify(data));
+            const encryptedData = await encrypt(JSON.stringify(data))
 
-            localStorage.setItem("user", encryptedData);
+            localStorage.setItem('user', encryptedData)
 
             update({
                 ...props.session,
@@ -173,14 +173,14 @@ export default function Profile(props: { session: any }) {
                     ...props.session.data,
                     user: response,
                 },
-            });
+            })
 
-            setEditing(false);
+            setEditing(false)
         } catch (error) {
-            setValidationErrors([...validationErrors, error]);
+            setValidationErrors([...validationErrors, error])
             // Handle error, e.g., show an error message to the user
         }
-    };
+    }
 
     return (
         <div className="bg-background h-screen flex items-center justify-center py-8">
@@ -235,5 +235,5 @@ export default function Profile(props: { session: any }) {
                 />
             </div>
         </div>
-    );
+    )
 }

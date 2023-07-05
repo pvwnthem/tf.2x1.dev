@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client'
+import React from 'react'
 
 export default function UserNotFound() {
     return (
@@ -13,5 +13,5 @@ export default function UserNotFound() {
                 </h2>
             </div>
         </div>
-    );
+    )
 }

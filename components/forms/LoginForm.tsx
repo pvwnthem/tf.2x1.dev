@@ -1,72 +1,72 @@
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import axios, { AxiosError } from "axios";
-import { loginUser } from "@services/auth.service";
-import Link from "next/link";
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import axios, { AxiosError } from 'axios'
+import { loginUser } from '@services/auth.service'
+import Link from 'next/link'
 
 interface LoginFormProps {
-    redirectPath: string;
+    redirectPath: string
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
     const [data, setData] = useState({
-        email: "",
-        password: "",
-    });
+        email: '',
+        password: '',
+    })
 
-    const [validationErrors, setValidationErrors] = useState<any>([]);
-    const [submitError, setSubmitError] = useState<any>("");
-    const [loading, setLoading] = useState(false);
-    const router = useRouter();
+    const [validationErrors, setValidationErrors] = useState<any>([])
+    const [submitError, setSubmitError] = useState<any>('')
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     const validateData = () => {
-        const errors = [];
+        const errors = []
 
         if (!data.email) {
-            errors.push({ error: "Email is required" });
+            errors.push({ error: 'Email is required' })
         } else if (!data.password) {
-            errors.push({ error: "Password is required" });
+            errors.push({ error: 'Password is required' })
         }
 
-        setValidationErrors(errors);
+        setValidationErrors(errors)
 
-        return errors.length === 0;
-    };
+        return errors.length === 0
+    }
 
     const handleLogin = async (event: any) => {
-        event.preventDefault();
+        event.preventDefault()
 
-        const isValid = validateData();
+        const isValid = validateData()
 
         if (isValid) {
             try {
-                setLoading(true);
+                setLoading(true)
 
-                const loginRes = await loginUser(data);
+                const loginRes = await loginUser(data)
 
                 if (loginRes && loginRes.error) {
-                    setSubmitError(loginRes.error || "");
+                    setSubmitError(loginRes.error || '')
                 } else {
-                    router.push(redirectPath);
+                    router.push(redirectPath)
                 }
             } catch (error) {
                 if (error) {
-                    setSubmitError(error);
+                    setSubmitError(error)
                 }
             }
 
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
 
     const handleInputChange = (event: any) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target
 
         setData((prevData) => ({
             ...prevData,
             [name]: value,
-        }));
-    };
+        }))
+    }
 
     return (
         <div className="w-full h-screen bg-background flex items-center justify-center">
@@ -131,7 +131,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
 
                     <div className="flex flex-col">
                         <p className="text-center text-white mt-2">
-                            Don&apos;t have an account?{" "}
+                            Don&apos;t have an account?{' '}
                         </p>
                         <Link
                             href="/signup"
@@ -143,7 +143,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
                 </form>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default LoginForm;
+export default LoginForm

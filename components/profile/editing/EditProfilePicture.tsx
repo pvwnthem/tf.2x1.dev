@@ -1,27 +1,27 @@
-import { images } from "@constants/images";
-import React, { useState } from "react";
-import Draggable from "react-draggable";
-import ProfilePicture from "../ProfilePicture";
+import { images } from '@constants/images'
+import React, { useState } from 'react'
+import Draggable from 'react-draggable'
+import ProfilePicture from '../ProfilePicture'
 
 const EditProfilePicture = ({
     src,
     handleProfilePictureChange,
 }: {
-    src: string;
-    handleProfilePictureChange: any;
+    src: string
+    handleProfilePictureChange: any
 }) => {
-    const [showPopup, setShowPopup] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(src);
+    const [showPopup, setShowPopup] = useState(false)
+    const [selectedImage, setSelectedImage] = useState(src)
 
     const togglePopup = () => {
-        setShowPopup(!showPopup);
-    };
+        setShowPopup(!showPopup)
+    }
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const newImage = event.target.value;
-        handleProfilePictureChange(newImage);
-        setSelectedImage(newImage);
-    };
+        const newImage = event.target.value
+        handleProfilePictureChange(newImage)
+        setSelectedImage(newImage)
+    }
 
     return (
         <div className="w-full">
@@ -55,14 +55,14 @@ const EditProfilePicture = ({
                                             src={image}
                                             className={`w-12 h-12 cursor-pointer ${
                                                 image === selectedImage
-                                                    ? "border"
-                                                    : ""
+                                                    ? 'border'
+                                                    : ''
                                             }`}
                                             onClick={() => {
-                                                setSelectedImage(image);
+                                                setSelectedImage(image)
                                                 handleProfilePictureChange({
                                                     target: { value: image },
-                                                });
+                                                })
                                             }}
                                         />
                                     </div>
@@ -73,7 +73,7 @@ const EditProfilePicture = ({
                 </div>
             </Draggable>
         </div>
-    );
-};
+    )
+}
 
-export default EditProfilePicture;
+export default EditProfilePicture

@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import { levels } from "@constants/levels";
-import React from "react";
+'use client'
+import { levels } from '@constants/levels'
+import React from 'react'
 
 export default function Badge(props: { user: any }) {
-    const { level, xp, title } = props.user;
+    const { level, xp, title } = props.user
 
     return (
         <>
@@ -25,5 +25,5 @@ export default function Badge(props: { user: any }) {
                 </h2>
             )}
         </>
-    );
+    )
 }

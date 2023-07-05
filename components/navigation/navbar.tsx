@@ -1,22 +1,22 @@
-"use client";
-import Logo from "@components/svg/logo";
-import Link from "next/link";
-import React, { useState } from "react";
-import { useSession } from "next-auth/react";
+'use client'
+import Logo from '@components/svg/logo'
+import Link from 'next/link'
+import React, { useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-    const session = useSession();
+    const session = useSession()
 
     function scroll(to: string) {
-        setIsMobileMenuOpen(false);
-        var element = document.getElementById(to);
+        setIsMobileMenuOpen(false)
+        var element = document.getElementById(to)
         element?.scrollIntoView({
-            behavior: "smooth",
-            block: "end",
-            inline: "nearest",
-        });
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
+        })
     }
 
     return (
@@ -38,7 +38,7 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                         <div className="hidden lg:flex space-x-4 lg:items-center lg:justify-end lg:flex-1">
                             <button
                                 onClick={() => {
-                                    scroll("home");
+                                    scroll('home')
                                 }}
                                 className="px-3 py-2 rounded-md text-sm font-medium hover:underline text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400"
                             >
@@ -46,7 +46,7 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                             </button>
                             <button
                                 onClick={() => {
-                                    scroll("info");
+                                    scroll('info')
                                 }}
                                 className="px-3 py-2 rounded-md text-sm font-medium hover:underline text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400"
                             >
@@ -54,16 +54,16 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                             </button>
                             <button
                                 onClick={() => {
-                                    window.location.replace("/forum");
+                                    window.location.replace('/forum')
                                 }}
                                 className="px-3 py-2 rounded-md text-sm font-medium hover:underline text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400"
                             >
                                 Forums
                             </button>
-                            {session.status === "authenticated" ? (
+                            {session.status === 'authenticated' ? (
                                 <button
                                     onClick={() => {
-                                        window.location.replace("/profile");
+                                        window.location.replace('/profile')
                                     }}
                                     className=" px-3 py-2 bg-wave-300 hover:bg-wave-400 rounded-md text-white"
                                 >
@@ -74,9 +74,9 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                                     <button
                                         onClick={() => {
                                             window.location.replace(
-                                                "/login?redirectPath=" +
+                                                '/login?redirectPath=' +
                                                     window.location.pathname
-                                            );
+                                            )
                                         }}
                                         className=" px-3 py-2 bg-wave-300 hover:bg-wave-400 rounded-md text-white"
                                     >
@@ -92,13 +92,13 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                                 aria-expanded={isMobileMenuOpen}
                                 aria-haspopup="true"
                                 onClick={() => {
-                                    setIsMobileMenuOpen(!isMobileMenuOpen);
+                                    setIsMobileMenuOpen(!isMobileMenuOpen)
                                 }}
                             >
                                 <span className="sr-only">Open main menu</span>
                                 <svg
                                     className={`${
-                                        isMobileMenuOpen ? "hidden" : "block"
+                                        isMobileMenuOpen ? 'hidden' : 'block'
                                     } h-6 w-6`}
                                     viewBox="0 0 24 24"
                                     fill="none"
@@ -114,7 +114,7 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                                 </svg>
                                 <svg
                                     className={`${
-                                        isMobileMenuOpen ? "block" : "hidden"
+                                        isMobileMenuOpen ? 'block' : 'hidden'
                                     } h-6 w-6`}
                                     viewBox="0 0 24 24"
                                     fill="none"
@@ -136,13 +136,13 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                 {/* Mobile menu, toggle className based on menu state */}
                 <div
                     className={`${
-                        isMobileMenuOpen ? "block" : "hidden"
+                        isMobileMenuOpen ? 'block' : 'hidden'
                     } lg:hidden`}
                 >
                     <div className="px-2 pt-2 pb-3 space-y-2">
                         <button
                             onClick={() => {
-                                scroll("home");
+                                scroll('home')
                             }}
                             className="block px-3 py-2 rounded-md text-base font-medium text-wave-100 hover:text-wave-400  focus:outline-none focus:text-wave-400"
                         >
@@ -150,7 +150,7 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                         </button>
                         <button
                             onClick={() => {
-                                scroll("info");
+                                scroll('info')
                             }}
                             className="block px-3 py-2 rounded-md text-base font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400"
                         >
@@ -158,16 +158,16 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                         </button>
                         <button
                             onClick={() => {
-                                window.location.replace("/forum");
+                                window.location.replace('/forum')
                             }}
                             className="block px-3 py-2 rounded-md text-base font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400"
                         >
                             Forum
                         </button>
-                        {session.status === "authenticated" ? (
+                        {session.status === 'authenticated' ? (
                             <button
                                 onClick={() => {
-                                    window.location.replace("/profile");
+                                    window.location.replace('/profile')
                                 }}
                                 className=" px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white"
                             >
@@ -178,9 +178,9 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                                 <button
                                     onClick={() => {
                                         window.location.replace(
-                                            "/login?redirectPath=" +
+                                            '/login?redirectPath=' +
                                                 window.location.pathname
-                                        );
+                                        )
                                     }}
                                     className=" px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white"
                                 >
@@ -192,5 +192,5 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                 </div>
             </nav>
         </div>
-    );
-};
+    )
+}

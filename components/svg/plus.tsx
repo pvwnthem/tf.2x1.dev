@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client'
+import React from 'react'
 
 const Plus = () => (
     <svg
@@ -16,6 +16,6 @@ const Plus = () => (
             d="M12 4.5v15m7.5-7.5h-15"
         />
     </svg>
-);
+)
 
-export default Plus;
+export default Plus

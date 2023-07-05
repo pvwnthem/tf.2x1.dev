@@ -11,10 +11,10 @@
 }
 
 @font-face {
-    font-family: "tf2build";
-    src: url("../fonts/tf2build.ttf");
+    font-family: 'tf2build';
+    src: url('../fonts/tf2build.ttf');
 }
 
 .tf2font {
-    font-family: "tf2build";
+    font-family: 'tf2build';
 }

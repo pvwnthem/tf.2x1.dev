@@ -1,23 +1,23 @@
-import Trading from "@components/svg/trading";
-import { getNumberOfPostsInCategory } from "@services/forum.service";
-import React, { useState, useEffect } from "react";
+import Trading from '@components/svg/trading'
+import { getNumberOfPostsInCategory } from '@services/forum.service'
+import React, { useState, useEffect } from 'react'
 
 const CategoryBox = ({
     name,
     description,
 }: {
-    name: string;
-    description: string;
+    name: string
+    description: string
 }) => {
-    const [count, setCount] = useState<number | null>(null);
+    const [count, setCount] = useState<number | null>(null)
 
     useEffect(() => {
         async function getCount() {
-            const count = await getNumberOfPostsInCategory(name);
-            setCount(count);
+            const count = await getNumberOfPostsInCategory(name)
+            setCount(count)
         }
-        getCount();
-    }, [name]);
+        getCount()
+    }, [name])
 
     return (
         <a
@@ -46,7 +46,7 @@ const CategoryBox = ({
                 </div>
             )}
         </a>
-    );
-};
+    )
+}
 
-export default CategoryBox;
+export default CategoryBox

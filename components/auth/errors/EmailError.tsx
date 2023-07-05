@@ -1,26 +1,26 @@
-"use client";
-import { sendVerificationRequest } from "@services/email.service";
-import { getToken } from "@services/users.service";
-import React, { useState } from "react";
+'use client'
+import { sendVerificationRequest } from '@services/email.service'
+import { getToken } from '@services/users.service'
+import React, { useState } from 'react'
 
 export default function EmailError({
     email,
     url,
     id,
 }: {
-    email: string;
-    url: string;
-    id: string;
+    email: string
+    url: string
+    id: string
 }) {
-    const [sent, setSent] = useState<boolean>(false);
+    const [sent, setSent] = useState<boolean>(false)
 
     async function resend() {
-        setSent(true);
+        setSent(true)
         await sendVerificationRequest({
             identifier: email,
             token: await getToken(id),
             baseUrl: url,
-        });
+        })
     }
 
     return (
@@ -47,5 +47,5 @@ export default function EmailError({
                 )}
             </div>
         </div>
-    );
+    )
 }

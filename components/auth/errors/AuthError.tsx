@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client'
+import React from 'react'
 
 export default function AuthError() {
     return (
@@ -15,7 +15,7 @@ export default function AuthError() {
                     className="bg-wave-400 text-white px-8 py-2 text-lg mx-auto rounded-lg mt-8"
                     onClick={() =>
                         window.location.replace(
-                            "/login?redirectPath=" + window.location.pathname
+                            '/login?redirectPath=' + window.location.pathname
                         )
                     }
                 >
@@ -23,5 +23,5 @@ export default function AuthError() {
                 </button>
             </div>
         </div>
-    );
+    )
 }

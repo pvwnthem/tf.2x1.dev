@@ -1,14 +1,14 @@
-"use client";
-import React from "react";
+'use client'
+import React from 'react'
 
 const Description = ({
     isEditing,
     handleSave,
     handleEdit,
 }: {
-    isEditing: boolean;
-    handleSave: any;
-    handleEdit: any;
+    isEditing: boolean
+    handleSave: any
+    handleEdit: any
 }) => {
     return (
         <div className="">
@@ -28,7 +28,7 @@ const Description = ({
                 </button>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default Description;
+export default Description

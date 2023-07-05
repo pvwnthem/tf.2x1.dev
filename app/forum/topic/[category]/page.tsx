@@ -1,49 +1,49 @@
-"use client";
-import React, { useState, useEffect } from "react";
+'use client'
+import React, { useState, useEffect } from 'react'
 
-import { IUser } from "@models/User";
-import { getUserByName } from "@services/users.service";
-import Loading from "@components/pages/loading";
-import { useSession } from "next-auth/react";
-import UserNotFound from "@components/auth/errors/UserNotFound";
-import UserProfile from "@components/pages/userProfile";
-import BackButton from "@components/navigation/back";
-import { getAllPostsInCategory } from "@services/forum.service";
-import { IForumPost } from "@models/forum/ForumPost";
-import Post from "@components/forum/Post";
-import { Navbar } from "@components/navigation/navbar";
-import { categories } from "@constants/categories";
-import CategoryBox from "@components/forum/CategoryBox";
-import Plus from "@components/svg/plus";
-import Wrapper from "@components/auth/Wrapper";
-import EmailProtected from "@components/auth/emailProtected";
-import Protected from "@components/auth/protected";
+import { IUser } from '@models/User'
+import { getUserByName } from '@services/users.service'
+import Loading from '@components/pages/loading'
+import { useSession } from 'next-auth/react'
+import UserNotFound from '@components/auth/errors/UserNotFound'
+import UserProfile from '@components/pages/userProfile'
+import BackButton from '@components/navigation/back'
+import { getAllPostsInCategory } from '@services/forum.service'
+import { IForumPost } from '@models/forum/ForumPost'
+import Post from '@components/forum/Post'
+import { Navbar } from '@components/navigation/navbar'
+import { categories } from '@constants/categories'
+import CategoryBox from '@components/forum/CategoryBox'
+import Plus from '@components/svg/plus'
+import Wrapper from '@components/auth/Wrapper'
+import EmailProtected from '@components/auth/emailProtected'
+import Protected from '@components/auth/protected'
 
 export default function CategoryPage({ params }: any) {
-    const [posts, setPosts] = useState<any>(null);
-    const [notFound, setNotFound] = useState<boolean>(false);
-    const session = useSession();
+    const [posts, setPosts] = useState<any>(null)
+    const [notFound, setNotFound] = useState<boolean>(false)
+    const session = useSession()
 
     useEffect(() => {
         async function getData() {
             if (params.category) {
                 const posts = await getAllPostsInCategory(
                     params.category as string
-                );
+                )
 
                 if (posts) {
-                    setPosts(posts);
+                    setPosts(posts)
                 } else {
-                    setNotFound(true);
+                    setNotFound(true)
                 }
             }
         }
 
-        getData();
-    }, [params.user, params.category]);
+        getData()
+    }, [params.user, params.category])
 
     if (notFound) {
-        return <UserNotFound />;
+        return <UserNotFound />
     }
 
     return (
@@ -69,7 +69,7 @@ export default function CategoryPage({ params }: any) {
                                         onClick={() => {
                                             window.location.replace(
                                                 `/forum/new?category=${params.category}`
-                                            );
+                                            )
                                         }}
                                         className="bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap"
                                     >
@@ -94,7 +94,7 @@ export default function CategoryPage({ params }: any) {
                                                         <>
                                                             <Post post={post} />
                                                         </>
-                                                    );
+                                                    )
                                                 }
                                             )}
                                         </>
@@ -124,5 +124,5 @@ export default function CategoryPage({ params }: any) {
             )}
             */}
         </>
-    );
+    )
 }

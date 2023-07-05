@@ -1,23 +1,23 @@
-import Badge from "@components/levels/Badge";
-import Loading from "@components/pages/loading";
-import Trading from "@components/svg/trading";
-import { deletedUserPfp } from "@constants/images";
-import { deletedUserBadge, levels } from "@constants/levels";
-import { getNumberOfPostsInCategory } from "@services/forum.service";
-import { getUser } from "@services/users.service";
-import React, { useState, useEffect } from "react";
+import Badge from '@components/levels/Badge'
+import Loading from '@components/pages/loading'
+import Trading from '@components/svg/trading'
+import { deletedUserPfp } from '@constants/images'
+import { deletedUserBadge, levels } from '@constants/levels'
+import { getNumberOfPostsInCategory } from '@services/forum.service'
+import { getUser } from '@services/users.service'
+import React, { useState, useEffect } from 'react'
 
 const Post = ({ post }: { post: any }) => {
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<any>(null)
 
     useEffect(() => {
         async function getUserData() {
-            const user = await getUser(post.author);
-            setUser(user);
+            const user = await getUser(post.author)
+            setUser(user)
         }
 
-        getUserData();
-    }, [post.author]);
+        getUserData()
+    }, [post.author])
 
     return (
         <>
@@ -34,11 +34,11 @@ const Post = ({ post }: { post: any }) => {
                         />
                         <div className="flex flex-col">
                             <h1 className="text-wave-300 text-sm md:text-base">
-                                {user ? user.username : "deleted user"}
+                                {user ? user.username : 'deleted user'}
                             </h1>
                             <h2 className="text-wave-500 text-xs md:text-sm">
-                                level {user ? user.level : "0"}{" "}
-                                {user ? user.title : "deleted"}
+                                level {user ? user.level : '0'}{' '}
+                                {user ? user.title : 'deleted'}
                             </h2>
                         </div>
                     </div>
@@ -51,18 +51,18 @@ const Post = ({ post }: { post: any }) => {
                         </div>
 
                         <h2 className="text-wave-100 text-xs md:text-sm font-light">
-                            by {user ? user.username : "deleted user"} on{" "}
+                            by {user ? user.username : 'deleted user'} on{' '}
                             {new Date(post.createdAt).toLocaleDateString(
-                                "en-US",
+                                'en-US',
                                 {
-                                    month: "2-digit",
-                                    day: "2-digit",
-                                    year: "numeric",
+                                    month: '2-digit',
+                                    day: '2-digit',
+                                    year: 'numeric',
                                 }
-                            )}{" "}
-                            at{" "}
+                            )}{' '}
+                            at{' '}
                             {new Date(post.createdAt).toLocaleTimeString(
-                                "en-US"
+                                'en-US'
                             )}
                         </h2>
                     </div>
@@ -81,7 +81,7 @@ const Post = ({ post }: { post: any }) => {
                 </a>
             </>
         </>
-    );
-};
+    )
+}
 
-export default Post;
+export default Post

@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import React from "react";
-import Image from "next/image";
-import LevelBar from "@components/levels/LevelBar";
-import { levels } from "@constants/levels";
-import Description from "@components/profile/Description";
-import Username from "@components/profile/Username";
-import ProfilePicture from "@components/profile/ProfilePicture";
+'use client'
+import React from 'react'
+import Image from 'next/image'
+import LevelBar from '@components/levels/LevelBar'
+import { levels } from '@constants/levels'
+import Description from '@components/profile/Description'
+import Username from '@components/profile/Username'
+import ProfilePicture from '@components/profile/ProfilePicture'
 
 export default function UserProfile(props: { user: any }) {
-    const { profilePicture, username, description, level } = props.user;
+    const { profilePicture, username, description, level } = props.user
 
     return (
         <div className="bg-background h-screen flex items-center justify-center py-8">
@@ -27,5 +27,5 @@ export default function UserProfile(props: { user: any }) {
                 <Description description={description} />
             </div>
         </div>
-    );
+    )
 }

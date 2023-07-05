@@ -1,26 +1,26 @@
-"use client";
-import React, { useState, useEffect } from "react";
+'use client'
+import React, { useState, useEffect } from 'react'
 
 export default function Loading() {
-    const [dots, setDots] = useState("...");
+    const [dots, setDots] = useState('...')
 
     useEffect(() => {
         const interval = setInterval(() => {
             setDots((prevDots) => {
-                if (prevDots === "...") {
-                    return ".";
-                } else if (prevDots === "..") {
-                    return "...";
+                if (prevDots === '...') {
+                    return '.'
+                } else if (prevDots === '..') {
+                    return '...'
                 } else {
-                    return "..";
+                    return '..'
                 }
-            });
-        }, 250);
+            })
+        }, 250)
 
         return () => {
-            clearInterval(interval);
-        };
-    }, []);
+            clearInterval(interval)
+        }
+    }, [])
 
     return (
         <div className="w-full h-screen flex items-center justify-center bg-background">
@@ -30,5 +30,5 @@ export default function Loading() {
                 </h1>
             </div>
         </div>
-    );
+    )
 }

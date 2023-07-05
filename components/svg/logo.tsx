@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client'
+import React from 'react'
 
 const Logo = () => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="">
@@ -8,6 +8,6 @@ const Logo = () => (
             fill="currentColor"
         ></path>
     </svg>
-);
+)
 
-export default Logo;
+export default Logo

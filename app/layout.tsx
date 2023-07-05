@@ -1,17 +1,17 @@
-import "./globals.css";
+import './globals.css'
 
-import React from "react";
-import Provider from "@components/Provider";
+import React from 'react'
+import Provider from '@components/Provider'
 
 export const metadata = {
-    title: "tf.2x1.dev",
-    description: "a team fortess 2 community",
-};
+    title: 'tf.2x1.dev',
+    description: 'a team fortess 2 community',
+}
 
 export default function RootLayout({
     children,
 }: {
-    children: React.ReactNode;
+    children: React.ReactNode
 }) {
     return (
         <Provider>
@@ -19,5 +19,5 @@ export default function RootLayout({
                 <body className="tf2font">{children}</body>
             </html>
         </Provider>
-    );
+    )
 }

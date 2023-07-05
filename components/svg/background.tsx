@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client'
+import React from 'react'
 
 const Background = () => (
     <svg
@@ -40,5 +40,5 @@ const Background = () => (
             transform="matrix(1, 0, 0, 1, -1553.919556, -554.666687)"
         />
     </svg>
-);
-export default Background;
+)
+export default Background

@@ -1,88 +1,88 @@
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import axios, { AxiosError } from "axios";
-import { loginUser } from "@services/auth.service";
-import Link from "next/link";
-import Loading from "@components/pages/loading";
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import axios, { AxiosError } from 'axios'
+import { loginUser } from '@services/auth.service'
+import Link from 'next/link'
+import Loading from '@components/pages/loading'
 
 const SignupForm = () => {
     const [data, setData] = useState({
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    });
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    })
 
-    const [validationErrors, setValidationErrors] = useState<any>([]);
-    const [submitError, setSubmitError] = useState<any>("");
-    const [loading, setLoading] = useState(false);
-    const router = useRouter();
+    const [validationErrors, setValidationErrors] = useState<any>([])
+    const [submitError, setSubmitError] = useState<any>('')
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     const validateData = () => {
-        const errors = [];
+        const errors = []
 
         if (data.username.length < 4) {
             errors.push({
-                error: "Full name must be at least 4 characters long",
-            });
+                error: 'Full name must be at least 4 characters long',
+            })
         } else if (data.username.length > 10) {
             errors.push({
-                error: "Full name should be less than 10 characters long",
-            });
+                error: 'Full name should be less than 10 characters long',
+            })
         } else if (data.password.length < 6) {
             errors.push({
-                error: "Password should be at least 6 characters long",
-            });
+                error: 'Password should be at least 6 characters long',
+            })
         } else if (data.password !== data.confirmPassword) {
-            errors.push({ error: "Passwords don't match" });
+            errors.push({ error: "Passwords don't match" })
         }
 
-        setValidationErrors(errors);
+        setValidationErrors(errors)
 
-        return errors.length === 0;
-    };
+        return errors.length === 0
+    }
 
     const handleSignup = async (event: any) => {
-        event.preventDefault();
+        event.preventDefault()
 
-        const isValid = validateData();
+        const isValid = validateData()
 
         if (isValid) {
             try {
-                setLoading(true);
-                const apiRes = await axios.post("/api/v1/auth/signup", data);
+                setLoading(true)
+                const apiRes = await axios.post('/api/v1/auth/signup', data)
 
                 if (apiRes.data.success) {
                     const loginRes = await loginUser({
                         email: data.email,
                         password: data.password,
-                    });
+                    })
 
                     if (loginRes && !loginRes.ok) {
-                        setSubmitError(loginRes.error || "");
+                        setSubmitError(loginRes.error || '')
                     } else {
-                        router.push("/");
+                        router.push('/')
                     }
                 }
             } catch (error) {
                 if (error instanceof AxiosError) {
-                    const errorMsg = error.response?.data;
-                    setSubmitError(errorMsg);
+                    const errorMsg = error.response?.data
+                    setSubmitError(errorMsg)
                 }
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
         }
-    };
+    }
 
     const handleInputChange = (event: any) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target
 
         setData((prevData) => ({
             ...prevData,
             [name]: value,
-        }));
-    };
+        }))
+    }
 
     return (
         <div className="w-full h-screen bg-background flex items-center justify-center">
@@ -144,7 +144,7 @@ const SignupForm = () => {
                         className="mx-auto mt-4 text-white p-2 bg-wave-300 rounded-md w-full"
                         disabled={loading}
                     >
-                        {loading ? "Loading" : "Sign Up"}
+                        {loading ? 'Loading' : 'Sign Up'}
                     </button>
 
                     {submitError && (
@@ -162,14 +162,14 @@ const SignupForm = () => {
                                     >
                                         Error: {error.error}
                                     </p>
-                                );
+                                )
                             })}
                         </>
                     )}
 
                     <div className="flex flex-col">
                         <p className="text-center text-white mt-2">
-                            Already have an account?{" "}
+                            Already have an account?{' '}
                         </p>
                         <Link
                             href="/login"
@@ -181,7 +181,7 @@ const SignupForm = () => {
                 </form>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default SignupForm;
+export default SignupForm

@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client'
+import React from 'react'
 
 const Username = ({ username }: { username: string }) => {
     return (
@@ -8,7 +8,7 @@ const Username = ({ username }: { username: string }) => {
                 {username}
             </h1>
         </div>
-    );
-};
+    )
+}
 
-export default Username;
+export default Username

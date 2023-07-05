@@ -1,74 +1,74 @@
-import { compare } from "bcryptjs";
-import NextAuth, { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { connect } from "@lib/mongodb";
-import { type IUser, User } from "@models/User";
+import { compare } from 'bcryptjs'
+import NextAuth, { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { connect } from '@lib/mongodb'
+import { type IUser, User } from '@models/User'
 
 const options: NextAuthOptions = {
     providers: [
         CredentialsProvider({
-            id: "credentials",
-            name: "Credentials",
+            id: 'credentials',
+            name: 'Credentials',
             credentials: {
-                email: { label: "Email", type: "text" },
-                password: { label: "Password", type: "password" },
+                email: { label: 'Email', type: 'text' },
+                password: { label: 'Password', type: 'password' },
             },
             async authorize(credentials) {
                 await connect().catch((err: any) => {
-                    throw new Error(err);
-                });
+                    throw new Error(err)
+                })
 
                 const user = await User.findOne({
                     email: credentials?.email,
-                }).select("+password");
+                }).select('+password')
 
                 if (!user) {
-                    throw new Error("Invalid credentials");
+                    throw new Error('Invalid credentials')
                 }
 
                 const isPasswordCorrect = await compare(
                     credentials!.password,
                     user.password
-                );
+                )
 
                 if (!isPasswordCorrect) {
-                    throw new Error("Invalid credentials");
+                    throw new Error('Invalid credentials')
                 }
 
-                return user;
+                return user
             },
         }),
     ],
     pages: {
-        signIn: "/login",
+        signIn: '/login',
     },
     session: {
-        strategy: "jwt",
+        strategy: 'jwt',
     },
     callbacks: {
         jwt: async ({ token, user }) => {
-            user && (token.user = user);
-            return token;
+            user && (token.user = user)
+            return token
         },
         session: async ({ session, token }) => {
             // TODO : investigate fatal flaw when signing up that causes user to be immedietly logged in
-            const user = token.user as IUser;
+            const user = token.user as IUser
 
             if (user) {
                 const updatedUser = await User.findOne({
                     id: user.id,
-                });
+                })
                 if (token.user === updatedUser) {
-                    session.user = user;
+                    session.user = user
                 } else {
-                    session.user = updatedUser;
+                    session.user = updatedUser
                 }
             }
-            return session;
+            return session
         },
     },
-};
+}
 
-const handler = NextAuth(options);
+const handler = NextAuth(options)
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }

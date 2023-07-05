@@ -1,9 +1,9 @@
-import mongoose, { Schema, model, models, Document } from "mongoose";
-import * as crypto from "crypto";
+import mongoose, { Schema, model, models, Document } from 'mongoose'
+import * as crypto from 'crypto'
 
 export interface IVerify extends Document {
-    token: string;
-    id: string;
+    token: string
+    id: string
 }
 
 const verifySchema = new Schema({
@@ -18,6 +18,6 @@ const verifySchema = new Schema({
         required: true,
         unique: true,
     },
-});
+})
 
-export const Verify = models.Verify || model<IVerify>("Verify", verifySchema);
+export const Verify = models.Verify || model<IVerify>('Verify', verifySchema)

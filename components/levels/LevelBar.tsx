@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import React from "react";
-import Badge from "./Badge";
+'use client'
+import React from 'react'
+import Badge from './Badge'
 
 export default function LevelBar(props: { user: any }) {
     return (
@@ -10,5 +10,5 @@ export default function LevelBar(props: { user: any }) {
                 <Badge user={props.user} />
             </div>
         </>
-    );
+    )
 }

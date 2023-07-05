@@ -1,23 +1,23 @@
-import Badge from "@components/levels/Badge";
-import Loading from "@components/pages/loading";
-import Trading from "@components/svg/trading";
-import { deletedUserPfp } from "@constants/images";
-import { deletedUserBadge, levels } from "@constants/levels";
-import { getNumberOfPostsInCategory } from "@services/forum.service";
-import { getUser } from "@services/users.service";
-import React, { useState, useEffect } from "react";
+import Badge from '@components/levels/Badge'
+import Loading from '@components/pages/loading'
+import Trading from '@components/svg/trading'
+import { deletedUserPfp } from '@constants/images'
+import { deletedUserBadge, levels } from '@constants/levels'
+import { getNumberOfPostsInCategory } from '@services/forum.service'
+import { getUser } from '@services/users.service'
+import React, { useState, useEffect } from 'react'
 
 const Reply = ({ reply }: { reply: any }) => {
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<any>(null)
 
     useEffect(() => {
         async function getUserData() {
-            const user = await getUser(reply.author);
-            setUser(user);
+            const user = await getUser(reply.author)
+            setUser(user)
         }
 
-        getUserData();
-    }, [reply.author]);
+        getUserData()
+    }, [reply.author])
 
     return (
         <>
@@ -31,11 +31,11 @@ const Reply = ({ reply }: { reply: any }) => {
                         />
                         <div className="flex flex-col">
                             <h1 className="text-wave-300 text-sm md:text-base">
-                                {user ? user.username : "deleted user"}
+                                {user ? user.username : 'deleted user'}
                             </h1>
                             <h2 className="text-wave-500 text-xs md:text-sm">
-                                level {user ? user.level : "0"}{" "}
-                                {user ? user.title : "deleted"}
+                                level {user ? user.level : '0'}{' '}
+                                {user ? user.title : 'deleted'}
                             </h2>
                         </div>
                     </div>
@@ -43,7 +43,7 @@ const Reply = ({ reply }: { reply: any }) => {
                     <div className="flex flex-col md:flex-grow">
                         <div className="">
                             <h1 className="text-wave-100 text-sm md:text-md font-semibold mb-2">
-                                posted on{" "}
+                                posted on{' '}
                                 {new Date(reply.createdAt).toLocaleDateString()}
                             </h1>
                             <h2 className="text-wave-300">{reply.content}</h2>
@@ -64,7 +64,7 @@ const Reply = ({ reply }: { reply: any }) => {
                 </a>
             </>
         </>
-    );
-};
+    )
+}
 
-export default Reply;
+export default Reply

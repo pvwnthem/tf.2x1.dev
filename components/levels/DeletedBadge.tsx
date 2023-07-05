@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import { deletedUserBadge, levels } from "@constants/levels";
-import React from "react";
+'use client'
+import { deletedUserBadge, levels } from '@constants/levels'
+import React from 'react'
 
 export default function DeletedBadge() {
     return (
@@ -13,5 +13,5 @@ export default function DeletedBadge() {
 
             <h2 className="text-center mt-1 text-wave-200">0 xp / 0 xp</h2>
         </>
-    );
+    )
 }

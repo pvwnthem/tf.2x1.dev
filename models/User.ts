@@ -1,25 +1,25 @@
-import mongoose, { Schema, model, models, Document } from "mongoose";
-import * as crypto from "crypto";
+import mongoose, { Schema, model, models, Document } from 'mongoose'
+import * as crypto from 'crypto'
 
 export interface IUser extends Document {
-    email: string;
-    username: string;
-    password: string;
-    id: string;
-    description: string | null;
-    profilePicture: string | null;
-    role: string;
-    title: string;
-    verified: boolean;
-    xp: number | string;
-    level: number;
+    email: string
+    username: string
+    password: string
+    id: string
+    description: string | null
+    profilePicture: string | null
+    role: string
+    title: string
+    verified: boolean
+    xp: number | string
+    level: number
 }
 
 const userSchema = new Schema({
     email: {
         type: String,
         unique: true,
-        required: [true, "Email is required"],
+        required: [true, 'Email is required'],
         /*
                 A valid e-mail address is a string that matches the ABNF production […].
 
@@ -29,21 +29,21 @@ const userSchema = new Schema({
             */
         match: [
             /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-            "Invalid Email",
+            'Invalid Email',
         ],
     },
 
     username: {
         type: String,
         unique: true,
-        required: [true, "Username is required"],
-        minLength: [2, "Username should be atleast 2 characters long"],
-        maxLength: [16, "Username should be no longer than 16 characters"],
+        required: [true, 'Username is required'],
+        minLength: [2, 'Username should be atleast 2 characters long'],
+        maxLength: [16, 'Username should be no longer than 16 characters'],
     },
 
     password: {
         type: String,
-        required: [true, "Password is required"],
+        required: [true, 'Password is required'],
         select: false,
     },
 
@@ -57,25 +57,25 @@ const userSchema = new Schema({
         type: String,
         required: false,
         default:
-            "Hi, I am a tf.2x1.dev user that has not yet changed their description!",
+            'Hi, I am a tf.2x1.dev user that has not yet changed their description!',
     },
 
     profilePicture: {
         type: String,
         required: false,
-        default: "",
+        default: '',
     },
 
     role: {
         type: String,
         required: false,
-        default: "user",
+        default: 'user',
     },
 
     title: {
         type: String,
         required: false,
-        default: "Beginner",
+        default: 'Beginner',
     },
 
     verified: {
@@ -107,6 +107,6 @@ const userSchema = new Schema({
         required: false,
         default: Date.now(),
     },
-});
+})
 
-export const User = models.User || model<IUser>("User", userSchema);
+export const User = models.User || model<IUser>('User', userSchema)

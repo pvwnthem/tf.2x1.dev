@@ -1,6 +1,6 @@
-"use client";
-import CategoryBox from "@components/forum/CategoryBox";
-import React from "react";
+'use client'
+import CategoryBox from '@components/forum/CategoryBox'
+import React from 'react'
 
 export default function ForumPage({ session }: { session: any }) {
     return (
@@ -9,12 +9,12 @@ export default function ForumPage({ session }: { session: any }) {
                 <div className="max-w-7xl w-full">
                     <div className="w-full border flex flex-col">
                         <CategoryBox
-                            name={"trading"}
-                            description={"Talk about trading tf2 items"}
+                            name={'trading'}
+                            description={'Talk about trading tf2 items'}
                         />
                     </div>
                 </div>
             </div>
         </>
-    );
+    )
 }

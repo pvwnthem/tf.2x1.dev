@@ -1,6 +1,6 @@
-"use client";
-import BackButton from "@components/navigation/back";
-import React from "react";
+'use client'
+import BackButton from '@components/navigation/back'
+import React from 'react'
 
 export default function Page() {
     return (
@@ -18,5 +18,5 @@ export default function Page() {
                 </div>
             </div>
         </>
-    );
+    )
 }

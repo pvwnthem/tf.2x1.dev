@@ -1,22 +1,22 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema } from 'mongoose'
 
 export interface IReply {
-    postId: string;
-    title: string | null;
-    content: string;
-    author: string;
-    category: string | null;
+    postId: string
+    title: string | null
+    content: string
+    author: string
+    category: string | null
 }
 
 export interface IForumPost extends Document {
-    category: string;
-    postId: string;
-    title: string;
-    content: string;
-    author: string;
-    replies: IReply[];
-    createdAt: Date;
-    updatedAt: Date;
+    category: string
+    postId: string
+    title: string
+    content: string
+    author: string
+    replies: IReply[]
+    createdAt: Date
+    updatedAt: Date
 }
 
 const ForumPostSchema: Schema = new Schema({
@@ -56,14 +56,14 @@ const ForumPostSchema: Schema = new Schema({
         type: Date,
         default: Date.now,
     },
-});
+})
 
-ForumPostSchema.set("toJSON", {
+ForumPostSchema.set('toJSON', {
     virtuals: true,
-});
+})
 
 const ForumPost =
     mongoose.models.ForumPost ||
-    mongoose.model<IForumPost>("ForumPost", ForumPostSchema);
+    mongoose.model<IForumPost>('ForumPost', ForumPostSchema)
 
-export default ForumPost;
+export default ForumPost
