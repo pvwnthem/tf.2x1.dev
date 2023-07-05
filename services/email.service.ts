@@ -43,7 +43,6 @@ class Mail {
   async send() {
     try {
       const info = await this.transporter.sendMail(this.options);
-      console.log(info);
     } catch (error) {
       console.error(error as string);
     }

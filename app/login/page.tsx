@@ -9,7 +9,6 @@ import React from "react";
 export default function Login() {
     const session = useSession();
     const query = useSearchParams()
-    console.log(query.get('redirectPath'))
 
     return (
         <RedirectIfAuth target={query.get('redirectPath') || "/profile"} session={session}>

@@ -41,7 +41,6 @@ export default function PostPage({ params }: any) {
         setUserLoading(true);
 
         const post = await getPost(params.postId);
-        console.log(post, params.postId);
 
         if (post) {
           setPost(post);
@@ -75,7 +74,6 @@ export default function PostPage({ params }: any) {
 
     try {
       const response = await addReply(params.postId, reply);
-      console.log(response);
       setReplies((prevReplies: any) => [...prevReplies, JSON.stringify(reply)]); // Add the new reply to the list
       setReplyContent(""); // Clear the reply content
     } catch (error) {

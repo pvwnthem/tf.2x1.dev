@@ -12,7 +12,7 @@ export default function AuthError() {
                     please login to access this page!
                 </h2>
                 <button
-                    className="bg-wave-400 px-8 py-2 text-lg mx-auto rounded-lg mt-8"
+                    className="bg-wave-400 text-white px-8 py-2 text-lg mx-auto rounded-lg mt-8"
                     onClick={() => window.location.replace("/login?redirectPath=" + window.location.pathname)}
                 >
                     login

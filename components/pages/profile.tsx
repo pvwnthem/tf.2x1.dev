@@ -101,7 +101,6 @@ export default function Profile(props: { session: any }) {
   };
 
   const handleProfilePictureChange = (event: React.ChangeEvent<HTMLTextAreaElement> | any) => {
-    console.log(event)
     setUpdatedProfilePicture(event.target.value);
   };
 
@@ -149,7 +148,7 @@ export default function Profile(props: { session: any }) {
 
       setEditing(false);
     } catch (error) {
-      console.log("Error updating user:", error);
+      setValidationErrors([...validationErrors, error])
       // Handle error, e.g., show an error message to the user
     }
   };

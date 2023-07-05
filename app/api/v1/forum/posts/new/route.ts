@@ -15,7 +15,6 @@ export const POST = async (req: Request, res: NextApiResponse) => {
 
     const { category, author, title, content } = data;
 
-    console.log(data)
 
     if (!category|| !author || !title|| !content) {
         return new NextResponse("One or more fields are missing", {

@@ -47,7 +47,6 @@ const SignupForm = () => {
 
         const isValid = validateData();
 
-        console.log(isValid);
 
         if (isValid) {
             try {
@@ -143,7 +142,7 @@ const SignupForm = () => {
 
                     <button
                         type="submit"
-                        className="mx-auto mt-4 p-2 bg-wave-300 rounded-md w-full"
+                        className="mx-auto mt-4 text-white p-2 bg-wave-300 rounded-md w-full"
                         disabled={loading}
                     >
                         {loading ? "Loading" : "Sign Up"}
