@@ -105,7 +105,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
 
           <button
             type="submit"
-            className="mx-auto mt-4 p-2 bg-wave-300 rounded-md w-full"
+            className="mx-auto mt-4 p-2 text-white bg-wave-300 rounded-md w-full"
             disabled={loading}
           >
             Log In

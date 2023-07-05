@@ -19,7 +19,7 @@ function Replies({ replies }: { replies: IForumPost[] }) {
       return <Reply reply={JSON.parse(reply as unknown as string)} key={index} />;
     });
   } else {
-    return <h1>No replies yet!</h1>;
+    return <h1 className="text-wave-200">No replies yet!</h1>;
   }
 }
 
