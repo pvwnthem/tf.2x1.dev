@@ -5,17 +5,17 @@ import { connect } from "@lib/mongodb";
 import { type IUser, User } from "@models/User";
 import { Verify } from "@models/Verify";
 import { sendVerificationRequest } from "@services/email.service";
-import { uuid } from 'uuidv4';
+import { uuid } from "uuidv4";
 import { images } from "@constants/images";
 
 export async function POST(req: Request) {
-    const url = new URL(req.url)
+    const url = new URL(req.url);
 
     const data = (await req.json()) as unknown as IUser;
 
     // destructure request data into required params of User model
     const { password, email } = data;
-    const username = data.username.toLowerCase()
+    const username = data.username.toLowerCase();
 
     // check if all the data is provided
 
@@ -30,16 +30,20 @@ export async function POST(req: Request) {
         await connect();
 
         const userExists = await User.findOne({
-            $or: [{ email }, { username }]
-          });
+            $or: [{ email }, { username }],
+        });
 
-          if (userExists) {
+        if (userExists) {
             if (userExists.email === email) {
-              return new NextResponse("Email is already in use", { status: 409 });
+                return new NextResponse("Email is already in use", {
+                    status: 409,
+                });
             }
-          
-            return new NextResponse("Username is already in use", { status: 409 });
-          }
+
+            return new NextResponse("Username is already in use", {
+                status: 409,
+            });
+        }
 
         if (password.length < 6) {
             return new NextResponse(
@@ -54,7 +58,6 @@ export async function POST(req: Request) {
         const hashedPassword: string = await hash(password, 12);
 
         // set random image as pfp
-
 
         const randomIndex = Math.floor(Math.random() * images.length);
         const image = images[randomIndex];

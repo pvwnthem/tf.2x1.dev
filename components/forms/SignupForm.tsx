@@ -47,7 +47,6 @@ const SignupForm = () => {
 
         const isValid = validateData();
 
-
         if (isValid) {
             try {
                 setLoading(true);

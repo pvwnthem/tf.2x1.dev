@@ -1,5 +1,3 @@
-
-
 export const images: string[] = [
     "https://i.imgur.com/JL92Jwq.png",
     "https://i.imgur.com/3ZdzSOF.png",
@@ -8,4 +6,4 @@ export const images: string[] = [
     "https://i.imgur.com/kcyIMoM.png",
 ];
 
-export const deletedUserPfp = "https://i.imgur.com/NUKhd4G.png"
+export const deletedUserPfp = "https://i.imgur.com/NUKhd4G.png";

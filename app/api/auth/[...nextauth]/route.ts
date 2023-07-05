@@ -54,7 +54,7 @@ const options: NextAuthOptions = {
             // TODO : investigate fatal flaw when signing up that causes user to be immedietly logged in
             const user = token.user as IUser;
 
-            if ((user)) {
+            if (user) {
                 const updatedUser = await User.findOne({
                     id: user.id,
                 });
@@ -63,7 +63,6 @@ const options: NextAuthOptions = {
                 } else {
                     session.user = updatedUser;
                 }
-                
             }
             return session;
         },

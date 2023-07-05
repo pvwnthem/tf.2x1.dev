@@ -7,7 +7,6 @@ export interface IVerify extends Document {
 }
 
 const verifySchema = new Schema({
-
     id: {
         type: String,
         required: true,
@@ -17,10 +16,8 @@ const verifySchema = new Schema({
     token: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
-
-   
 });
 
 export const Verify = models.Verify || model<IVerify>("Verify", verifySchema);

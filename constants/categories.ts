@@ -1,11 +1,10 @@
-
 export interface Categories {
-    [key: string]: any
+    [key: string]: any;
 }
 
 export const categories: Categories = {
-    trading : {
+    trading: {
         title: "trading",
-        description: "Talk about trading tf2 items"
-    }
-}
+        description: "Talk about trading tf2 items",
+    },
+};

@@ -99,14 +99,14 @@ const userSchema = new Schema({
     lastChangedName: {
         type: Date,
         required: false,
-        default: Date.now()
+        default: Date.now(),
     },
 
     createdAt: {
         type: Date,
         required: false,
-        default: Date.now()
-    }
+        default: Date.now(),
+    },
 });
 
 export const User = models.User || model<IUser>("User", userSchema);

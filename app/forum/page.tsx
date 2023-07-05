@@ -14,12 +14,12 @@ export default function Forum() {
     return (
         <>
             <Wrapper session={session}>
-                    <Protected session={session}>
-                        <EmailProtected session={session} >
-                            <Navbar overlapsNot={true} />
-                            <ForumPage session={session} />
-                        </EmailProtected>
-                    </Protected>
+                <Protected session={session}>
+                    <EmailProtected session={session}>
+                        <Navbar overlapsNot={true} />
+                        <ForumPage session={session} />
+                    </EmailProtected>
+                </Protected>
             </Wrapper>
         </>
     );

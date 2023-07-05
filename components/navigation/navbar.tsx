@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 
-export const Navbar = ({ overlapsNot } : { overlapsNot?: boolean }) => {
+export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const session = useSession();
@@ -73,7 +73,10 @@ export const Navbar = ({ overlapsNot } : { overlapsNot?: boolean }) => {
                                 <>
                                     <button
                                         onClick={() => {
-                                            window.location.replace("/login?redirectPath=" + window.location.pathname);
+                                            window.location.replace(
+                                                "/login?redirectPath=" +
+                                                    window.location.pathname
+                                            );
                                         }}
                                         className=" px-3 py-2 bg-wave-300 hover:bg-wave-400 rounded-md text-white"
                                     >
@@ -174,7 +177,10 @@ export const Navbar = ({ overlapsNot } : { overlapsNot?: boolean }) => {
                             <>
                                 <button
                                     onClick={() => {
-                                        window.location.replace("/login?redirectPath=" + window.location.pathname);
+                                        window.location.replace(
+                                            "/login?redirectPath=" +
+                                                window.location.pathname
+                                        );
                                     }}
                                     className=" px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white"
                                 >

@@ -8,12 +8,15 @@ import React from "react";
 
 export default function Login() {
     const session = useSession();
-    const query = useSearchParams()
+    const query = useSearchParams();
 
     return (
-        <RedirectIfAuth target={query.get('redirectPath') || "/profile"} session={session}>
+        <RedirectIfAuth
+            target={query.get("redirectPath") || "/profile"}
+            session={session}
+        >
             <BackButton />
-            <LoginForm redirectPath={query.get('redirectPath') || "/profile"} />
+            <LoginForm redirectPath={query.get("redirectPath") || "/profile"} />
         </RedirectIfAuth>
     );
 }
