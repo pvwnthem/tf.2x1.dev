@@ -5,13 +5,25 @@ import Loading from '@components/pages/loading'
 import Trading from '@components/svg/trading'
 import { deletedUserPfp } from '@constants/images'
 import { deletedUserBadge, levels } from '@constants/levels'
-import { getNumberOfPostsInCategory } from '@services/forum.service'
+import {
+    getNumberOfPostsInCategory,
+    removeReply,
+} from '@services/forum.service'
 import { getUser } from '@services/users.service'
 import React, { useState, useEffect } from 'react'
 
-const Reply = ({ reply }: { reply: any }) => {
+const Reply = ({
+    reply,
+    parentId,
+    handleDelete,
+    editable,
+}: {
+    reply: any
+    parentId: string
+    handleDelete: any
+    editable: boolean
+}) => {
     const [user, setUser] = useState<any>(null)
-
     useEffect(() => {
         async function getUserData() {
             const user = await getUser(reply.author)
@@ -63,6 +75,7 @@ const Reply = ({ reply }: { reply: any }) => {
                             alt='Level Badge'
                         />
                     </div>
+                    {editable && <button onClick={handleDelete}>Delete</button>}
                 </a>
             </>
         </>

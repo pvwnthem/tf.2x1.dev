@@ -9,27 +9,11 @@ import { Navbar } from '@components/navigation/navbar'
 import Loading from '@components/pages/loading'
 import { deletedUserPfp } from '@constants/images'
 import ForumPost, { IForumPost } from '@models/forum/ForumPost'
-import { addReply, getPost } from '@services/forum.service'
+import { addReply, getPost, removeReply } from '@services/forum.service'
 import { getUser } from '@services/users.service'
 import { uuid } from 'uuidv4'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
-
-function Replies({ replies }: { replies: IForumPost[] }) {
-    console.log(replies, 'rep')
-    if (replies.length > 0) {
-        return replies.map((reply: IForumPost, index: number) => {
-            return (
-                <Reply
-                    reply={JSON.parse(reply as unknown as string)}
-                    key={index}
-                />
-            )
-        })
-    } else {
-        return <h1 className='text-wave-200'>No replies yet!</h1>
-    }
-}
 
 export default function PostPage({ params }: any) {
     const [post, setPost] = useState<any>(null)
@@ -179,7 +163,41 @@ export default function PostPage({ params }: any) {
                     <h1 className='text-left text-wave-300 text-4xl'>
                         Replies
                     </h1>
-                    {!replyLoading && <Replies replies={replies} />}
+                    {!replyLoading && replies.length > 0 ? (
+                        replies.map((reply: IForumPost, index: number) => {
+                            const handleDelete = async () => {
+                                await removeReply(
+                                    post.postId,
+                                    JSON.parse(reply as any).postId
+                                )
+                                // Remove the reply from the screen
+                                setReplies((prevReplies) =>
+                                    prevReplies.filter(
+                                        (r: any) =>
+                                            JSON.parse(r).postId !==
+                                            JSON.parse(reply as any).postId
+                                    )
+                                )
+                            }
+                            console.log(session, reply)
+                            return (
+                                <Reply
+                                    reply={JSON.parse(
+                                        reply as unknown as string
+                                    )}
+                                    parentId={post.postId}
+                                    key={index}
+                                    editable={
+                                        JSON.parse(reply as any).author ===
+                                        (session.data?.user as any).id
+                                    }
+                                    handleDelete={handleDelete}
+                                />
+                            )
+                        })
+                    ) : (
+                        <h1 className='text-wave-200'>No replies yet!</h1>
+                    )}
                 </div>
 
                 <div className='w-full mt-8'>

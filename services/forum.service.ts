@@ -56,15 +56,23 @@ export async function addReply(parentId: string, reply: any) {
     }
 }
 
-export async function removeReply(parentId: string, reply: string) {
+export async function removeReply(parentId: string, replyId: string) {
     try {
         await connect()
 
-        const post = await ForumPost.findOneAndUpdate(
-            { postId: parentId },
-            { $pull: { replies: JSON.stringify(reply) } },
-            { new: true }
-        )
+        const post = await ForumPost.findOne({ postId: parentId })
+
+        if (!post) {
+            throw new Error('Post not found')
+        }
+
+        const updatedReplies = post.replies.filter((reply: string) => {
+            const replyObj = JSON.parse(reply)
+            return replyObj.postId !== replyId
+        })
+
+        post.replies = updatedReplies
+        await post.save()
 
         return JSON.parse(JSON.stringify(post))
     } catch (e: any) {
