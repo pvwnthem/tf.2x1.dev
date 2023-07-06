@@ -163,7 +163,7 @@ export default function PostPage({ params }: any) {
                     <h1 className='text-left text-wave-300 text-4xl'>
                         Replies
                     </h1>
-                    {!replyLoading && replies.length > 0 ? (
+                    {!replyLoading && replies && replies.length > 0 ? (
                         replies.map((reply: IForumPost, index: number) => {
                             const handleDelete = async () => {
                                 await removeReply(
@@ -179,7 +179,6 @@ export default function PostPage({ params }: any) {
                                     )
                                 )
                             }
-                            console.log(session, reply)
                             return (
                                 <Reply
                                     reply={JSON.parse(
