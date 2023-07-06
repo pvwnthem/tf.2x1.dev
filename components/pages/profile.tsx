@@ -14,6 +14,7 @@ import EditUsername from '@components/profile/editing/EditUsername'
 import ProfilePicture from '@components/profile/ProfilePicture'
 import EditProfilePicture from '@components/profile/editing/EditProfilePicture'
 import { encrypt, decrypt } from '@services/encryption.service'
+import Notification from '@components/navigation/notification'
 
 const validateData = (
     data: any,
