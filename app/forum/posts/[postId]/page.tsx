@@ -110,9 +110,9 @@ export default function PostPage({ params }: { params: { postId: string } }) {
         <>
             <Navbar overlapsNot={true} />
             <div className='w-full min-h-screen md:px-16 bg-background flex flex-col items-center'>
-                <div className='w-full border flex-col p-8'>
-                    <div className='flex w-full'>
-                        <div className='w-1/5 flex flex-col border rounded p-8 items-center justify-center'>
+                <div className='w-full border p-8'>
+                    <div className='flex flex-col md:flex-row'>
+                        <div className='w-full md:w-1/5 flex flex-col border rounded p-8 items-center justify-center'>
                             <img
                                 src={
                                     user ? user.profilePicture : deletedUserPfp
@@ -151,8 +151,8 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                             </div>
                         </div>
 
-                        <div className='px-12'>
-                            <div className='post-content'>
+                        <div className='px-4 md:px-12'>
+                            <div className='post-content md:mt-0 mt-8'>
                                 <h1 className='text-wave-300 text-3xl'>
                                     {post.title}
                                 </h1>
@@ -164,22 +164,22 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                     </div>
                 </div>
 
-                <div className='w-full flex justify-end px-8 mt-4 space-x-4'>
+                <div className='w-full flex flex-col md:flex-row justify-end px-8 mt-4 space-y-4 md:space-y-0 md:space-x-4'>
                     <button
                         onClick={() => scroll('reply')}
-                        className='bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl'
+                        className='bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl w-full md:w-auto'
                     >
                         Reply
                     </button>
                     <button
                         onClick={handleLike}
-                        className='bg-wave-300 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl'
+                        className='bg-wave-300 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl w-full md:w-auto'
                     >
                         Like
                     </button>
                 </div>
 
-                <div className='w-full mt-8'>
+                <div className='w-full mt-8 md:px-0 px-8'>
                     <h1 className='text-left text-wave-300 text-4xl'>
                         Replies
                     </h1>
@@ -250,7 +250,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                     )}
                 </div>
 
-                <div className='w-full mt-8'>
+                <div className='w-full mt-8  md:px-0 px-8'>
                     <h1 className='text-left text-wave-300 text-4xl'>Reply</h1>
                     <textarea
                         value={replyContent}
