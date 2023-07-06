@@ -9,7 +9,12 @@ import { Navbar } from '@components/navigation/navbar'
 import Loading from '@components/pages/loading'
 import { deletedUserPfp } from '@constants/images'
 import ForumPost, { IForumPost } from '@models/forum/ForumPost'
-import { addReply, getPost, removeReply } from '@services/forum.service'
+import {
+    addReply,
+    editReply,
+    getPost,
+    removeReply,
+} from '@services/forum.service'
 import { getUser } from '@services/users.service'
 import { uuid } from 'uuidv4'
 import { useSession } from 'next-auth/react'
@@ -185,6 +190,26 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                                     )
                                 )
                             }
+
+                            const handleEdit = async (content: string) => {
+                                await editReply(
+                                    post.postId,
+                                    JSON.parse(reply as any).postId,
+                                    content
+                                )
+                                setReplies((prevReplies: any) =>
+                                    prevReplies.map((r: any) => {
+                                        const parsedReply = JSON.parse(r)
+                                        if (
+                                            parsedReply.postId ===
+                                            JSON.parse(reply as any).postId
+                                        ) {
+                                            parsedReply.content = content
+                                        }
+                                        return JSON.stringify(parsedReply)
+                                    })
+                                )
+                            }
                             return (
                                 <Reply
                                     reply={JSON.parse(
@@ -199,7 +224,15 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                                             (session.data?.user as IUser).role
                                         ).hasPerm('edit')
                                     }
+                                    deletable={
+                                        JSON.parse(reply as any).author ===
+                                            (session.data?.user as IUser).id ||
+                                        new RoleManager(
+                                            (session.data?.user as IUser).role
+                                        ).hasPerm('delete')
+                                    }
                                     handleDelete={handleDelete}
+                                    handleEdit={handleEdit}
                                 />
                             )
                         })

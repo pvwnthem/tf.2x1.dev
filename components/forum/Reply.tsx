@@ -17,14 +17,21 @@ const Reply = ({
     reply,
     parentId,
     handleDelete,
+    handleEdit,
     editable,
+    deletable,
 }: {
     reply: any
     parentId: string
     handleDelete: any
+    handleEdit: any
     editable: boolean
+    deletable: boolean
 }) => {
     const [user, setUser] = useState<any>(null)
+    const [editing, setEditing] = useState(false)
+    const [editedContent, setEditedContent] = useState(reply.content)
+
     useEffect(() => {
         async function getUserData() {
             const user = await getUser(reply.author)
@@ -33,6 +40,26 @@ const Reply = ({
 
         getUserData()
     }, [reply.author])
+
+    const handleEditClick = () => {
+        setEditing(true)
+    }
+
+    const handleCancelEdit = () => {
+        setEditing(false)
+        setEditedContent(reply.content)
+    }
+
+    const handleSaveEdit = () => {
+        handleEdit(editedContent)
+        setEditing(false)
+    }
+
+    const handleContentChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setEditedContent(e.target.value)
+    }
 
     return (
         <>
@@ -61,7 +88,17 @@ const Reply = ({
                                 posted on{' '}
                                 {new Date(reply.createdAt).toLocaleDateString()}
                             </h1>
-                            <h2 className='text-wave-300'>{reply.content}</h2>
+                            {editing ? (
+                                <textarea
+                                    value={editedContent}
+                                    onChange={handleContentChange}
+                                    className='bg-background text-wave-300'
+                                />
+                            ) : (
+                                <h2 className='text-wave-300'>
+                                    {reply.content}
+                                </h2>
+                            )}
                         </div>
                     </div>
 
@@ -76,13 +113,37 @@ const Reply = ({
                             alt='Level Badge'
                         />
                     </div>
-                    {editable && (
+                    {deletable && (
                         <button
                             className='text-wave-400 w-8 md:mx-4'
                             onClick={handleDelete}
                         >
                             <Trash />
                         </button>
+                    )}
+                    {editable && !editing && (
+                        <button
+                            className='text-wave-400 w-8 md:mx-4'
+                            onClick={handleEditClick}
+                        >
+                            Edit
+                        </button>
+                    )}
+                    {editing && (
+                        <>
+                            <button
+                                className='text-wave-400 w-8 md:mx-4'
+                                onClick={handleSaveEdit}
+                            >
+                                Save
+                            </button>
+                            <button
+                                className='text-wave-400 w-8 md:mx-4'
+                                onClick={handleCancelEdit}
+                            >
+                                Cancel
+                            </button>
+                        </>
                     )}
                 </a>
             </>

@@ -79,3 +79,34 @@ export async function removeReply(parentId: string, replyId: string) {
         throw new Error(e)
     }
 }
+
+export async function editReply(
+    parentId: string,
+    replyId: string,
+    updatedContent: string
+) {
+    try {
+        await connect()
+
+        const post = await ForumPost.findOne({ postId: parentId })
+
+        if (!post) {
+            throw new Error('Post not found')
+        }
+
+        const updatedReplies = post.replies.map((reply: string) => {
+            const replyObj = JSON.parse(reply)
+            if (replyObj.postId === replyId) {
+                replyObj.content = updatedContent // Update the content of the matching reply
+            }
+            return JSON.stringify(replyObj)
+        })
+
+        post.replies = updatedReplies
+        await post.save()
+
+        return JSON.parse(JSON.stringify(post))
+    } catch (e: any) {
+        throw new Error(e)
+    }
+}
