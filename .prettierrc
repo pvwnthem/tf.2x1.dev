@@ -4,6 +4,5 @@
     "semi": false,
     "singleQuote": true,
     "insertPragma": true,
-    "requirePragma": true,
     "jsxSingleQuote": true
 }
