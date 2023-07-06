@@ -65,6 +65,7 @@ export default function Profile(props: { session: any }) {
         description,
         level,
         id,
+        role,
         lastChangedName,
     } = props.session.data.user
     const { update } = props.session
@@ -205,6 +206,8 @@ export default function Profile(props: { session: any }) {
                     ) : (
                         <Username username={updatedUsername} />
                     )}
+
+                    <h1 className='text-wave-200 text-lg'>{role}</h1>
 
                     <LevelBar user={props.session.data.user} />
                 </div>
