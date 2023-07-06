@@ -50,7 +50,6 @@ const options: NextAuthOptions = {
     callbacks: {
         jwt: async ({ token, user }) => {
             if (user && user.id) {
-                console.log(user, token)
                 token.user = user
             }
             return token
