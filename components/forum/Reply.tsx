@@ -3,6 +3,7 @@
 import Badge from '@components/levels/Badge'
 import Loading from '@components/pages/loading'
 import Trading from '@components/svg/trading'
+import Trash from '@components/svg/trash'
 import { deletedUserPfp } from '@constants/images'
 import { deletedUserBadge, levels } from '@constants/levels'
 import {
@@ -75,7 +76,14 @@ const Reply = ({
                             alt='Level Badge'
                         />
                     </div>
-                    {editable && <button onClick={handleDelete}>Delete</button>}
+                    {editable && (
+                        <button
+                            className='text-wave-400 w-8 md:mx-4'
+                            onClick={handleDelete}
+                        >
+                            <Trash />
+                        </button>
+                    )}
                 </a>
             </>
         </>

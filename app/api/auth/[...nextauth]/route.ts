@@ -49,23 +49,16 @@ const options: NextAuthOptions = {
     },
     callbacks: {
         jwt: async ({ token, user }) => {
-            user && (token.user = user)
+            if (user && user.id) {
+                console.log(user, token)
+                token.user = user
+            }
             return token
         },
         session: async ({ session, token }) => {
-            // TODO : investigate fatal flaw when signing up that causes user to be immedietly logged in
             const user = token.user as IUser
+            session.user = user
 
-            if (user) {
-                const updatedUser = await User.findOne({
-                    id: user.id,
-                })
-                if (token.user === updatedUser) {
-                    session.user = user
-                } else {
-                    session.user = updatedUser
-                }
-            }
             return session
         },
     },
