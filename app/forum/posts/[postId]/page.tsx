@@ -97,6 +97,15 @@ export default function PostPage({ params }: { params: { postId: string } }) {
         return <Loading />
     }
 
+    function scroll(to: string) {
+        var element = document.getElementById(to)
+        element?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
+        })
+    }
+
     return (
         <>
             <Navbar overlapsNot={true} />
@@ -157,7 +166,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
 
                 <div className='w-full flex justify-end px-8 mt-4 space-x-4'>
                     <button
-                        onClick={handleReply}
+                        onClick={() => scroll('reply')}
                         className='bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl'
                     >
                         Reply
@@ -250,6 +259,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                         placeholder='Write your reply...'
                     ></textarea>
                     <button
+                        id='reply'
                         onClick={handleReply}
                         className='bg-wave-500 hover:bg-wave-400 px-8 py-4 rounded text-white flex whitespace-nowrap text-xl mt-4'
                     >
