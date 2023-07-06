@@ -14,6 +14,8 @@ import { getUser } from '@services/users.service'
 import { uuid } from 'uuidv4'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
+import { RoleManager } from '@services/roles.service'
+import { IUser } from '@models/User'
 
 export default function PostPage({ params }: any) {
     const [post, setPost] = useState<any>(null)
@@ -192,7 +194,10 @@ export default function PostPage({ params }: any) {
                                     key={index}
                                     editable={
                                         JSON.parse(reply as any).author ===
-                                        (session.data?.user as any).id
+                                            (session.data?.user as IUser).id ||
+                                        new RoleManager(
+                                            (session.data?.user as IUser).role
+                                        ).hasPerm('edit')
                                     }
                                     handleDelete={handleDelete}
                                 />
