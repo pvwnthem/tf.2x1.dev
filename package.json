@@ -1,7 +1,7 @@
 {
-    "name": "wtf",
+    "name": "tf.2x1.dev",
     "version": "0.1.0",
-    "private": true,
+    "private": false,
     "scripts": {
         "dev": "next dev",
         "build": "next build",
