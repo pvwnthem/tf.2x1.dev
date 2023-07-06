@@ -66,10 +66,14 @@ export default function PostPage({ params }: any) {
 
         try {
             const response = await addReply(params.postId, reply)
-            setReplies((prevReplies: any) => [
-                ...prevReplies,
-                JSON.stringify(reply),
-            ]) // Add the new reply to the list
+            if (replies) {
+                setReplies((prevReplies: any) => [
+                    ...prevReplies,
+                    JSON.stringify(reply),
+                ]) // Add the new reply to the list
+            } else {
+                setReplies([JSON.stringify(reply) as any])
+            }
             setReplyContent('') // Clear the reply content
         } catch (error) {
             console.error(error)
