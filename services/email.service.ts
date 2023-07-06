@@ -44,9 +44,9 @@ class Mail {
     // Send mail with options
     async send() {
         try {
-            const info = await this.transporter.sendMail(this.options)
-        } catch (error) {
-            console.error(error as string)
+            await this.transporter.sendMail(this.options)
+        } catch (error: any) {
+            throw new Error(error)
         }
     }
 }

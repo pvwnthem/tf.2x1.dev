@@ -82,8 +82,8 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                 setReplies([JSON.stringify(reply) as unknown as IForumPost])
             }
             setReplyContent('') // Clear the reply content
-        } catch (error) {
-            console.error(error)
+        } catch (error: any) {
+            throw new Error(error)
         }
     }
 

@@ -18,9 +18,7 @@ const Notification = ({ message }: { message: string }) => {
         const audio = new Audio(
             'https://wiki.teamfortress.com/w/images/5/50/Notification_alert.wav'
         )
-        audio.play().catch((error) => {
-            console.error('Audio playback error:', error)
-        })
+        audio.play()
     }
 
     return (

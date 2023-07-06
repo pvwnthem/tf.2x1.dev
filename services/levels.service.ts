@@ -32,31 +32,11 @@ export async function addXP(id: string, amount: number) {
 
         await user.save()
         return JSON.parse(JSON.stringify(user))
-    } catch (error) {
-        console.error('Error adding XP:', error)
+    } catch (error: any) {
+        throw new Error('Error adding XP:', error)
     }
 }
 
-export async function getAllXP(id: string) {
-    try {
-        await connect()
-        const user = await User.findOne({ id })
-
-        let totalXp = 0
-
-        for (let level = 1; level <= user.level; level++) {
-            const currentLevel = levels[level]
-            if (currentLevel) {
-                const xpRequired = parseInt(currentLevel.xpRequired)
-                totalXp += xpRequired
-            }
-        }
-
-        return (totalXp += user.xp)
-    } catch (error) {
-        console.error('Error getting XP:', error)
-    }
-}
 /*
 const { update } = props.session
 

@@ -88,8 +88,8 @@ export default function Profile(props: { session: any }) {
                 let parsedUser
                 try {
                     parsedUser = JSON.parse(decryptedUser)
-                } catch (error) {
-                    console.error('Error parsing decrypted user:', error)
+                } catch (error: any) {
+                    throw new Error('Error parsing decrypted user:', error)
                     parsedUser = {}
                 }
                 if (
@@ -104,8 +104,8 @@ export default function Profile(props: { session: any }) {
                 setUpdatedUsername(parsedUser.username?.toLowerCase() || '')
                 setUpdatedDescription(parsedUser.description || '')
                 setUpdatedProfilePicture(parsedUser.profilePicture || '')
-            } catch (error) {
-                console.error('Error decrypting user:', error)
+            } catch (error: any) {
+                throw new Error('Error decrypting user:', error)
             }
         }
 

@@ -22,7 +22,7 @@ export class RoleManager {
             },
         }
     }
-    public hasPerm(perm: any): boolean {
+    public hasPerm(perm: 'delete' | 'edit'): boolean {
         return this.perms[this.role][perm] === true
     }
 }
