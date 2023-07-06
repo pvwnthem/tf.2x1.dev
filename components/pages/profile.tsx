@@ -34,11 +34,11 @@ const validateData = (
         })
     }
 
-    if (data.username.length < 4) {
+    if (data.username != lastUsername && data.username.length < 4) {
         errors.push({
             error: 'username must be at least 4 characters long',
         })
-    } else if (data.username.length > 16) {
+    } else if (data.username != lastUsername && data.username.length > 16) {
         errors.push({
             error: 'username should be less than 16 characters long',
         })
@@ -77,7 +77,6 @@ export default function Profile(props: { session: any }) {
     const [validationErrors, setValidationErrors] = useState<any>([])
 
     useEffect(() => {
-        // Load the user data from localStorage on component mount
         const storedUser = localStorage.getItem('user')
 
         async function decUser() {
@@ -180,7 +179,6 @@ export default function Profile(props: { session: any }) {
             setEditing(false)
         } catch (error) {
             setValidationErrors([...validationErrors, error])
-            // Handle error, e.g., show an error message to the user
         }
     }
 
