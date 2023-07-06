@@ -17,7 +17,7 @@ import React, { useEffect, useState } from 'react'
 import { RoleManager } from '@services/roles.service'
 import { IUser } from '@models/User'
 
-export default function PostPage({ params }: any) {
+export default function PostPage({ params }: { params: { postId: string } }) {
     const [post, setPost] = useState<any>(null)
     const [user, setUser] = useState<any>(null)
     const [notFound, setNotFound] = useState<boolean>(false)
@@ -54,14 +54,14 @@ export default function PostPage({ params }: any) {
         }
 
         getData()
-    }, [params.postId, params.category])
+    }, [params.postId])
 
     const handleReply = async () => {
         const reply = {
             postId: uuid(), // Generate a unique string value for postId
             title: '', // Provide a title for the reply
             content: replyContent,
-            author: (session.data?.user as any).id,
+            author: (session.data?.user as IUser).id,
             category: '',
             createdAt: Date.now(),
         }
@@ -69,12 +69,12 @@ export default function PostPage({ params }: any) {
         try {
             const response = await addReply(params.postId, reply)
             if (replies) {
-                setReplies((prevReplies: any) => [
+                setReplies((prevReplies: IForumPost[]) => [
                     ...prevReplies,
-                    JSON.stringify(reply),
+                    JSON.stringify(reply) as unknown as IForumPost,
                 ]) // Add the new reply to the list
             } else {
-                setReplies([JSON.stringify(reply) as any])
+                setReplies([JSON.stringify(reply) as unknown as IForumPost])
             }
             setReplyContent('') // Clear the reply content
         } catch (error) {
