@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { loginUser } from '@services/auth.service'
 import Link from 'next/link'
+import { IUser } from '@models/User'
+import { addXP } from '@services/levels.service'
 
 interface NewPostFormProps {
     category: string
@@ -13,6 +15,7 @@ interface NewPostFormProps {
 
 const NewPostForm: React.FC<NewPostFormProps> = ({ category, session }) => {
     const { id } = session.data.user
+    const { update } = session
 
     const [postData, setPostData] = useState({
         category,
@@ -46,6 +49,18 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ category, session }) => {
                 '/api/v1/forum/posts/new',
                 postData
             )
+
+            addXP(response.data.post.author, 25).then((user: IUser) => {
+                update({
+                    ...session,
+                    data: {
+                        ...session.data,
+                        user,
+                    },
+                })
+            })
+
+            // add notification to post author once xp is added
 
             // Handle the successful creation of the forum post.
             router.push(`/forum/posts/${response.data.post.postId}`)
