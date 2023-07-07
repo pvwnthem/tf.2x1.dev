@@ -105,7 +105,6 @@ export async function editReply(
 
         post.replies = updatedReplies
         post.updatedAt = Date.now()
-        console.log(post)
         await post.save()
 
         return JSON.parse(JSON.stringify(post))
@@ -130,7 +129,6 @@ export async function isReplyUnique(
 
         let count = 0
         for (const reply of post.replies) {
-            console.log(JSON.parse(reply).author === user.id)
             if (JSON.parse(reply).author === user.id) {
                 count++
                 if (count > 1) {
