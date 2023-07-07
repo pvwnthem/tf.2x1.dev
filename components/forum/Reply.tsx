@@ -65,7 +65,10 @@ const Reply = ({
         <>
             <>
                 <a className='w-full border flex flex-col md:flex-row md:items-center md:px-4 md:py-8 px-2 py-6'>
-                    <div className='flex items-center md:w-1/5 mb-4 md:mb-0'>
+                    <a
+                        href={user ? `/users/${user.username}` : undefined}
+                        className='flex items-center md:w-1/5 mb-4 md:mb-0'
+                    >
                         <img
                             src={user ? user.profilePicture : deletedUserPfp}
                             className='w-12 h-12 mr-4'
@@ -80,7 +83,7 @@ const Reply = ({
                                 {user ? user.title : 'deleted'}
                             </h2>
                         </div>
-                    </div>
+                    </a>
 
                     <div className='flex flex-col md:flex-grow'>
                         <div className=''>

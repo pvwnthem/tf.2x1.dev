@@ -137,7 +137,10 @@ export default function PostPage({ params }: { params: { postId: string } }) {
             <div className='w-full min-h-screen md:px-16 bg-background flex flex-col items-center'>
                 <div className='w-full border p-8'>
                     <div className='flex flex-col md:flex-row'>
-                        <div className='w-full md:w-1/5 flex flex-col border rounded p-8 items-center justify-center'>
+                        <a
+                            href={user ? `/users/${user.username}` : undefined}
+                            className='w-full md:w-1/5 flex flex-col border rounded p-8 items-center justify-center'
+                        >
                             <img
                                 src={
                                     user ? user.profilePicture : deletedUserPfp
@@ -176,7 +179,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                                     <DeletedBadge />
                                 )}
                             </div>
-                        </div>
+                        </a>
 
                         <div className='px-4 md:px-12'>
                             <div className='post-content md:mt-0 mt-8'>
