@@ -14,7 +14,7 @@ import Username from '@components/profile/Username'
 import ProfilePicture from '@components/profile/ProfilePicture'
 
 export default function UserProfile(props: { user: any }) {
-    const { profilePicture, username, description, level } = props.user
+    const { profilePicture, username, description, level, role } = props.user
 
     return (
         <div className='bg-background h-screen flex items-center justify-center py-8'>
@@ -25,6 +25,8 @@ export default function UserProfile(props: { user: any }) {
                     <div className='flex items-center justify-center'>
                         <Username username={username} />
                     </div>
+
+                    <h1 className='text-wave-200 text-lg'>{role}</h1>
 
                     <LevelBar user={props.user} />
                 </div>

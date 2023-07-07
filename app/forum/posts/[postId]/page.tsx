@@ -148,7 +148,9 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                             <h1 className='text-wave-400 text-3xl mt-4'>
                                 {user ? user.username : 'Deleted User'}
                             </h1>
-                            <h2 className='text-wave-500'>{user.role}</h2>
+                            <h2 className='text-wave-500'>
+                                {user ? user.role : 'deleted'}
+                            </h2>
                             <h1 className='mt-1 text-sm text-wave-200'>
                                 Created{' '}
                                 {user
