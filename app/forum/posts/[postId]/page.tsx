@@ -11,6 +11,7 @@ import { deletedUserPfp } from '@constants/images'
 import ForumPost, { IForumPost } from '@models/forum/ForumPost'
 import {
     addReply,
+    deletePost,
     editReply,
     getPost,
     isReplyUnique,
@@ -49,8 +50,9 @@ export default function PostPage({ params }: { params: { postId: string } }) {
 
                 if (post) {
                     setPost(post)
-                    const user = await getUser(post.author)
-                    setUser(user)
+                    const Uuser = await getUser(post.author)
+
+                    setUser(Uuser)
                     setUserLoading(false)
 
                     // Fetch replies
@@ -59,19 +61,6 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                 } else {
                     setNotFound(true)
                 }
-                setEditable(
-                    post.author === (session.data?.user as IUser).id ||
-                        new RoleManager(
-                            (session.data?.user as IUser).role
-                        ).hasPerm('edit')
-                )
-
-                setDeletable(
-                    post.author === (session.data?.user as IUser).id ||
-                        new RoleManager(
-                            (session.data?.user as IUser).role
-                        ).hasPerm('delete')
-                )
 
                 setPostLoading(false)
             }
@@ -79,6 +68,24 @@ export default function PostPage({ params }: { params: { postId: string } }) {
 
         getData()
     }, [params.postId])
+
+    useEffect(() => {
+        if (post) {
+            setEditable(
+                post.author === (session.data?.user as IUser).id ||
+                    new RoleManager((session.data?.user as IUser).role).hasPerm(
+                        'edit'
+                    )
+            )
+
+            setDeletable(
+                post.author === (session.data?.user as IUser).id ||
+                    new RoleManager((session.data?.user as IUser).role).hasPerm(
+                        'delete'
+                    )
+            )
+        }
+    }, [session.data?.user, post])
 
     const handleReply = async () => {
         const reply = {
@@ -147,6 +154,11 @@ export default function PostPage({ params }: { params: { postId: string } }) {
         })
     }
 
+    async function handleDelete() {
+        await deletePost(post.postId)
+        window.location.replace('/forum')
+    }
+
     return (
         <>
             <Navbar overlapsNot={true} />
@@ -210,7 +222,10 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                     </div>
                     <div className='flex items-center justify-center'>
                         {deletable && (
-                            <button className='text-wave-400 w-8 md:mx-4'>
+                            <button
+                                className='text-wave-400 w-8 md:mx-4'
+                                onClick={handleDelete}
+                            >
                                 <Trash />
                             </button>
                         )}

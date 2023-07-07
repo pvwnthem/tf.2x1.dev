@@ -4,6 +4,7 @@
 import { connect } from '@lib/mongodb'
 import { IUser } from '@models/User'
 import ForumPost from '@models/forum/ForumPost'
+import Forum from '../app/forum/page'
 
 export async function getNumberOfPostsInCategory(category: string) {
     try {
@@ -137,6 +138,18 @@ export async function isReplyUnique(
             }
         }
         return true
+    } catch (e: any) {
+        throw new Error(e)
+    }
+}
+
+export async function deletePost(id: string) {
+    try {
+        await connect()
+
+        const doc = await ForumPost.findOneAndDelete({ postId: id })
+
+        return doc
     } catch (e: any) {
         throw new Error(e)
     }
