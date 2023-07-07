@@ -55,7 +55,7 @@ export default function CategoryPage({ params }: any) {
                     <EmailProtected session={session}>
                         <>
                             <Navbar overlapsNot={true} />
-                            <div className='w-full h-screen bg-background flex flex-col px-2 py-2 items-center'>
+                            <div className='w-full min-h-screen bg-background flex flex-col px-2 py-2 items-center'>
                                 <div className='max-w-7xl w-full md:mt-12'>
                                     <CategoryBox
                                         name={categories[params.category].title}
