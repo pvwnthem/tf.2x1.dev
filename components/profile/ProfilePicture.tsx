@@ -1,7 +1,6 @@
 /** @format */
 
 'use client'
-import React from 'react'
 
 const ProfilePicture = ({ src, onClick }: { src: string; onClick?: any }) => {
     return (

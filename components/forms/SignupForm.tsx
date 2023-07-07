@@ -1,11 +1,10 @@
 /** @format */
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios, { AxiosError } from 'axios'
 import { loginUser } from '@services/auth.service'
 import Link from 'next/link'
-import Loading from '@components/pages/loading'
 
 const SignupForm = () => {
     const [data, setData] = useState({

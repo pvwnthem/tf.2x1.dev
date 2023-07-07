@@ -1,10 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
 import LevelBar from '@components/levels/LevelBar'
-import { levels } from '@constants/levels'
-import { addXP } from '@services/levels.service'
 import { updateUser } from '@services/users.service'
 import Description from '@components/profile/Description'
 import EditingButton from '@components/profile/editing/EditingButton'
@@ -14,7 +11,6 @@ import EditUsername from '@components/profile/editing/EditUsername'
 import ProfilePicture from '@components/profile/ProfilePicture'
 import EditProfilePicture from '@components/profile/editing/EditProfilePicture'
 import { encrypt, decrypt } from '@services/encryption.service'
-import Notification from '@components/navigation/notification'
 
 const validateData = (
     data: any,

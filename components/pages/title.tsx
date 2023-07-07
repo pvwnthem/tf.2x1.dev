@@ -3,7 +3,6 @@
 'use client'
 import Background from '@components/svg/background'
 import Logo from '@components/svg/logo'
-import React from 'react'
 
 export default function Title() {
     return (

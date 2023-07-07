@@ -2,7 +2,6 @@
 
 'use client'
 import CategoryBox from '@components/forum/CategoryBox'
-import React from 'react'
 
 export default function ForumPage({ session }: { session: any }) {
     return (

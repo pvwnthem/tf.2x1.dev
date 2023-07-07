@@ -6,7 +6,6 @@
 
 'use client'
 import { levels } from '@constants/levels'
-import React from 'react'
 
 export default function NameBadge(props: { session: any }) {
     const { level } = props.session.data.user

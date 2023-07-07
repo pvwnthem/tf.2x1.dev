@@ -1,8 +1,7 @@
 /** @format */
 
 'use server'
-import { NextApiRequest, NextApiResponse } from 'next'
-import axios from 'axios'
+import { NextApiResponse } from 'next'
 import { NextResponse } from 'next/server'
 import { uuid } from 'uuidv4'
 import { connect } from '@lib/mongodb'

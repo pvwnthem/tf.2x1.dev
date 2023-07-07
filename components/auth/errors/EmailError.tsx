@@ -3,7 +3,7 @@
 'use client'
 import { sendVerificationRequest } from '@services/email.service'
 import { getToken } from '@services/users.service'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 export default function EmailError({
     email,

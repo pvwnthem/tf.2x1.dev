@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Notification = ({ message }: { message: string }) => {
     const [visible, setVisible] = useState(false)
@@ -9,7 +9,7 @@ const Notification = ({ message }: { message: string }) => {
         const notificationTimer = setTimeout(() => {
             setVisible(true)
             playAudio()
-        }, 1000) // Display notification after 2 seconds
+        }, 1000)
 
         return () => clearTimeout(notificationTimer)
     }, [])

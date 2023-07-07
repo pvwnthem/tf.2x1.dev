@@ -1,7 +1,7 @@
 /** @format */
 
 'use client'
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import { IUser } from '@models/User'
 import { getUserByName } from '@services/users.service'

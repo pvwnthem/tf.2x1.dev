@@ -1,13 +1,9 @@
 /** @format */
 
-import Badge from '@components/levels/Badge'
-import Loading from '@components/pages/loading'
-import Trading from '@components/svg/trading'
 import { deletedUserPfp } from '@constants/images'
 import { deletedUserBadge, levels } from '@constants/levels'
-import { getNumberOfPostsInCategory } from '@services/forum.service'
 import { getUser } from '@services/users.service'
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 const Post = ({ post }: { post: any }) => {
     const [user, setUser] = useState<any>(null)

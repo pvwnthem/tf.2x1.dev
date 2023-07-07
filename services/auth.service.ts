@@ -1,8 +1,5 @@
 /** @format */
 
-import { connect } from '@lib/mongodb'
-import { User } from '@models/User'
-import { Verify } from '@models/Verify'
 import { signIn } from 'next-auth/react'
 
 export const loginUser = async ({

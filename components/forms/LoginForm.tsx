@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import axios, { AxiosError } from 'axios'
 import { loginUser } from '@services/auth.service'
 import Link from 'next/link'
 

@@ -6,7 +6,6 @@
 
 'use client'
 import { levels } from '@constants/levels'
-import React from 'react'
 
 export default function Badge(props: { user: any }) {
     const { level, xp, title } = props.user

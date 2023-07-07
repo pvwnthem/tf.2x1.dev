@@ -3,7 +3,7 @@
 'use client'
 import Logo from '@components/svg/logo'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 

@@ -1,7 +1,6 @@
 /** @format */
 
-import mongoose, { Schema, model, models, Document } from 'mongoose'
-import * as crypto from 'crypto'
+import { Schema, model, models, Document } from 'mongoose'
 
 export interface IVerify extends Document {
     token: string

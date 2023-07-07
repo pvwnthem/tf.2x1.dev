@@ -8,7 +8,7 @@ import DeletedBadge from '@components/levels/DeletedBadge'
 import { Navbar } from '@components/navigation/navbar'
 import Loading from '@components/pages/loading'
 import { deletedUserPfp } from '@constants/images'
-import ForumPost, { IForumPost } from '@models/forum/ForumPost'
+import { IForumPost } from '@models/forum/ForumPost'
 import {
     addReply,
     deletePost,

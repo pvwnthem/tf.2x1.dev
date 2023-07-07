@@ -1,7 +1,5 @@
 /** @format */
 
-import React from 'react'
-
 const BackButton = () => {
     const goBack = () => {
         history.back()

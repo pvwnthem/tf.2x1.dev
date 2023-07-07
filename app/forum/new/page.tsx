@@ -8,7 +8,6 @@ import NewPostForm from '@components/forms/NewPostForm'
 import { Navbar } from '@components/navigation/navbar'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
 
 export default function NewPost() {
     const session = useSession()

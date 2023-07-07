@@ -5,10 +5,7 @@
  */
 
 'use client'
-import React from 'react'
-import Image from 'next/image'
 import LevelBar from '@components/levels/LevelBar'
-import { levels } from '@constants/levels'
 import Description from '@components/profile/Description'
 import Username from '@components/profile/Username'
 import ProfilePicture from '@components/profile/ProfilePicture'

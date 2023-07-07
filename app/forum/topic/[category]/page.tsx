@@ -1,7 +1,7 @@
 /** @format */
 
 'use client'
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import Loading from '@components/pages/loading'
 import { useSession } from 'next-auth/react'

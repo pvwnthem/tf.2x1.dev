@@ -1,7 +1,6 @@
 /** @format */
 
 'use client'
-import React from 'react'
 import { useSession } from 'next-auth/react'
 import Protected from '@components/auth/protected'
 import Wrapper from '@components/auth/Wrapper'

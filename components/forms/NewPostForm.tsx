@@ -3,8 +3,6 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
-import { loginUser } from '@services/auth.service'
-import Link from 'next/link'
 import { IUser } from '@models/User'
 import { addXP } from '@services/levels.service'
 

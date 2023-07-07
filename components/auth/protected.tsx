@@ -1,7 +1,6 @@
 /** @format */
 
 'use client'
-import React from 'react'
 import AuthError from './errors/AuthError'
 
 export interface props {

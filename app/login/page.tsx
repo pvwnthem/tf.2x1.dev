@@ -6,7 +6,6 @@ import LoginForm from '@components/forms/LoginForm'
 import BackButton from '@components/navigation/back'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
 
 export default function Login() {
     const session = useSession()

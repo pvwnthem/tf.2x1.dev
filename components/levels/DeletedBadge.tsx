@@ -5,8 +5,7 @@
  */
 
 'use client'
-import { deletedUserBadge, levels } from '@constants/levels'
-import React from 'react'
+import { deletedUserBadge } from '@constants/levels'
 
 export default function DeletedBadge() {
     return (

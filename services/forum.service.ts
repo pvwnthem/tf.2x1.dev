@@ -4,7 +4,6 @@
 import { connect } from '@lib/mongodb'
 import { IUser } from '@models/User'
 import ForumPost, { IForumPost } from '@models/forum/ForumPost'
-import Forum from '../app/forum/page'
 
 export async function getNumberOfPostsInCategory(category: string) {
     try {

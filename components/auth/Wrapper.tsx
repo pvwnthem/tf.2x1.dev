@@ -2,7 +2,6 @@
 
 'use client'
 import Loading from '@components/pages/loading'
-import React from 'react'
 
 export interface props {
     children: any

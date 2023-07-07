@@ -1,7 +1,6 @@
 /** @format */
 
 'use client'
-import React from 'react'
 
 const EditDescription = ({
     description,
