@@ -20,11 +20,13 @@ import Plus from '@components/svg/plus'
 import Wrapper from '@components/auth/Wrapper'
 import EmailProtected from '@components/auth/emailProtected'
 import Protected from '@components/auth/protected'
+import { useRouter } from 'next/navigation'
 
 export default function CategoryPage({ params }: any) {
     const [posts, setPosts] = useState<any>(null)
     const [notFound, setNotFound] = useState<boolean>(false)
     const session = useSession()
+    const { push } = useRouter()
 
     useEffect(() => {
         async function getData() {
@@ -69,7 +71,7 @@ export default function CategoryPage({ params }: any) {
                                 <div className='max-w-7xl w-full mt-6 flex md:justify-end justify-center'>
                                     <button
                                         onClick={() => {
-                                            window.location.replace(
+                                            push(
                                                 `/forum/new?category=${params.category}`
                                             )
                                         }}

@@ -2,8 +2,11 @@
 
 'use client'
 import React from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function AuthError() {
+    const { push } = useRouter()
+
     return (
         <div className='w-full h-screen flex items-start justify-center bg-background'>
             <div className='w-1/2 flex flex-col'>
@@ -16,9 +19,7 @@ export default function AuthError() {
                 <button
                     className='bg-wave-400 text-white px-8 py-2 text-lg mx-auto rounded-lg mt-8'
                     onClick={() =>
-                        window.location.replace(
-                            '/login?redirectPath=' + window.location.pathname
-                        )
+                        push('/login?redirectPath=' + window.location.pathname)
                     }
                 >
                     login

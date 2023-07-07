@@ -1,7 +1,7 @@
 /** @format */
 
 'use client'
-import Loading from '@components/pages/loading'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 export interface props {
@@ -11,14 +11,12 @@ export interface props {
 }
 
 export default function RedirectIfAuth(props: props) {
-    function redirect() {
-        window.location.replace(props.target)
-    }
+    const { push } = useRouter()
 
     return (
         <>
             {props.session.status === 'authenticated' ? (
-                redirect()
+                push(props.target)
             ) : (
                 <div>{props.children}</div>
             )}

@@ -5,11 +5,13 @@ import Logo from '@components/svg/logo'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     const session = useSession()
+    const { push } = useRouter()
 
     function scroll(to: string) {
         setIsMobileMenuOpen(false)
@@ -56,7 +58,7 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                             </button>
                             <button
                                 onClick={() => {
-                                    window.location.replace('/forum')
+                                    push('/forum')
                                 }}
                                 className='px-3 py-2 rounded-md text-sm font-medium hover:underline text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400'
                             >
@@ -65,7 +67,7 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                             {session.status === 'authenticated' ? (
                                 <button
                                     onClick={() => {
-                                        window.location.replace('/profile')
+                                        push('/profile')
                                     }}
                                     className=' px-3 py-2 bg-wave-300 hover:bg-wave-400 rounded-md text-white'
                                 >
@@ -75,8 +77,8 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                                 <>
                                     <button
                                         onClick={() => {
-                                            window.location.replace(
-                                                '/login?redirectPath=' +
+                                            push(
+                                                '/login?pushPath=' +
                                                     window.location.pathname
                                             )
                                         }}
@@ -160,7 +162,7 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                         </button>
                         <button
                             onClick={() => {
-                                window.location.replace('/forum')
+                                push('/forum')
                             }}
                             className='block px-3 py-2 rounded-md text-base font-medium text-wave-100 hover:text-wave-400 focus:outline-none focus:text-wave-400'
                         >
@@ -169,7 +171,7 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                         {session.status === 'authenticated' ? (
                             <button
                                 onClick={() => {
-                                    window.location.replace('/profile')
+                                    push('/profile')
                                 }}
                                 className=' px-3 py-2 w-full bg-wave-300 hover:bg-wave-400 rounded-md text-white'
                             >
@@ -179,7 +181,7 @@ export const Navbar = ({ overlapsNot }: { overlapsNot?: boolean }) => {
                             <>
                                 <button
                                     onClick={() => {
-                                        window.location.replace(
+                                        push(
                                             '/login?redirectPath=' +
                                                 window.location.pathname
                                         )

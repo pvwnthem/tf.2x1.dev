@@ -4,7 +4,7 @@ import React from 'react'
 
 const BackButton = () => {
     const goBack = () => {
-        window.location.replace('/')
+        history.back()
     }
 
     return (

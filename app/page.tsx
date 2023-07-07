@@ -2,7 +2,6 @@
 
 'use client'
 import Wrapper from '@components/auth/Wrapper'
-import RedirectIfAuth from '@components/auth/redirectIfAuth'
 import { Navbar } from '@components/navigation/navbar'
 import Info from '@components/pages/info'
 import Title from '@components/pages/title'
