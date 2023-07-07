@@ -149,7 +149,7 @@ export async function deletePost(id: string) {
 
         const doc = await ForumPost.findOneAndDelete({ postId: id })
 
-        return doc
+        return JSON.parse(JSON.stringify(doc))
     } catch (e: any) {
         throw new Error(e)
     }
