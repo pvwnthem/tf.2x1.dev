@@ -70,7 +70,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
     }, [params.postId])
 
     useEffect(() => {
-        if (post) {
+        if (post && session.data?.user) {
             setEditable(
                 post.author === (session.data?.user as IUser).id ||
                     new RoleManager((session.data?.user as IUser).role).hasPerm(
