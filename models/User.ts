@@ -15,6 +15,7 @@ export interface IUser extends Document {
     verified: boolean
     xp: number | string
     level: number
+    notifications: string[]
 }
 
 const userSchema = new Schema({
@@ -108,6 +109,12 @@ const userSchema = new Schema({
         type: Date,
         required: false,
         default: Date.now(),
+    },
+
+    notifications: {
+        type: Array,
+        required: false,
+        default: [],
     },
 })
 
