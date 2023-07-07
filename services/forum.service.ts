@@ -104,6 +104,8 @@ export async function editReply(
         })
 
         post.replies = updatedReplies
+        post.updatedAt = Date.now()
+        console.log(post)
         await post.save()
 
         return JSON.parse(JSON.stringify(post))

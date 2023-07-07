@@ -231,7 +231,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                             }
 
                             const handleEdit = async (content: string) => {
-                                await editReply(
+                                const res = await editReply(
                                     post.postId,
                                     JSON.parse(reply as any).postId,
                                     content
@@ -244,6 +244,8 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                                             JSON.parse(reply as any).postId
                                         ) {
                                             parsedReply.content = content
+                                            parsedReply.updatedAt =
+                                                res.updatedAt
                                         }
                                         return JSON.stringify(parsedReply)
                                     })

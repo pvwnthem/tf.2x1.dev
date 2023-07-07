@@ -89,7 +89,14 @@ const Reply = ({
                         <div className=''>
                             <h1 className='text-wave-100 text-sm md:text-md font-semibold mb-2'>
                                 posted on{' '}
-                                {new Date(reply.createdAt).toLocaleDateString()}
+                                {new Date(reply.createdAt).toLocaleDateString()}{' '}
+                                {reply.updatedAt
+                                    ? `updated on ${new Date(
+                                          reply.updatedAt
+                                      ).toLocaleDateString()} at ${new Date(
+                                          reply.updatedAt
+                                      ).toLocaleTimeString()}`
+                                    : null}
                             </h1>
                             {editing ? (
                                 <textarea
