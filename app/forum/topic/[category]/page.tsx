@@ -109,22 +109,6 @@ export default function CategoryPage({ params }: any) {
                     </EmailProtected>
                 </Protected>
             </Wrapper>
-
-            {/*
-            {posts ? (
-                <>
-                    { posts.map((post: IForumPost, index: number) => {
-                        return (
-                            <>
-                                <Post post={post} />
-                            </>
-                        )
-                    }) }
-                </>
-            ) : (
-                <Loading />
-            )}
-            */}
         </>
     )
 }
