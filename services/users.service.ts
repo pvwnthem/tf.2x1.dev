@@ -71,3 +71,28 @@ export async function getToken(id: string) {
         throw new Error(error)
     }
 }
+
+export async function addNotification(
+    id: string,
+    message: string,
+    type: string,
+    amount?: number
+) {
+    try {
+        await connect()
+
+        const notificationObject = await User.findOneAndUpdate(
+            { id },
+            {
+                $push: {
+                    replies: { message, type, amount: amount ? amount : null },
+                },
+            },
+            { new: true }
+        )
+
+        return notificationObject
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
