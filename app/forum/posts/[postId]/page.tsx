@@ -23,6 +23,7 @@ import React, { useEffect, useState } from 'react'
 import { RoleManager } from '@services/roles.service'
 import { IUser } from '@models/User'
 import { addXP } from '@services/levels.service'
+import Trash from '@components/svg/trash'
 
 export default function PostPage({ params }: { params: { postId: string } }) {
     const [post, setPost] = useState<any>(null)
@@ -33,6 +34,8 @@ export default function PostPage({ params }: { params: { postId: string } }) {
     const [replyContent, setReplyContent] = useState<any>(null)
     const [replies, setReplies] = useState<IForumPost[]>([])
     const [replyLoading, setReplyLoading] = useState<boolean>(true)
+    const [deletable, setDeletable] = useState<boolean>(false)
+    const [editable, setEditable] = useState<boolean>(false)
     const session = useSession()
     const { update } = session
 
@@ -56,6 +59,19 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                 } else {
                     setNotFound(true)
                 }
+                setEditable(
+                    post.author === (session.data?.user as IUser).id ||
+                        new RoleManager(
+                            (session.data?.user as IUser).role
+                        ).hasPerm('edit')
+                )
+
+                setDeletable(
+                    post.author === (session.data?.user as IUser).id ||
+                        new RoleManager(
+                            (session.data?.user as IUser).role
+                        ).hasPerm('delete')
+                )
 
                 setPostLoading(false)
             }
@@ -191,6 +207,18 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                                 </p>
                             </div>
                         </div>
+                    </div>
+                    <div className='flex items-center justify-center'>
+                        {deletable && (
+                            <button className='text-wave-400 w-8 md:mx-4'>
+                                <Trash />
+                            </button>
+                        )}
+                        {editable && (
+                            <button className='text-wave-400 w-8 md:mx-4'>
+                                Edit
+                            </button>
+                        )}
                     </div>
                 </div>
 
