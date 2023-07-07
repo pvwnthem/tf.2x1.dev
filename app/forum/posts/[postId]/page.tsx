@@ -13,6 +13,7 @@ import {
     addReply,
     editReply,
     getPost,
+    isReplyUnique,
     removeReply,
 } from '@services/forum.service'
 import { getUser } from '@services/users.service'
@@ -21,6 +22,7 @@ import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import { RoleManager } from '@services/roles.service'
 import { IUser } from '@models/User'
+import { addXP } from '@services/levels.service'
 
 export default function PostPage({ params }: { params: { postId: string } }) {
     const [post, setPost] = useState<any>(null)
@@ -32,6 +34,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
     const [replies, setReplies] = useState<IForumPost[]>([])
     const [replyLoading, setReplyLoading] = useState<boolean>(true)
     const session = useSession()
+    const { update } = session
 
     useEffect(() => {
         async function getData() {
@@ -73,6 +76,28 @@ export default function PostPage({ params }: { params: { postId: string } }) {
 
         try {
             const response = await addReply(params.postId, reply)
+
+            if (
+                post.author != (session.data?.user as IUser).id &&
+                (await isReplyUnique(
+                    post.postId,
+                    reply.postId,
+                    session.data?.user as IUser
+                ))
+            ) {
+                addXP(post.author, 25).then((user) => {
+                    update({
+                        ...session,
+                        data: {
+                            ...session.data,
+                            user,
+                        },
+                    })
+                })
+
+                // add notification to post author once xp is added
+            }
+
             if (replies) {
                 setReplies((prevReplies: IForumPost[]) => [
                     ...prevReplies,

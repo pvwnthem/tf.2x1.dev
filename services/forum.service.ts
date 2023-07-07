@@ -2,6 +2,7 @@
 
 'use server'
 import { connect } from '@lib/mongodb'
+import { IUser } from '@models/User'
 import ForumPost from '@models/forum/ForumPost'
 
 export async function getNumberOfPostsInCategory(category: string) {
@@ -106,6 +107,36 @@ export async function editReply(
         await post.save()
 
         return JSON.parse(JSON.stringify(post))
+    } catch (e: any) {
+        throw new Error(e)
+    }
+}
+
+export async function isReplyUnique(
+    parentId: string,
+    replyId: string,
+    user: IUser
+) {
+    try {
+        await connect()
+
+        const post = await ForumPost.findOne({ postId: parentId })
+
+        if (!post) {
+            throw new Error('Post not found')
+        }
+
+        let count = 0
+        for (const reply of post.replies) {
+            console.log(JSON.parse(reply).author === user.id)
+            if (JSON.parse(reply).author === user.id) {
+                count++
+                if (count > 1) {
+                    return false
+                }
+            }
+        }
+        return true
     } catch (e: any) {
         throw new Error(e)
     }
