@@ -33,7 +33,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
     const [notFound, setNotFound] = useState<boolean>(false)
     const [postLoading, setPostLoading] = useState<boolean>(true)
     const [userLoading, setUserLoading] = useState<boolean>(true)
-    const [replyContent, setReplyContent] = useState<any>(null)
+    const [replyContent, setReplyContent] = useState<any>('')
     const [replies, setReplies] = useState<IForumPost[]>([])
     const [replyLoading, setReplyLoading] = useState<boolean>(true)
     const [deletable, setDeletable] = useState<boolean>(false)
