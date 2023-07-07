@@ -114,11 +114,7 @@ export async function editReply(
     }
 }
 
-export async function isReplyUnique(
-    parentId: string,
-    replyId: string,
-    user: IUser
-) {
+export async function isReplyUnique(parentId: string, user: IUser) {
     try {
         await connect()
 

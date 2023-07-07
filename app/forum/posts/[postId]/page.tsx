@@ -102,11 +102,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
 
             if (
                 post.author != (session.data?.user as IUser).id &&
-                (await isReplyUnique(
-                    post.postId,
-                    reply.postId,
-                    session.data?.user as IUser
-                ))
+                (await isReplyUnique(post.postId, session.data?.user as IUser))
             ) {
                 addXP(post.author, 25).then((user) => {
                     update({
