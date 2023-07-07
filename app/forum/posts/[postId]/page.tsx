@@ -26,10 +26,11 @@ import { RoleManager } from '@services/roles.service'
 import { IUser } from '@models/User'
 import { addXP } from '@services/levels.service'
 import Trash from '@components/svg/trash'
+import { redirect } from 'next/navigation'
 
 export default function PostPage({ params }: { params: { postId: string } }) {
-    const [post, setPost] = useState<any>(null)
-    const [user, setUser] = useState<any>(null)
+    const [post, setPost] = useState<IForumPost | null>(null)
+    const [user, setUser] = useState<IUser | null>(null)
     const [notFound, setNotFound] = useState<boolean>(false)
     const [postLoading, setPostLoading] = useState<boolean>(true)
     const [userLoading, setUserLoading] = useState<boolean>(true)
@@ -105,9 +106,10 @@ export default function PostPage({ params }: { params: { postId: string } }) {
         }
 
         try {
-            const response = await addReply(params.postId, reply)
+            await addReply(params.postId, reply)
 
             if (
+                post &&
                 post.author != (session.data?.user as IUser).id &&
                 (await isReplyUnique(post.postId, session.data?.user as IUser))
             ) {
@@ -158,8 +160,10 @@ export default function PostPage({ params }: { params: { postId: string } }) {
     }
 
     async function handleDelete() {
-        await deletePost(post.postId)
-        window.location.replace('/forum')
+        if (post) {
+            await deletePost(post.postId)
+            redirect('/forum')
+        }
     }
 
     const handleContentEdit = (
@@ -176,7 +180,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
 
     const handleSave = async () => {
         setEditing(false)
-        const updatedPost = {
+        const updatedPost: any = {
             ...post,
             title: editedTitle,
             content: editedContent,
@@ -186,8 +190,8 @@ export default function PostPage({ params }: { params: { postId: string } }) {
             await editPost(params.postId, updatedPost)
             setPost(updatedPost)
             setEditable(false)
-        } catch (error) {
-            console.error(error)
+        } catch (error: any) {
+            throw new Error(error)
         }
     }
 
@@ -260,10 +264,10 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                                 ) : (
                                     <>
                                         <h1 className='text-wave-300 text-3xl'>
-                                            {post.title}
+                                            {post?.title}
                                         </h1>
                                         <p className='text-wave-400 mt-8'>
-                                            {post.content}
+                                            {post?.content}
                                         </p>
                                     </>
                                 )}
@@ -319,47 +323,50 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                     {!replyLoading && replies && replies.length > 0 ? (
                         replies.map((reply: IForumPost, index: number) => {
                             const handleDelete = async () => {
-                                await removeReply(
-                                    post.postId,
-                                    JSON.parse(reply as any).postId
-                                )
-                                // Remove the reply from the screen
-                                setReplies((prevReplies) =>
-                                    prevReplies.filter(
-                                        (r: any) =>
-                                            JSON.parse(r).postId !==
-                                            JSON.parse(reply as any).postId
+                                if (post) {
+                                    await removeReply(
+                                        post.postId,
+                                        JSON.parse(reply as any).postId
                                     )
-                                )
+                                    // Remove the reply from the screen
+                                    setReplies((prevReplies) =>
+                                        prevReplies.filter(
+                                            (r: any) =>
+                                                JSON.parse(r).postId !==
+                                                JSON.parse(reply as any).postId
+                                        )
+                                    )
+                                }
                             }
 
                             const handleEdit = async (content: string) => {
-                                const res = await editReply(
-                                    post.postId,
-                                    JSON.parse(reply as any).postId,
-                                    content
-                                )
-                                setReplies((prevReplies: any) =>
-                                    prevReplies.map((r: any) => {
-                                        const parsedReply = JSON.parse(r)
-                                        if (
-                                            parsedReply.postId ===
-                                            JSON.parse(reply as any).postId
-                                        ) {
-                                            parsedReply.content = content
-                                            parsedReply.updatedAt =
-                                                res.updatedAt
-                                        }
-                                        return JSON.stringify(parsedReply)
-                                    })
-                                )
+                                if (post) {
+                                    const res = await editReply(
+                                        post.postId,
+                                        JSON.parse(reply as any).postId,
+                                        content
+                                    )
+                                    setReplies((prevReplies: any) =>
+                                        prevReplies.map((r: any) => {
+                                            const parsedReply = JSON.parse(r)
+                                            if (
+                                                parsedReply.postId ===
+                                                JSON.parse(reply as any).postId
+                                            ) {
+                                                parsedReply.content = content
+                                                parsedReply.updatedAt =
+                                                    res.updatedAt
+                                            }
+                                            return JSON.stringify(parsedReply)
+                                        })
+                                    )
+                                }
                             }
                             return (
                                 <Reply
                                     reply={JSON.parse(
                                         reply as unknown as string
                                     )}
-                                    parentId={post.postId}
                                     key={index}
                                     editable={
                                         JSON.parse(reply as any).author ===

@@ -8,14 +8,16 @@ export interface IUser extends Document {
     username: string
     password: string
     id: string
-    description: string | null
-    profilePicture: string | null
+    description: string
+    profilePicture: string
     role: string
     title: string
     verified: boolean
     xp: number | string
     level: number
     notifications: string[]
+    createdAt: Date
+    lastChangedName: Date
 }
 
 const userSchema = new Schema({

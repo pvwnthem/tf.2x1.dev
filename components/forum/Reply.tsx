@@ -1,28 +1,19 @@
 /** @format */
 
-import Badge from '@components/levels/Badge'
-import Loading from '@components/pages/loading'
-import Trading from '@components/svg/trading'
 import Trash from '@components/svg/trash'
 import { deletedUserPfp } from '@constants/images'
 import { deletedUserBadge, levels } from '@constants/levels'
-import {
-    getNumberOfPostsInCategory,
-    removeReply,
-} from '@services/forum.service'
 import { getUser } from '@services/users.service'
 import React, { useState, useEffect } from 'react'
 
 const Reply = ({
     reply,
-    parentId,
     handleDelete,
     handleEdit,
     editable,
     deletable,
 }: {
     reply: any
-    parentId: string
     handleDelete: any
     handleEdit: any
     editable: boolean
