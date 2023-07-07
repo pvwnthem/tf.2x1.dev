@@ -3,7 +3,7 @@
 'use server'
 import { connect } from '@lib/mongodb'
 import { IUser } from '@models/User'
-import ForumPost from '@models/forum/ForumPost'
+import ForumPost, { IForumPost } from '@models/forum/ForumPost'
 import Forum from '../app/forum/page'
 
 export async function getNumberOfPostsInCategory(category: string) {
@@ -37,6 +37,20 @@ export async function getPost(id: string) {
         const post = await ForumPost.findOne({ postId: id })
 
         return JSON.parse(JSON.stringify(post))
+    } catch (e: any) {
+        throw new Error(e)
+    }
+}
+
+export async function editPost(id: string, post: IForumPost) {
+    try {
+        await connect()
+
+        const newPost = await ForumPost.findOneAndUpdate({ postId: id }, post, {
+            new: true,
+        })
+
+        return JSON.parse(JSON.stringify(newPost))
     } catch (e: any) {
         throw new Error(e)
     }

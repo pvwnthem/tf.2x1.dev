@@ -12,6 +12,7 @@ import ForumPost, { IForumPost } from '@models/forum/ForumPost'
 import {
     addReply,
     deletePost,
+    editPost,
     editReply,
     getPost,
     isReplyUnique,
@@ -37,6 +38,9 @@ export default function PostPage({ params }: { params: { postId: string } }) {
     const [replyLoading, setReplyLoading] = useState<boolean>(true)
     const [deletable, setDeletable] = useState<boolean>(false)
     const [editable, setEditable] = useState<boolean>(false)
+    const [editing, setEditing] = useState<boolean>(false)
+    const [editedContent, setEditedContent] = useState('')
+    const [editedTitle, setEditedTitle] = useState('')
     const session = useSession()
     const { update } = session
 
@@ -47,6 +51,9 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                 setUserLoading(true)
 
                 const post = await getPost(params.postId)
+
+                setEditedContent(post.content)
+                setEditedTitle(post.title)
 
                 if (post) {
                     setPost(post)
@@ -155,6 +162,35 @@ export default function PostPage({ params }: { params: { postId: string } }) {
         window.location.replace('/forum')
     }
 
+    const handleContentEdit = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setEditedContent(e.target.value)
+    }
+
+    const handleTitleEdit = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setEditedTitle(e.target.value)
+    }
+
+    const handleSave = async () => {
+        setEditing(false)
+        const updatedPost = {
+            ...post,
+            title: editedTitle,
+            content: editedContent,
+        }
+
+        try {
+            await editPost(params.postId, updatedPost)
+            setPost(updatedPost)
+            setEditable(false)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return (
         <>
             <Navbar overlapsNot={true} />
@@ -207,12 +243,30 @@ export default function PostPage({ params }: { params: { postId: string } }) {
 
                         <div className='px-4 md:px-12'>
                             <div className='post-content md:mt-0 mt-8'>
-                                <h1 className='text-wave-300 text-3xl'>
-                                    {post.title}
-                                </h1>
-                                <p className='text-wave-400 mt-8'>
-                                    {post.content}
-                                </p>
+                                {editing ? (
+                                    <div className='flex-col flex'>
+                                        <input
+                                            type='text'
+                                            value={editedTitle}
+                                            onChange={handleTitleEdit}
+                                            className='text-wave-300 text-3xl outline-none bg-transparent border-b border-wave-400'
+                                        />
+                                        <textarea
+                                            value={editedContent}
+                                            onChange={handleContentEdit}
+                                            className='text-wave-400 mt-8 outline-none bg-transparent border-b border-wave-400'
+                                        ></textarea>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <h1 className='text-wave-300 text-3xl'>
+                                            {post.title}
+                                        </h1>
+                                        <p className='text-wave-400 mt-8'>
+                                            {post.content}
+                                        </p>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -225,8 +279,18 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                                 <Trash />
                             </button>
                         )}
-                        {editable && (
-                            <button className='text-wave-400 w-8 md:mx-4'>
+                        {editable && editing ? (
+                            <button
+                                className='text-wave-400 w-8 md:mx-4'
+                                onClick={handleSave}
+                            >
+                                Save
+                            </button>
+                        ) : (
+                            <button
+                                className='text-wave-400 w-8 md:mx-4'
+                                onClick={() => setEditing(true)}
+                            >
                                 Edit
                             </button>
                         )}
