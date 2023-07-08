@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { IUser } from '@models/User'
 import { addXP } from '@services/levels.service'
+import { addNotification } from '@services/notifications.service'
 
 interface NewPostFormProps {
     category: string
