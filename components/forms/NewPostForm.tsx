@@ -58,9 +58,14 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ category, session }) => {
                         user,
                     },
                 })
-            })
 
-            // add notification to post author once xp is added
+                // add notification to post author once xp is added
+                addNotification(user.id, {
+                    type: 'xp',
+                    message: 'You recieved xp for making a post!',
+                    amount: 25,
+                })
+            })
 
             // Handle the successful creation of the forum post.
             router.push(`/forum/posts/${response.data.post.postId}`)
