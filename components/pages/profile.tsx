@@ -10,7 +10,7 @@ import Username from '@components/profile/Username'
 import EditUsername from '@components/profile/editing/EditUsername'
 import ProfilePicture from '@components/profile/ProfilePicture'
 import EditProfilePicture from '@components/profile/editing/EditProfilePicture'
-import { encrypt, decrypt } from '@services/encryption.service'
+import { encrypt } from '@services/encryption.service'
 
 const validateData = (
     data: {
