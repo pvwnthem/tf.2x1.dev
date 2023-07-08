@@ -207,7 +207,7 @@ const Profile: React.FC<any> = (props) => {
                     />
                 </div>
 
-                <div className='mt-4 w-3/4 h-1/6 flex items-start justify-center py-2 break-words'>
+                <div className='mt-4 md:w-3/4 flex items-start justify-center py-2 break-words'>
                     {editing ? (
                         <EditDescription
                             description={updatedDescription}
