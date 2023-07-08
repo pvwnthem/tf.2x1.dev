@@ -64,6 +64,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ category, session }) => {
                     type: 'xp',
                     message: 'You recieved xp for making a post!',
                     amount: 25,
+                    href: '/profile',
                 })
             })
 

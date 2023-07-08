@@ -27,6 +27,7 @@ import { IUser } from '@models/User'
 import { addXP } from '@services/levels.service'
 import Trash from '@components/svg/trash'
 import { redirect } from 'next/navigation'
+import { addNotification } from '@services/notifications.service'
 
 export default function PostPage({ params }: { params: { postId: string } }) {
     const [post, setPost] = useState<IForumPost | null>(null)
@@ -113,7 +114,23 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                 post.author != (session.data?.user as IUser).id &&
                 (await isReplyUnique(post.postId, session.data?.user as IUser))
             ) {
-                addXP(post.author, 25)
+                addXP(post.author, 25).then((user) => {
+                    addNotification(user.id, {
+                        type: 'xp',
+                        message:
+                            'You recieved xp for getting a reply on your post!',
+                        amount: 25,
+                        href: '/profile',
+                    })
+
+                    addNotification(user.id, {
+                        type: 'reply',
+                        message: `${
+                            (session.data?.user as IUser).username
+                        } replied to your post`,
+                        href: `/forum/${post?.postId}`,
+                    })
+                })
 
                 // add notification to post author once xp is added
             }

@@ -23,6 +23,7 @@ export interface INotification {
     type: 'xp' | 'reply' | 'like'
     message: string
     amount?: number
+    href?: string
 }
 
 const userSchema = new Schema({
