@@ -1,5 +1,6 @@
 /** @format */
-'use client'
+
+// Imports
 import React, { useState, useEffect } from 'react'
 import LevelBar from '@components/levels/LevelBar'
 import { getUser, updateUser } from '@services/users.service'
@@ -11,16 +12,16 @@ import EditUsername from '@components/profile/editing/EditUsername'
 import ProfilePicture from '@components/profile/ProfilePicture'
 import EditProfilePicture from '@components/profile/editing/EditProfilePicture'
 import { encrypt } from '@services/encryption.service'
+import { INotification, IUser } from '@models/User'
+import Notification from '@components/navigation/notification'
 
+// Validation function
 const validateData = (
-    data: {
-        username: string
-        description: string
-    },
+    data: { username: string; description: string },
     lastChangedName: number | Date,
     lastUsername: string
 ) => {
-    const errors = []
+    const errors: { error: string }[] = []
 
     lastChangedName = new Date(lastChangedName)
 
@@ -58,6 +59,7 @@ const validateData = (
     return errors
 }
 
+// Profile component
 const Profile: React.FC<any> = (props) => {
     const {
         profilePicture,
@@ -68,7 +70,8 @@ const Profile: React.FC<any> = (props) => {
         lastChangedName,
         xp,
         level,
-    } = props.session.data.user
+        notifications,
+    } = props.session.data.user as IUser
     const { update } = props.session
 
     const [editing, setEditing] = useState<boolean>(false)
@@ -77,22 +80,32 @@ const Profile: React.FC<any> = (props) => {
         useState<string>(profilePicture)
     const [updatedDescription, setUpdatedDescription] =
         useState<string>(description)
-    const [updatedXP, setUpdatedXP] = useState<number>(xp)
+    const [updatedXP, setUpdatedXP] = useState<number | string>(xp)
     const [updatedLevel, setUpdatedLevel] = useState<number>(level)
-    const [validationErrors, setValidationErrors] = useState<any>([])
+    const [validationErrors, setValidationErrors] = useState<any[]>([])
+    const [updatedNotifications, setUpdatedNotifications] = useState<
+        INotification[] | string[]
+    >(notifications)
 
     useEffect(() => {
         async function getUserData() {
             try {
                 const response = await getUser(id)
-                const { profilePicture, username, description, xp, level } =
-                    response
+                const {
+                    profilePicture,
+                    username,
+                    description,
+                    xp,
+                    level,
+                    notifications,
+                } = response
 
                 setUpdatedUsername(username.toLowerCase())
                 setUpdatedDescription(description)
                 setUpdatedProfilePicture(profilePicture)
                 setUpdatedXP(xp)
                 setUpdatedLevel(level)
+                setUpdatedNotifications(notifications)
             } catch (error) {
                 console.log('Error fetching user data:', error)
             }
@@ -217,6 +230,18 @@ const Profile: React.FC<any> = (props) => {
                         <Description description={updatedDescription} />
                     )}
                 </div>
+
+                {/* Updated Notifications */}
+                {updatedNotifications.map(
+                    (notification: any, index: number) => (
+                        <>
+                            <Notification
+                                key={index}
+                                notification={JSON.parse(notification)}
+                            />
+                        </>
+                    )
+                )}
 
                 {validationErrors.length > 0 && (
                     <div className='text-red-500'>

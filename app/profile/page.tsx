@@ -16,7 +16,7 @@ export default function Profile() {
             <Wrapper session={session}>
                 <Protected session={session}>
                     <EmailProtected session={session}>
-                        <Navbar />
+                        <Navbar overlapsNot={true} />
                         <ProfilePage session={session} />
                     </EmailProtected>
                 </Protected>

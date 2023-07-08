@@ -1,8 +1,9 @@
 /** @format */
 
 import { useEffect, useState } from 'react'
+import { INotification } from '@models/User'
 
-const Notification = ({ message }: { message: string }) => {
+const Notification = ({ notification }: { notification: INotification }) => {
     const [visible, setVisible] = useState(false)
 
     useEffect(() => {
@@ -22,13 +23,14 @@ const Notification = ({ message }: { message: string }) => {
     }
 
     return (
-        <div
+        <a
+            href={notification.href}
             className={`fixed top-4 right-4 bg-white rounded-lg p-4 shadow-md transition-all duration-300 ${
                 visible ? 'opacity-100' : 'opacity-0'
             }`}
         >
-            <p className='text-gray-800'>{message}</p>
-        </div>
+            <p className='text-gray-800'>{notification.message}</p>
+        </a>
     )
 }
 
