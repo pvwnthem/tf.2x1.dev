@@ -127,7 +127,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ category, session }) => {
 
                     <button
                         type='submit'
-                        className='mx-auto text-whitewit mt-4 p-2 bg-wave-300 rounded-md w-full'
+                        className='mx-auto text-white mt-4 p-2 bg-wave-300 rounded-md w-full'
                         disabled={loading}
                     >
                         {loading ? 'Creating...' : 'Create Post'}
