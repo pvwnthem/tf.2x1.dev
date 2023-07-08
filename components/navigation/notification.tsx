@@ -2,8 +2,15 @@
 
 import { useEffect, useState } from 'react'
 import { INotification } from '@models/User'
+import Trash from '@components/svg/trash'
 
-const Notification = ({ notification }: { notification: INotification }) => {
+const Notification = ({
+    notification,
+    handleClose,
+}: {
+    notification: INotification
+    handleClose: any
+}) => {
     const [visible, setVisible] = useState(false)
 
     useEffect(() => {
@@ -23,14 +30,24 @@ const Notification = ({ notification }: { notification: INotification }) => {
     }
 
     return (
-        <a
-            href={notification.href}
-            className={`fixed top-4 right-4 bg-white rounded-lg p-4 shadow-md transition-all duration-300 ${
+        <div
+            className={`fixed top-4 right-4 flex items-center justify-center bg-white rounded-lg p-4 shadow-md transition-all duration-300 ${
                 visible ? 'opacity-100' : 'opacity-0'
             }`}
         >
-            <p className='text-gray-800'>{notification.message}</p>
-        </a>
+            <a href={notification.href} className='text-gray-800'>
+                {notification.message}
+            </a>
+            <button
+                onClick={() => {
+                    handleClose(notification)
+                    setVisible(false)
+                }}
+                className='w-6 ml-2'
+            >
+                <Trash />
+            </button>
+        </div>
     )
 }
 

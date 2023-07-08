@@ -14,6 +14,7 @@ import EditProfilePicture from '@components/profile/editing/EditProfilePicture'
 import { encrypt } from '@services/encryption.service'
 import { INotification, IUser } from '@models/User'
 import Notification from '@components/navigation/notification'
+import { removeNotification } from '@services/notifications.service'
 
 // Validation function
 const validateData = (
@@ -83,9 +84,8 @@ const Profile: React.FC<any> = (props) => {
     const [updatedXP, setUpdatedXP] = useState<number | string>(xp)
     const [updatedLevel, setUpdatedLevel] = useState<number>(level)
     const [validationErrors, setValidationErrors] = useState<any[]>([])
-    const [updatedNotifications, setUpdatedNotifications] = useState<
-        INotification[] | string[]
-    >(notifications)
+    const [updatedNotifications, setUpdatedNotifications] =
+        useState<any>(notifications)
 
     useEffect(() => {
         async function getUserData() {
@@ -184,6 +184,18 @@ const Profile: React.FC<any> = (props) => {
             setValidationErrors([...validationErrors, error])
         }
     }
+    const handleClose = async (notification: INotification) => {
+        try {
+            await removeNotification(id, notification)
+            setUpdatedNotifications((prevNotifications: any) =>
+                prevNotifications.filter(
+                    (r: any) => JSON.parse(r) !== notification
+                )
+            )
+        } catch (error) {
+            console.log('Error deleting notification:', error)
+        }
+    }
 
     return (
         <div className='bg-background h-screen flex items-center justify-center py-8'>
@@ -238,6 +250,7 @@ const Profile: React.FC<any> = (props) => {
                             <Notification
                                 key={index}
                                 notification={JSON.parse(notification)}
+                                handleClose={handleClose}
                             />
                         </>
                     )
