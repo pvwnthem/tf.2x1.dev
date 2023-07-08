@@ -113,15 +113,7 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                 post.author != (session.data?.user as IUser).id &&
                 (await isReplyUnique(post.postId, session.data?.user as IUser))
             ) {
-                addXP(post.author, 25).then((user) => {
-                    update({
-                        ...session,
-                        data: {
-                            ...session.data,
-                            user,
-                        },
-                    })
-                })
+                addXP(post.author, 25)
 
                 // add notification to post author once xp is added
             }
@@ -283,14 +275,15 @@ export default function PostPage({ params }: { params: { postId: string } }) {
                                 <Trash />
                             </button>
                         )}
-                        {editable && editing ? (
+                        {editing && (
                             <button
                                 className='text-wave-400 w-8 md:mx-4'
                                 onClick={handleSave}
                             >
                                 Save
                             </button>
-                        ) : (
+                        )}
+                        {editable && (
                             <button
                                 className='text-wave-400 w-8 md:mx-4'
                                 onClick={() => setEditing(true)}
