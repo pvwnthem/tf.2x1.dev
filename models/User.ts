@@ -19,6 +19,12 @@ export interface IUser extends Document {
     lastChangedName: Date
 }
 
+export interface INotification {
+    type: 'xp' | 'reply' | 'like'
+    message: string
+    amount?: number
+}
+
 const userSchema = new Schema({
     email: {
         type: String,
