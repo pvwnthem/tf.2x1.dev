@@ -1,5 +1,5 @@
 /** @format */
-
+'use client'
 import React, { useState, useEffect } from 'react'
 import LevelBar from '@components/levels/LevelBar'
 import { getUser, updateUser } from '@services/users.service'
