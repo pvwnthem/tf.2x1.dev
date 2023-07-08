@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import LevelBar from '@components/levels/LevelBar'
-import { updateUser } from '@services/users.service'
+import { getUser, updateUser } from '@services/users.service'
 import Description from '@components/profile/Description'
 import EditingButton from '@components/profile/editing/EditingButton'
 import EditDescription from '@components/profile/editing/EditDescription'
@@ -13,7 +13,10 @@ import EditProfilePicture from '@components/profile/editing/EditProfilePicture'
 import { encrypt, decrypt } from '@services/encryption.service'
 
 const validateData = (
-    data: any,
+    data: {
+        username: string
+        description: string
+    },
     lastChangedName: number | Date,
     lastUsername: string
 ) => {
@@ -23,7 +26,7 @@ const validateData = (
 
     if (
         lastChangedName.getDate() + 30 < Date.now() &&
-        data.username != lastUsername
+        data.username !== lastUsername
     ) {
         lastChangedName.setDate(lastChangedName.getDate() + 30)
         errors.push({
@@ -31,11 +34,11 @@ const validateData = (
         })
     }
 
-    if (data.username != lastUsername && data.username.length < 4) {
+    if (data.username !== lastUsername && data.username.length < 4) {
         errors.push({
             error: 'username must be at least 4 characters long',
         })
-    } else if (data.username != lastUsername && data.username.length > 16) {
+    } else if (data.username !== lastUsername && data.username.length > 16) {
         errors.push({
             error: 'username should be less than 16 characters long',
         })
@@ -55,60 +58,48 @@ const validateData = (
     return errors
 }
 
-export default function Profile(props: { session: any }) {
+const Profile: React.FC<any> = (props) => {
     const {
         profilePicture,
         username,
         description,
-        level,
         id,
         role,
         lastChangedName,
+        xp,
+        level,
     } = props.session.data.user
     const { update } = props.session
 
-    const [editing, setEditing] = useState(false)
-    const [updatedUsername, setUpdatedUsername] = useState(username)
+    const [editing, setEditing] = useState<boolean>(false)
+    const [updatedUsername, setUpdatedUsername] = useState<string>(username)
     const [updatedProfilePicture, setUpdatedProfilePicture] =
-        useState(profilePicture)
-    const [updatedDescription, setUpdatedDescription] = useState(description)
+        useState<string>(profilePicture)
+    const [updatedDescription, setUpdatedDescription] =
+        useState<string>(description)
+    const [updatedXP, setUpdatedXP] = useState<number>(xp)
+    const [updatedLevel, setUpdatedLevel] = useState<number>(level)
     const [validationErrors, setValidationErrors] = useState<any>([])
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user')
-
-        async function decUser() {
+        async function getUserData() {
             try {
-                const decryptedUser = await decrypt(storedUser)
+                const response = await getUser(id)
+                const { profilePicture, username, description, xp, level } =
+                    response
 
-                let parsedUser
-                try {
-                    parsedUser = JSON.parse(decryptedUser)
-                } catch (error: any) {
-                    throw new Error('Error parsing decrypted user:', error)
-                    parsedUser = {}
-                }
-                if (
-                    !parsedUser ||
-                    !parsedUser.username ||
-                    !parsedUser.profilePicture ||
-                    !parsedUser.description
-                ) {
-                    localStorage.removeItem('user')
-                    parsedUser = props.session.data.user
-                }
-                setUpdatedUsername(parsedUser.username?.toLowerCase() || '')
-                setUpdatedDescription(parsedUser.description || '')
-                setUpdatedProfilePicture(parsedUser.profilePicture || '')
-            } catch (error: any) {
-                throw new Error('Error decrypting user:', error)
+                setUpdatedUsername(username.toLowerCase())
+                setUpdatedDescription(description)
+                setUpdatedProfilePicture(profilePicture)
+                setUpdatedXP(xp)
+                setUpdatedLevel(level)
+            } catch (error) {
+                console.log('Error fetching user data:', error)
             }
         }
 
-        if (storedUser) {
-            decUser()
-        }
-    }, [props.session.data.user])
+        getUserData()
+    }, [id])
 
     const handleUsernameChange = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -122,9 +113,7 @@ export default function Profile(props: { session: any }) {
         setUpdatedDescription(event.target.value)
     }
 
-    const handleProfilePictureChange = (
-        event: React.ChangeEvent<HTMLTextAreaElement> | any
-    ) => {
+    const handleProfilePictureChange = (event: React.ChangeEvent<any>) => {
         setUpdatedProfilePicture(event.target.value)
     }
 
@@ -134,10 +123,11 @@ export default function Profile(props: { session: any }) {
 
     const handleSave = async () => {
         const updatedUser = {
-            ...props.session.data.user,
             username: updatedUsername,
             description: updatedDescription,
             profilePicture: updatedProfilePicture,
+            xp: updatedXP,
+            level: updatedLevel,
         }
 
         const validationErrors = validateData(
@@ -154,13 +144,15 @@ export default function Profile(props: { session: any }) {
         try {
             const response = await updateUser(id, updatedUser)
 
+            await updateUser(id, { lastChangedName: Date.now() })
+
             const data = {
                 profilePicture: response.profilePicture,
                 description: response.description,
                 username: response.username,
+                xp: response.xp,
+                level: response.level,
             }
-
-            await updateUser(id, { lastChangedName: Date.now() })
 
             const encryptedData = await encrypt(JSON.stringify(data))
 
@@ -175,7 +167,7 @@ export default function Profile(props: { session: any }) {
             })
 
             setEditing(false)
-        } catch (error) {
+        } catch (error: any) {
             setValidationErrors([...validationErrors, error])
         }
     }
@@ -206,7 +198,13 @@ export default function Profile(props: { session: any }) {
 
                     <h1 className='text-wave-200 text-lg'>{role}</h1>
 
-                    <LevelBar user={props.session.data.user} />
+                    <LevelBar
+                        user={{
+                            ...props.session.data.user,
+                            xp: updatedXP,
+                            level: updatedLevel,
+                        }}
+                    />
                 </div>
 
                 <div className='mt-4 w-3/4 h-1/6 flex items-start justify-center py-2 break-words'>
@@ -237,3 +235,5 @@ export default function Profile(props: { session: any }) {
         </div>
     )
 }
+
+export default Profile
