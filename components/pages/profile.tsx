@@ -13,7 +13,7 @@ import ProfilePicture from '@components/profile/ProfilePicture'
 import EditProfilePicture from '@components/profile/editing/EditProfilePicture'
 import { encrypt } from '@services/encryption.service'
 import { INotification, IUser } from '@models/User'
-import Notification from '@components/navigation/notification'
+import Notification from '@components/profile/notification'
 import { removeNotification } from '@services/notifications.service'
 
 // Validation function
