@@ -31,19 +31,18 @@ const Notification = ({
 
     return (
         <div
-            className={`fixed top-4 right-4 flex items-center justify-center bg-white rounded-lg p-4 shadow-md transition-all duration-300 ${
+            className={`fixed top-4 right-4 flex items-center justify-center bg-background rounded border p-4 shadow-md transition-all duration-300 ${
                 visible ? 'opacity-100' : 'opacity-0'
             }`}
         >
-            <a href={notification.href} className='text-gray-800'>
+            <a href={notification.href} className='text-wave-400'>
                 {notification.message}
             </a>
             <button
                 onClick={() => {
                     handleClose(notification)
-                    setVisible(false)
                 }}
-                className='w-6 ml-2'
+                className='w-6 ml-2 text-wave-500'
             >
                 <Trash />
             </button>
